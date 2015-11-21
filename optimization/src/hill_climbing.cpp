@@ -1,6 +1,7 @@
 #include "hill_climbing.h"
 #include <iostream>
 #include <cmath> //for fabs()
+#include "../../analysis/src/analysis.h" //for sgn()
 using namespace std;
 
 namespace mo {
@@ -22,7 +23,7 @@ double Hill_climbing::linear_search(double (*f)(const double&), double(*df)(cons
     double x = x0;
 
     while(fabs(df(x)) > eps_){
-        //        h =
+        h *= sgn(df(x));
     }
 
     return x;
