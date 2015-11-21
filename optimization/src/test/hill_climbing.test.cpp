@@ -25,7 +25,7 @@ int main(){
          << "run test Hill_climbing::linear_search()\n";
     double x0 = 8.0;
     double x = hc.linear_search(f,df,x0);
-    if(fabs(x) < eps){
+    if(fabs(x) < eps){ //maybe this should be 2*eps or larger.
         cout << "[PASS] \n";
     }else{
         cout << "[ERROR] it returns " << x << ", but should be 0.\n";

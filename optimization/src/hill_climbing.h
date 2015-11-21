@@ -1,5 +1,6 @@
 #ifndef HILL_CLIMBING_H
 #define HILL_CLIMBING_H
+#include "../../linear_algebra/src/vector.h"
 
 namespace mo {
 
@@ -14,6 +15,14 @@ public:
     void compute();
 
 
+    /////////////////////
+    /// \brief x
+    /// return the final result; maximal point x of f()
+    /// \return
+    /////////////////////
+    Vector x()const{return x_;}
+
+
     ////////////////////
     /// \brief linear_search
     /// find a maximal for 1-dim funtion f(x)
@@ -26,6 +35,7 @@ private:
     double h0_;
     double eps_;
     double delta_;
+    Vector x_;
 };
 
 } //namespace mo
