@@ -2,9 +2,15 @@
 
 using namespace std;
 
+
 double f(const double& x){
     return x*x;
 }
+
+double df(const double& x){
+    return 2*x;
+}
+
 
 int main(){
     double h0 = 1.0;
@@ -12,7 +18,8 @@ int main(){
     double delta = 1.0e-5;
     Hill_climbing hc(h0,eps,delta);
 
-    hc.linear_search(f);
+    double x0 = 8.0;
+    double x = hc.linear_search(f,df,x0);
 
 
     return 0;

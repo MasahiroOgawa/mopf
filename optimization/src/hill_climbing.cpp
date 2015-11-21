@@ -13,7 +13,8 @@ void Hill_climbing::compute(){
 
 }
 
-void Hill_climbing::linear_search(double (*f)(const double&)){
-    cout << "f(0)=" << f(0) << endl;
-    cout << "f(2)=" << f(2) << endl;
+double Hill_climbing::linear_search(double (*f)(const double&), double(*df)(const double&), const double& x0){
+    double x = x0;
+
+    return x;
 }
