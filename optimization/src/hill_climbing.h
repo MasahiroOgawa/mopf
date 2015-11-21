@@ -11,7 +11,7 @@ class Hill_climbing
 public:
     Hill_climbing(const double& h0, const double& eps, const double& delta);
     void compute();
-    void linear_search();
+    void linear_search(double (*f)(const double&));
 private:
     double h0_;
     double eps_;
