@@ -16,6 +16,6 @@ namespace mo {
 void polynomial_curvefit(const Matrix& x, const Matrix& y, Matrix& c,
                          const int& degree = 1, const std::vector<double>& weight = {1});
 
-}
+} //namespace mo
 
 #endif // LEAST_SQUARE_H

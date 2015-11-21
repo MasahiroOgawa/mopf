@@ -1,6 +1,7 @@
 #ifndef HILL_CLIMBING_H
 #define HILL_CLIMBING_H
 
+namespace mo {
 
 /////////////////
 /// \brief The Hill_climbing class
@@ -17,5 +18,7 @@ private:
     double eps_;
     double delta_;
 };
+
+} //namespace mo
 
 #endif // HILL_CLIMBING_H

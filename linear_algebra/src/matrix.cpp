@@ -19,4 +19,4 @@ void add(const Matrix& S, const double& val, Matrix& D){
     cv::add(S,val,D);
 }
 
-}
+} //namespace mo

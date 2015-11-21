@@ -1,6 +1,7 @@
 #include "../hill_climbing.h"
 
 using namespace std;
+using namespace mo;
 
 
 double f(const double& x){
