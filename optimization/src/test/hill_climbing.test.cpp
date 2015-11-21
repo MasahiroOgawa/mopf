@@ -31,6 +31,9 @@ int main(){
         cout << "[ERROR] it returns " << x << ", but should be 0.\n";
     }
 
+    cout << "----------------------------------------\n"
+         << "run test Hill_climbing::compute()\n";
+
 
     return 0;
 }

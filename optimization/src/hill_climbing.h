@@ -1,6 +1,6 @@
 #ifndef HILL_CLIMBING_H
 #define HILL_CLIMBING_H
-#include "../../linear_algebra/src/vector.h"
+#include "../../linear_algebra/src/matrix.h"
 
 namespace mo {
 
@@ -20,7 +20,7 @@ public:
     /// return the final result; maximal point x of f()
     /// \return
     /////////////////////
-    Vector x()const{return x_;}
+    Matrix x()const{return x_;}
 
 
     ////////////////////
@@ -35,7 +35,7 @@ private:
     double h0_;
     double eps_;
     double delta_;
-    Vector x_;
+    Matrix x_; //vector of current point
 };
 
 } //namespace mo
