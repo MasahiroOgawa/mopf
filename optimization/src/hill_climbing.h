@@ -21,6 +21,7 @@ public:
     /// \return
     ////////////////////
     double linear_search(double (*f)(const double&), double(*df)(const double&), const double& x0);
+
 private:
     double h0_;
     double eps_;
