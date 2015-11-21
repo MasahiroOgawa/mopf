@@ -12,6 +12,14 @@ class Hill_climbing
 public:
     Hill_climbing(const double& h0, const double& eps, const double& delta);
     void compute();
+
+
+    ////////////////////
+    /// \brief linear_search
+    /// find a maximal for 1-dim funtion f(x)
+    /// \param x0
+    /// \return
+    ////////////////////
     double linear_search(double (*f)(const double&), double(*df)(const double&), const double& x0);
 private:
     double h0_;
