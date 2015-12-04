@@ -1,6 +1,7 @@
 #ifndef HILL_CLIMBING_H
 #define HILL_CLIMBING_H
 #include "../../linear_algebra/src/matrix.h"
+#include <functional> //for std::function
 
 namespace mo {
 
@@ -11,8 +12,15 @@ namespace mo {
 class Hill_climbing
 {
 public:
-    Hill_climbing(const double& h0, const double& eps, const double& delta);
-    void compute();
+    Hill_climbing(const double& h0, const double& eps, const double& delta, const int& max_loopcount=1e+8);
+
+
+    /////////////////////
+    /// \brief compute
+    /// compute hill climbing for multi variate function f(x); x is vector.
+    /// \param x0
+    /////////////////////
+    void compute(double (*f)(const Matrix&), Matrix (*df)(const Matrix&), const Matrix& x0);
 
 
     /////////////////////
@@ -29,15 +37,25 @@ public:
     /// \param x0
     /// \return
     ////////////////////
-    double linear_search(double (*f)(const double&), double(*df)(const double&), const double& x0);
+    template<typename F1, typename F2> double linear_search(F1 f, F2 df, const double& x0);
 
 private:
+    /////////////////////
+    /// \brief check_loopcount
+    /// check the loop count and if it is over max_loopcount_, this will throw overflow_error.
+    /// \param loop_count
+    /////////////////////
+    void check_loopcount(const int loop_count);
+
     double h0_;
     double eps_;
     double delta_;
+    int max_loopcount_;
     Matrix x_; //vector of current point
 };
 
 } //namespace mo
+
+#include "hill_climbing.tpp"
 
 #endif // HILL_CLIMBING_H
