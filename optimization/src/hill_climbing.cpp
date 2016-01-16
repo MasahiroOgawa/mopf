@@ -6,8 +6,8 @@ using namespace std;
 
 namespace mo {
 
-Hill_climbing::Hill_climbing(const double& h0, const double& eps, const double& delta, const int& max_loopcount)
-    : h0_{h0}, eps_{eps}, delta_{delta}, max_loopcount_{max_loopcount}
+Hill_climbing::Hill_climbing(const double& step0, const double& eps, const double& delta, const int& max_loopcount)
+    : step0_{step0}, eps_{eps}, delta_{delta}, max_loopcount_{max_loopcount}
 {
 }
 
