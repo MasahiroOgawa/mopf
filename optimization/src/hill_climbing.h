@@ -2,7 +2,7 @@
 #define HILL_CLIMBING_H
 #include "../../linear_algebra/src/matrix.h"
 #include <functional> //for std::function
-#include "optimization_visualizer.h"
+#include "visualizer_1d.h"
 
 namespace mo {
 
@@ -61,7 +61,7 @@ private:
     double thre_dx_;
     int max_loopcount_;
     Matrix x_; //vector of current point
-    Optimization_visualizer vis_;
+    Visualizer_1d linsearch_vis_;
     bool opt_vis_;
 };
 
