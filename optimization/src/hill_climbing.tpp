@@ -8,10 +8,11 @@ template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 
     double x = x0;
 
     //search until |df(x)/dx| ~ 0
-    while(fabs(df(x)) > thre_df_){
+    double dfx = df(x);
+    while(fabs(dfx) > thre_df_){
         int loop_count{0};
         //init x_next
-        step = sgn(df(x)) * fabs(step);
+        step = sgn(dfx) * fabs(step);
         double x_next = x + step;
 
         if(f(x) < f(x_next)){ //in case f(x_next) does not yet reached the neighborhood of maximal
@@ -36,6 +37,9 @@ template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 
             linsearch_vis_.record(x,f(x));
             linsearch_vis_.show();
         }
+
+        //update
+        dfx = df(x);
     }
 
     return x;
