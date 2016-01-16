@@ -13,3 +13,7 @@ void Visualizer_1d::show(){
     cv::waitKey(0);
 }
 
+
+void Visualizer_1d::record(const double& x, const double& y){
+    pts_.push_back(cv::Point2d(x,y));
+}
