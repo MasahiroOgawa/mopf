@@ -8,7 +8,7 @@ template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 
     double x = x0;
 
     //search until |df(x)| ~ 0
-    while(fabs(df(x)) > eps_){
+    while(fabs(df(x)) > thre_df_){
         int loop_count{0};
         //init x_next
         step = sgn(df(x)) * fabs(step);

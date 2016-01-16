@@ -6,8 +6,8 @@ using namespace std;
 
 namespace mo {
 
-Hill_climbing::Hill_climbing(const double& step0, const double& eps, const double& delta, const int& max_loopcount)
-    : step0_{step0}, eps_{eps}, delta_{delta}, max_loopcount_{max_loopcount}
+Hill_climbing::Hill_climbing(const double& step0, const double& thre_df, const double& thre_dx, const int& max_loopcount)
+    : step0_{step0}, thre_df_{thre_df}, thre_dx_{thre_dx}, max_loopcount_{max_loopcount}
 {
 }
 
@@ -16,9 +16,9 @@ void Hill_climbing::compute(double (*f)(const Matrix&), Matrix (*df)(const Matri
     //initialize
     int loop_count{0};
     x_ = x0;
-    Matrix dx = (delta_ + 1.0)*Matrix::ones(x_.size()); //any value is OK if it is larger than delta_.
+    Matrix dx = (thre_dx_ + 1.0)*Matrix::ones(x_.size()); //any value is OK if it is larger than thre_dx_.
 
-    while(norm(dx) > delta_){
+    while(norm(dx) > thre_dx_){
         auto F = [f,df,this](const double& t){return f(x_ + t*df(x_));};
         auto dF = [df,this](const double& t){cv::Mat_<double> Dfdf(df(x_ + t*df(x_)).t() * df(x_)); return Dfdf.at<double>(0,0);};
 

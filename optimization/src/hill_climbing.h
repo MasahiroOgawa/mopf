@@ -15,11 +15,11 @@ public:
     /////////////////////
     /// \brief Hill_climbing
     /// \param step0 : initial step value. x(1)=x(0)+step0.
-    /// \param eps : linear search's tolerance. It will judge convergence if |f'(x)| < eps.
-    /// \param delta : multi dimentional hill climbing's convergence threshold. It will judge convergence if |dx| < delta.
+    /// \param thre_df : linear search's tolerance. It will judge convergence if |f'(x)| < thre_df.
+    /// \param thre_dx : multi dimentional hill climbing's convergence threshold. It will judge convergence if |dx| < thre_dx.
     /// \param max_loopcount
     /////////////////////
-    Hill_climbing(const double& step0, const double& eps, const double& delta, const int& max_loopcount=1e+8);
+    Hill_climbing(const double& step0, const double& thre_df, const double& thre_dx, const int& max_loopcount=1e+8);
 
 
     /////////////////////
@@ -55,8 +55,8 @@ private:
     void check_loopcount(const int loop_count);
 
     double step0_;
-    double eps_;
-    double delta_;
+    double thre_df_;
+    double thre_dx_;
     int max_loopcount_;
     Matrix x_; //vector of current point
 };
