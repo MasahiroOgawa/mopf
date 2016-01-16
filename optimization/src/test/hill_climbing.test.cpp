@@ -60,7 +60,7 @@ int main()try{
 
     return 0;
 }catch(runtime_error& e){
-    cerr << e.what() << endl;
+    cerr << "runtime error: " << e.what() << endl;
 }catch(...){
     cerr << "unknown error!\n";
 }

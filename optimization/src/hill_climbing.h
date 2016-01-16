@@ -12,6 +12,13 @@ namespace mo {
 class Hill_climbing
 {
 public:
+    /////////////////////
+    /// \brief Hill_climbing
+    /// \param h0 : initial step value. x(1)=x(0)+h0.
+    /// \param eps : linear search's tolerance. It will judge convergence if |f'(x)| < eps.
+    /// \param delta : multi dimentional hill climbing's convergence threshold. It will judge convergence if |dx| < delta.
+    /// \param max_loopcount
+    /////////////////////
     Hill_climbing(const double& h0, const double& eps, const double& delta, const int& max_loopcount=1e+8);
 
 
