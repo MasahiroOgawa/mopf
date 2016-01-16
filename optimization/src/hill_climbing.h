@@ -2,6 +2,7 @@
 #define HILL_CLIMBING_H
 #include "../../linear_algebra/src/matrix.h"
 #include <functional> //for std::function
+#include "optimization_visualizer.h"
 
 namespace mo {
 
@@ -18,8 +19,9 @@ public:
     /// \param thre_df : linear search's tolerance. It will judge convergence if |f'(x)| < thre_df.
     /// \param thre_dx : multi dimentional hill climbing's convergence threshold. It will judge convergence if |dx| < thre_dx.
     /// \param max_loopcount
+    /// \param opt_vis :
     /////////////////////
-    Hill_climbing(const double& step0, const double& thre_df, const double& thre_dx, const int& max_loopcount=1e+8);
+    Hill_climbing(const double& step0, const double& thre_df, const double& thre_dx, const int& max_loopcount=1e+8, bool opt_vis=true);
 
 
     /////////////////////
@@ -59,6 +61,8 @@ private:
     double thre_dx_;
     int max_loopcount_;
     Matrix x_; //vector of current point
+    Optimization_visualizer vis_;
+    bool opt_vis_;
 };
 
 } //namespace mo

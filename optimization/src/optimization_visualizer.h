@@ -6,10 +6,6 @@ class Optimization_visualizer
 {
 public:
     Optimization_visualizer();
-
-signals:
-
-public slots:
 };
 
 #endif // OPTIMIZATION_VISUALIZER_H
