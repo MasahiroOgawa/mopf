@@ -31,6 +31,8 @@ template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 
             x = x_next;
             step *= 2.0;
         }
+
+        if(opt_vis_) vis_.show();
     }
 
     return x;
