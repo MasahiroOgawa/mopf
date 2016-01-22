@@ -1,4 +1,7 @@
 #include "visualizer_1d.h"
+#include <iostream>
+#define DEBUG_
+using namespace std;
 
 namespace mo {
 
@@ -38,7 +41,17 @@ void Visualizer_1d::comp_minmax(){
         if(pts_.back().y < min_y_) min_y_ = pts_.back().y;
         else if(pts_.back().y > max_y_) max_y_ = pts_.back().y;
     }
-    //from here. 2016/1/20 check correctness.
+
+#ifdef DEBUG_
+    cout << "pts= ";
+    for(auto p : pts_){
+        cout << p << ' ';
+    }
+    cout << endl;
+
+    cout << "min_x=" << min_x_ << ", min_y_=" << min_y_ <<
+            ", max_x=" << max_x_ << ", max_y=" << max_y_ << endl;
+#endif
 }
 
 } //namespace mo
