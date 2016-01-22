@@ -35,7 +35,7 @@ template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 
 
         if(opt_vis_){
             linsearch_vis_.record(x,f(x));
-            linsearch_vis_.show();
+            linsearch_vis_.show_optimization();
         }
 
         //update

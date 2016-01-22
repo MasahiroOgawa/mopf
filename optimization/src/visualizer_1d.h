@@ -1,12 +1,14 @@
 #ifndef VISUALIZER_1D_H
 #define VISUALIZER_1D_H
-#include <opencv2/core.hpp>
+#include "../../linear_algebra/src/matrix.h"
+
+namespace mo {
 
 class Visualizer_1d
 {
 public:
     Visualizer_1d(const int img_w=255, const int img_h=255);
-    void show();
+    void show_optimization();
 
     ////////////////////
     /// \brief record
@@ -16,10 +18,22 @@ public:
     void record(const double& x, const double& y);
 
 private:
-    cv::Mat img_;
+    ////////////////////
+    /// \brief comp_minmax
+    /// check only newly added point is min or max
+    ////////////////////
+    void comp_minmax();
+
+    Matrix img_;
     int img_w_;
     int img_h_;
     std::vector<cv::Point2d> pts_;
+    double min_x_; //to define draw area
+    double min_y_;
+    double max_x_;
+    double max_y_;
 };
+
+} //namespace mo
 
 #endif // VISUALIZER_1D_H
