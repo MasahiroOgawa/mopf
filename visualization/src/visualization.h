@@ -5,6 +5,7 @@
 
 namespace mo {
 
+using Point = cv::Point2d;
 void show(const std::string& winname, const Matrix& img, const int waitms=0);
 
 } //namespace mo

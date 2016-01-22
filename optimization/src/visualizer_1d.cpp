@@ -1,5 +1,4 @@
 #include "visualizer_1d.h"
-#include "../../visualization/src/visualization.h"
 
 namespace mo {
 
@@ -21,7 +20,7 @@ void Visualizer_1d::show_optimization(){
 //-----------------------------------------------------------------
 
 void Visualizer_1d::record(const double& x, const double& y){
-    pts_.push_back(cv::Point2d(x,y));
+    pts_.push_back(Point(x,y));
 }
 
 

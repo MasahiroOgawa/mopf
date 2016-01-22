@@ -1,6 +1,7 @@
 #ifndef VISUALIZER_1D_H
 #define VISUALIZER_1D_H
 #include "../../linear_algebra/src/matrix.h"
+#include "../../visualization/src/visualization.h"
 
 namespace mo {
 
@@ -27,7 +28,7 @@ private:
     Matrix img_;
     int img_w_;
     int img_h_;
-    std::vector<cv::Point2d> pts_;
+    std::vector<Point> pts_;
     double min_x_; //to define draw area
     double min_y_;
     double max_x_;
