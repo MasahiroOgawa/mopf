@@ -14,14 +14,14 @@ std::ostream& operator<<(std::ostream& os, const Color& col){
 
 
 //-----------------------------------------------------------------
-void show(const std::string& winname, const Matrix& img, const int waitms){
+void show(const std::string& winname, const Image& img, const int waitms){
     cv::imshow(winname, img);
     cv::waitKey(waitms);
 }
 
 
 //-----------------------------------------------------------------
-void arrow(const Point& pt_sta, const Point& pt_end, Matrix& img, const Color& color){
+void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color){
     //for debug
     std::cout << "{r,g,b}={" << static_cast<double>(color.red) << ',' <<
                  static_cast<double>(color.green) << ',' <<
