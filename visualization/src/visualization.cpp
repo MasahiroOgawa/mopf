@@ -1,7 +1,6 @@
 #include "visualization.h"
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp> //for arrowedLine()
-#include <iostream> //for debug
 
 namespace mo {
 
@@ -22,16 +21,7 @@ void show(const std::string& winname, const Image& img, const int waitms){
 
 //-----------------------------------------------------------------
 void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color){
-    //for debug
-    std::cout << "{r,g,b}={" << static_cast<double>(color.red) << ',' <<
-                 static_cast<double>(color.green) << ',' <<
-                 static_cast<double>(color.blue) << "}";
-    cv::arrowedLine(img, pt_sta, pt_end, cv::Scalar{0,255,0});
-
-//    cv::arrowedLine(img, pt_sta, pt_end,
-//                    cv::Scalar(static_cast<double>(color.blue),
-//                               static_cast<double>(color.green),
-//                               static_cast<double>(color.red)));
+    cv::arrowedLine(img, pt_sta, pt_end, color.pixval());
 }
 
 }
