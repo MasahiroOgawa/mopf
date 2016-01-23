@@ -16,6 +16,7 @@ Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
 //-----------------------------------------------------------------
 void Visualizer_1d::show_optimization(){
     comp_minmax();
+    draw_arrow();
     show("1D optimization", img_);
 }
 
@@ -52,6 +53,12 @@ void Visualizer_1d::comp_minmax(){
     cout << "min_x=" << min_x_ << ", min_y_=" << min_y_ <<
             ", max_x=" << max_x_ << ", max_y=" << max_y_ << endl;
 #endif
+}
+
+
+//-----------------------------------------------------------------
+void Visualizer_1d::draw_arrow(){
+
 }
 
 } //namespace mo

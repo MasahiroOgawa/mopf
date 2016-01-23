@@ -25,6 +25,11 @@ private:
     ////////////////////
     void comp_minmax();
 
+    ////////////////////
+    /// \brief draw_arrow
+    ////////////////////
+    void draw_arrow();
+
     Matrix img_;
     int img_w_;
     int img_h_;
