@@ -30,7 +30,7 @@ private:
     ////////////////////
     void draw_arrow();
 
-    Matrix img_;
+    Image img_;
     int img_w_;
     int img_h_;
     std::vector<Point> pts_;

@@ -9,7 +9,8 @@ namespace mo {
 Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
     img_w_{img_w}, img_h_{img_h}
 {
-    img_ = Matrix(img_h_, img_w_, CV_8UC3);
+    Color color{128,128,128};
+    img_ = Image(img_h_, img_w_, color.pixval());
 }
 
 
