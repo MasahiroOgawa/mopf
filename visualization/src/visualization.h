@@ -21,7 +21,7 @@ void show(const std::string& winname, const Image& img, const int waitms=0);
 /// \param img
 /// \param color
 //////////////////////////
-void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color);
+void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color = Color{255,255,255});
 
 } //namespace mo
 
