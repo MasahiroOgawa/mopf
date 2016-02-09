@@ -18,6 +18,7 @@ Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
 void Visualizer_1d::show_optimization(){
     comp_minmax();
     draw_arrow();
+    //from here. draw_point_with_color();
     show("1D optimization", img_);
 }
 
@@ -66,12 +67,16 @@ void Visualizer_1d::draw_arrow(){
     double h_scale = (img_h_ - 2 * h_margin) / (max_y_ - min_y_);
 
     for(int i=1; i<pts_.size(); ++i){
-        //from here. 2016 1/28 we need right margin too.
         Point sta_pt{(pts_[i-1].x - min_x_) * w_scale + w_margin, (pts_[i-1].y - min_y_) * h_scale + h_margin};
         Point end_pt{(pts_[i].x - min_x_) * w_scale + w_margin, (pts_[i].y - min_y_) * h_scale + h_margin};
         arrow(sta_pt, end_pt, img_);
     }
 }
 
+
+//-----------------------------------------------------------------
+Point map_to_display(const Point& pt){
+    return Point();
+}
 
 } //namespace mo

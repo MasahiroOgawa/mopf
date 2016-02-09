@@ -30,6 +30,14 @@ private:
     ////////////////////
     void draw_arrow();
 
+    ////////////////////
+    /// \brief map_to_display
+    /// map input point into display image "img_" by scaling and translate it.
+    /// \param pt
+    /// \return
+    ////////////////////
+    Point map_to_display(const Point& pt);
+
     Image img_;
     int img_w_;
     int img_h_;
