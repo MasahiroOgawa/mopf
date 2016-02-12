@@ -59,24 +59,25 @@ void Visualizer_1d::comp_minmax(){
 
 
 //-----------------------------------------------------------------
-void Visualizer_1d::draw_arrow(){
-    const double w_margin{img_w_/10.0};
-    const double h_margin{img_h_/10.0};
-    if(min_x_==max_x_ || min_y_==max_y_) return; //don't draw
-    double w_scale = (img_w_ - 2 * w_margin) / (max_x_ - min_x_);
-    double h_scale = (img_h_ - 2 * h_margin) / (max_y_ - min_y_);
-
+void Visualizer_1d::draw_arrow()try{
     for(int i=1; i<pts_.size(); ++i){
-        Point sta_pt{(pts_[i-1].x - min_x_) * w_scale + w_margin, (pts_[i-1].y - min_y_) * h_scale + h_margin};
-        Point end_pt{(pts_[i].x - min_x_) * w_scale + w_margin, (pts_[i].y - min_y_) * h_scale + h_margin};
-        arrow(sta_pt, end_pt, img_);
+        arrow(map_to_display(pts_[i-1]), map_to_display(pts_[i]), img_);
     }
+}catch(runtime_error& e){
+    cout << e.what() << endl;
+    return;
 }
 
 
 //-----------------------------------------------------------------
-Point map_to_display(const Point& pt){
-    return Point();
+Point Visualizer_1d::map_to_display(const Point& pt){
+    const double w_margin{img_w_/10.0};
+    const double h_margin{img_h_/10.0};
+    if(min_x_==max_x_ || min_y_==max_y_) throw runtime_error("min==max @Visualizer_1d::map_to_display()");
+    double w_scale = (img_w_ - 2 * w_margin) / (max_x_ - min_x_);
+    double h_scale = (img_h_ - 2 * h_margin) / (max_y_ - min_y_);
+
+    return Point((pt.x - min_x_) * w_scale + w_margin, (pt.y - min_y_) * h_scale + h_margin);
 }
 
 } //namespace mo
