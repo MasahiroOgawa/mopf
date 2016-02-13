@@ -20,8 +20,19 @@ void show(const std::string& winname, const Image& img, const int waitms){
 
 
 //-----------------------------------------------------------------
+void line(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color){
+    cv::line(img, pt_sta, pt_end, color.pixval());
+}
+
+
+//-----------------------------------------------------------------
 void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color){
     cv::arrowedLine(img, pt_sta, pt_end, color.pixval());
 }
 
+//-----------------------------------------------------------------
+void point(const Point& pt, Image& img, const Color& color, const int radius){
+    cv::circle(img, pt, radius, color.pixval(), -1); //-1 means filled color.
 }
+
+} //namespace mo

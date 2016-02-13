@@ -8,7 +8,7 @@ namespace mo {
 class Visualizer_1d
 {
 public:
-    Visualizer_1d(const int img_w=255, const int img_h=255);
+    Visualizer_1d(const double& thre_df=0.0, const int img_w=255, const int img_h=255);
     void show_optimization();
 
     ////////////////////
@@ -24,6 +24,13 @@ private:
     /// check only newly added point is min or max
     ////////////////////
     void comp_minmax();
+
+
+    ////////////////////
+    /// \brief draw_axis
+    ////////////////////
+    void draw_axis();
+
 
     ////////////////////
     /// \brief draw_arrow
@@ -46,6 +53,7 @@ private:
     double min_y_;
     double max_x_;
     double max_y_;
+    double thre_df_;
 };
 
 } //namespace mo

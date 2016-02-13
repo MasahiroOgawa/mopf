@@ -15,13 +15,29 @@ void show(const std::string& winname, const Image& img, const int waitms=0);
 
 
 /////////////////////////
+/// \brief line
+/// draw line in img.
+/////////////////////////
+void line(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color = Color{255,255,255});
+
+
+/////////////////////////
 /// \brief arrow
+/// draw arrow in img.
 /// \param pt_sta
 /// \param pt_end
 /// \param img
 /// \param color
 //////////////////////////
 void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color = Color{255,255,255});
+
+
+//////////////////////////
+/// \brief point
+/// draw point in img.
+//////////////////////////
+void point(const Point& pt, Image& img, const Color& color = Color{255,255,255}, const int radius = 1);
+
 
 } //namespace mo
 

@@ -6,8 +6,8 @@ using namespace std;
 namespace mo {
 
 //-----------------------------------------------------------------
-Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
-    img_w_{img_w}, img_h_{img_h}
+Visualizer_1d::Visualizer_1d(const double& thre_df, const int img_w, const int img_h):
+    thre_df_{thre_df}, img_w_{img_w}, img_h_{img_h}
 {
     Color color{128,128,128};
     img_ = Image(img_h_, img_w_, color.pixval());
@@ -17,8 +17,8 @@ Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
 //-----------------------------------------------------------------
 void Visualizer_1d::show_optimization(){
     comp_minmax();
+    draw_axis();
     draw_arrow();
-    //from here. draw_point_with_color();
     show("1D optimization", img_);
 }
 
@@ -57,6 +57,11 @@ void Visualizer_1d::comp_minmax(){
 #endif
 }
 
+
+//-----------------------------------------------------------------
+void Visualizer_1d::draw_axis(){
+
+}
 
 //-----------------------------------------------------------------
 void Visualizer_1d::draw_arrow()try{
