@@ -17,6 +17,7 @@ Visualizer_1d::Visualizer_1d(const double& thre_df, const int img_w, const int i
 //-----------------------------------------------------------------
 void Visualizer_1d::show_optimization(){
     comp_minmax();
+    if(min_x_==max_x_ || min_y_==max_y_) return; //draw nothing.
     draw_axis();
     draw_arrow();
     show("1D optimization", img_);
@@ -60,7 +61,11 @@ void Visualizer_1d::comp_minmax(){
 
 //-----------------------------------------------------------------
 void Visualizer_1d::draw_axis(){
+    //x axis
+    arrow(map_to_display(Point(min_x_,min_y_)), map_to_display(Point(max_x_,min_y_)), img_, Color(0,0,0));
 
+    //y axis
+    arrow(map_to_display(Point(0,min_y_)), map_to_display(Point(0,max_y_)), img_, Color(0,0,0));
 }
 
 //-----------------------------------------------------------------
@@ -73,6 +78,10 @@ void Visualizer_1d::draw_arrow()try{
     return;
 }
 
+//-----------------------------------------------------------------
+void draw_pts(){
+
+}
 
 //-----------------------------------------------------------------
 Point Visualizer_1d::map_to_display(const Point& pt){
@@ -82,7 +91,7 @@ Point Visualizer_1d::map_to_display(const Point& pt){
     double w_scale = (img_w_ - 2 * w_margin) / (max_x_ - min_x_);
     double h_scale = (img_h_ - 2 * h_margin) / (max_y_ - min_y_);
 
-    return Point((pt.x - min_x_) * w_scale + w_margin, (pt.y - min_y_) * h_scale + h_margin);
+    return Point((pt.x - min_x_) * w_scale + w_margin, (max_y_ - pt.y) * h_scale + h_margin); //note: y direction is inverse in image coordinate.
 }
 
 } //namespace mo

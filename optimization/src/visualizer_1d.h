@@ -37,6 +37,13 @@ private:
     ////////////////////
     void draw_arrow();
 
+
+    ////////////////////
+    /// \brief draw_pts
+    ////////////////////
+    void draw_pts();
+
+
     ////////////////////
     /// \brief map_to_display
     /// map input point into display image "img_" by scaling and translate it.
