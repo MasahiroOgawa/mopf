@@ -68,15 +68,14 @@ void Visualizer_1d::draw_axis(){
     arrow(map_to_display(Point(0,min_y_)), map_to_display(Point(0,max_y_)), img_, Color(0,0,0));
 }
 
+
 //-----------------------------------------------------------------
-void Visualizer_1d::draw_arrow()try{
+void Visualizer_1d::draw_arrow(){
     for(int i=1; i<pts_.size(); ++i){
         arrow(map_to_display(pts_[i-1]), map_to_display(pts_[i]), img_);
     }
-}catch(runtime_error& e){
-    cout << e.what() << endl;
-    return;
 }
+
 
 //-----------------------------------------------------------------
 void draw_pts(){
