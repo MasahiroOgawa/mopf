@@ -8,15 +8,22 @@ namespace mo {
 class Visualizer_1d
 {
 public:
-    Visualizer_1d(const double& thre_df=0.0, const int img_w=255, const int img_h=255);
+    Visualizer_1d(const int img_w=255, const int img_h=255);
     void show_optimization();
 
     ////////////////////
     /// \brief record
     /// \param x : variable
     /// \param y : output value of f(x)
+    /// \param dfx: differential value df(x)
     ////////////////////
-    void record(const double& x, const double& y);
+    void record(const double& x, const double& y, const double& dfx);
+
+
+    ////////////////////
+    /// \brief clear
+    ////////////////////
+    void clear();
 
 private:
     ////////////////////
@@ -56,11 +63,11 @@ private:
     int img_w_;
     int img_h_;
     std::vector<Point> pts_;
+    std::vector<double> dfxs_;
     double min_x_; //to define draw area
     double min_y_;
     double max_x_;
     double max_y_;
-    double thre_df_;
 };
 
 } //namespace mo
