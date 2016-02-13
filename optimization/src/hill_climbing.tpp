@@ -4,8 +4,14 @@
 namespace mo {
 
 template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 df, const double& x0){
+    //init variables
     double step = step0_;
     double x = x0;
+    if(opt_vis_){
+        linsearch_vis_.clear();
+        linsearch_vis_.record(x,f(x),df(x)); //record initial point.
+        linsearch_vis_.show_optimization(); //we have to call this because comp_minmax assume input points was initially size 1.
+    }
 
     //search until |df(x)/dx| ~ 0
     double dfx = df(x);
@@ -35,7 +41,7 @@ template<typename F1, typename F2> double Hill_climbing::linear_search(F1 f, F2 
 
         if(opt_vis_){
             linsearch_vis_.record(x,f(x),df(x));
-            linsearch_vis_.show_optimization();
+            linsearch_vis_.show_optimization(); //note: until minx!=maxx && miny!=maxy, it will not display image.
         }
 
         //update

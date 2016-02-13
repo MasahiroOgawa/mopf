@@ -45,10 +45,9 @@ int main()try{
         cout << "[ERROR] it returns " << x << ", but should be 0.\n";
     }
 
-
     cout << "----------------------------------------\n"
          << "run test Hill_climbing::compute()\n";
-    Matrix mx0 = (Matrix(2,1) << 1, 2);
+    Matrix mx0 = (Matrix(2,1) << 100, 200);
     hc.compute(mf,dmf,mx0);
     Matrix mx = hc.x();
     if(norm(mx) < eps){ //maybe this should be 2*eps or larger.

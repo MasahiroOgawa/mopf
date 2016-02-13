@@ -59,6 +59,12 @@ private:
     ////////////////////
     Point map_to_display(const Point& pt);
 
+
+    ////////////////////
+    /// \brief clear_img
+    ////////////////////
+    void clear_img();
+
     Image img_;
     int img_w_;
     int img_h_;
@@ -68,6 +74,7 @@ private:
     double min_y_;
     double max_x_;
     double max_y_;
+    Color bg_color_;
 };
 
 } //namespace mo

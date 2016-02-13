@@ -7,21 +7,22 @@ namespace mo {
 
 //-----------------------------------------------------------------
 Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
-    img_w_{img_w}, img_h_{img_h}
+    img_w_{img_w}, img_h_{img_h}, bg_color_(Color(128,128,128))
 {
-    Color color{128,128,128};
-    img_ = Image(img_h_, img_w_, color.pixval());
+    img_ = Image(img_h_, img_w_, bg_color_.pixval());
 }
 
 
 //-----------------------------------------------------------------
 void Visualizer_1d::show_optimization(){
     comp_minmax();
-    if(min_x_==max_x_ || min_y_==max_y_) return; //draw nothing.
+    if(min_x_==max_x_ || min_y_==max_y_) return; //display nothing.
+    clear_img(); //after computed min & max, we have to rescale points. So we need to clear image.
     draw_axis();
     draw_arrow();
     draw_pts();
-    show("1D optimization", img_);
+    int waitms=100;
+    show("1D optimization", img_, waitms);
 }
 
 
@@ -35,9 +36,15 @@ void Visualizer_1d::record(const double& x, const double& y, const double& dfx){
 
 //-----------------------------------------------------------------
 void Visualizer_1d::clear(){
-
+    pts_.clear();
+    dfxs_.clear();
+    clear_img();
 }
 
+//-----------------------------------------------------------------
+void Visualizer_1d::clear_img(){
+    img_ = Image(img_h_, img_w_, bg_color_.pixval());
+}
 
 //-----------------------------------------------------------------
 void Visualizer_1d::comp_minmax(){

@@ -22,10 +22,10 @@ void Hill_climbing::compute(double (*f)(const Matrix&), Matrix (*df)(const Matri
         auto F = [f,df,this](const double& t){return f(x_ + t*df(x_));};
         auto dF = [df,this](const double& t){cv::Mat_<double> Dfdf(df(x_ + t*df(x_)).t() * df(x_)); return Dfdf.at<double>(0,0);};
 
-        double t = linear_search(F,dF,0.0);
+        double t = linear_search(F,dF,0.0); //0.0 means t=0.0, so starting from the corresting point of x_.
         dx = t * df(x_);
         x_ += dx;
-        check_loopcount(++loop_count);
+        check_loopcount(++loop_count); //to do: we have to change this to finish condition.
     }
 
 }
