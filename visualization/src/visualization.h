@@ -39,6 +39,12 @@ void arrow(const Point& pt_sta, const Point& pt_end, Image& img, const Color& co
 void point(const Point& pt, Image& img, const Color& color = Color{255,255,255}, const int radius = 1);
 
 
+//////////////////////////
+/// \brief text
+/// draw text in img.
+//////////////////////////
+void text(const std::string& text, Image& img, const Point& org, const double& scale=1.0, const Color& color = Color{255,255,255});
+
 } //namespace mo
 
 #endif // VISUALIZATION_H

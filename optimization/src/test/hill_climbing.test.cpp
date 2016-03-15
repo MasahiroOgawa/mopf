@@ -6,6 +6,9 @@ using namespace std;
 using namespace mo;
 
 
+//----------------------------------------
+//test functions
+
 double f(const double& x){
     return -x*x;
 }
@@ -13,6 +16,16 @@ double f(const double& x){
 double df(const double& x){
     return -2*x;
 }
+
+double f2(const double& x){
+    return sin(x) * (-x*x);
+}
+
+double df2(const double& x){
+    return cos(x) * (-x*x) - 2*x*sin(x);
+}
+
+//----------------------------------------
 
 double mf(const Matrix& m){ //multidimentional function
     assert(m.cols==1);
@@ -27,6 +40,7 @@ Matrix dmf(const Matrix& m){
     return (Matrix(2,1) << -2*x, -2*y);
 }
 
+//----------------------------------------
 
 int main()try{
     double h0 = 1.0;
@@ -38,7 +52,16 @@ int main()try{
     cout << "----------------------------------------\n"
          << "run test Hill_climbing::linear_search()\n";
     double x0 = 80.0;
+    cout << "test for f1=-x^2\n";
     double x = hc.linear_search(f,df,x0);
+    if(fabs(x) < eps){ //maybe this should be 2*eps or larger.
+        cout << "[PASS] \n";
+    }else{
+        cout << "[ERROR] it returns " << x << ", but should be 0.\n";
+    }
+
+    cout << "test for f2=-x^2*sin(x)\n";
+    x = hc.linear_search(f2,df2,x0);
     if(fabs(x) < eps){ //maybe this should be 2*eps or larger.
         cout << "[PASS] \n";
     }else{

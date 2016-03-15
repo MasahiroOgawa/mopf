@@ -35,4 +35,9 @@ void point(const Point& pt, Image& img, const Color& color, const int radius){
     cv::circle(img, pt, radius, color.pixval(), -1); //-1 means filled color.
 }
 
+//-----------------------------------------------------------------
+void text(const std::string& text, Image& img, const Point& org, const double& scale, const Color& color){
+    cv::putText(img, text, org, cv::FONT_HERSHEY_SIMPLEX, scale, color.pixval());
+}
+
 } //namespace mo

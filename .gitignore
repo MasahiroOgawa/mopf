@@ -8,3 +8,6 @@ install_manifest.txt
 
 # backuped files
 *~
+
+# build outputs
+build

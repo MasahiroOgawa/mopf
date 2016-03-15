@@ -17,11 +17,11 @@ Visualizer_1d::Visualizer_1d(const int img_w, const int img_h):
 void Visualizer_1d::show_optimization(){
     comp_minmax();
     if(min_x_==max_x_ || min_y_==max_y_) return; //display nothing.
-    clear_img(); //after computed min & max, we have to rescale points. So we need to clear image.
+    clear_img(); //after computing min & max, we have to rescale points. So we need to clear image.
     draw_axis();
     draw_arrow();
     draw_pts();
-    int waitms=100;
+    int waitms=0;
     show("1D optimization", img_, waitms);
 }
 
@@ -78,9 +78,14 @@ void Visualizer_1d::comp_minmax(){
 void Visualizer_1d::draw_axis(){
     //x axis
     arrow(map_to_display(Point(min_x_,min_y_)), map_to_display(Point(max_x_,min_y_)), img_, Color(0,0,0));
+    text("x", img_,  map_to_display(Point(max_x_,min_y_)), 1.0, Color{0,0,0});
 
     //y axis
     arrow(map_to_display(Point(0,min_y_)), map_to_display(Point(0,max_y_)), img_, Color(0,0,0));
+    text("f(x)", img_,  map_to_display(Point(0,max_y_)), 1.0, Color{0,0,0});
+
+    //from here 2016 3/16
+    //draw color bar df(x)
 }
 
 
