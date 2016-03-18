@@ -21,6 +21,7 @@ void Visualizer_1d::show_optimization(){
     draw_axis();
     draw_arrow();
     draw_pts();
+    draw_colorbar();
     int waitms=0;
     show("1D optimization", img_, waitms);
 }
@@ -83,9 +84,6 @@ void Visualizer_1d::draw_axis(){
     //y axis
     arrow(map_to_display(Point(0,min_y_)), map_to_display(Point(0,max_y_)), img_, Color(0,0,0));
     text("f(x)", img_,  map_to_display(Point(0,max_y_)), 1.0, Color{0,0,0});
-
-    //from here 2016 3/16
-    //draw color bar df(x)
 }
 
 
@@ -106,6 +104,15 @@ void Visualizer_1d::draw_pts(){
     }
 }
 
+
+//-----------------------------------------------------------------
+void Visualizer_1d::draw_colorbar(){
+    text("df(x)", img_, Point(0,20), 0.5, Color{0,0,0});
+    //from here 2016 3/16
+    //draw color bar df(x)
+}
+
+
 //-----------------------------------------------------------------
 Point Visualizer_1d::map_to_display(const Point& pt){
     const double w_margin{img_w_/10.0};
@@ -116,5 +123,7 @@ Point Visualizer_1d::map_to_display(const Point& pt){
 
     return Point((pt.x - min_x_) * w_scale + w_margin, (max_y_ - pt.y) * h_scale + h_margin); //note: y direction is inverse in image coordinate.
 }
+
+
 
 } //namespace mo
