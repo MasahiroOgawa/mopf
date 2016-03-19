@@ -46,7 +46,7 @@ void colorbar(Image& img, const ColormapTypes colormaptype){
         unsigned char* Mu = img.ptr(u);
         for(int v=0; v<img.cols*3; v+=3){
             for(int c=0; c<3; ++c){ //color channel
-                Mu[v+c] = u*255/img.rows;
+                Mu[v+c] = 255 - u*255/img.rows;
             }
         }
     }
