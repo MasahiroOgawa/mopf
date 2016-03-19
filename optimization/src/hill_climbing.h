@@ -61,6 +61,8 @@ private:
     double thre_dx_;
     int max_loopcount_;
     Matrix x_; //vector of current point
+    int viswin_w_;
+    int viswin_h_;
     Visualizer_1d linsearch_vis_;
     bool opt_vis_;
 };

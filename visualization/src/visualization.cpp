@@ -1,6 +1,6 @@
 #include "visualization.h"
 #include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp> //for arrowedLine()
+using namespace std;
 
 namespace mo {
 
@@ -39,5 +39,20 @@ void point(const Point& pt, Image& img, const Color& color, const int radius){
 void text(const std::string& text, Image& img, const Point& org, const double& scale, const Color& color){
     cv::putText(img, text, org, cv::FONT_HERSHEY_SIMPLEX, scale, color.pixval());
 }
+
+//-----------------------------------------------------------------
+void colorbar(Image& img, const ColormapTypes colormaptype){
+    for(int u=0; u<img.rows; ++u){
+        unsigned char* Mu = img.ptr(u);
+        for(int v=0; v<img.cols*3; v+=3){
+            for(int c=0; c<3; ++c){ //color channel
+                Mu[v+c] = u*255/img.rows;
+            }
+        }
+    }
+
+    cv::applyColorMap(img, img, cv::COLORMAP_HOT);
+}
+
 
 } //namespace mo

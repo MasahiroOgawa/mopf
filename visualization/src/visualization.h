@@ -2,6 +2,7 @@
 #define VISUALIZATION_H
 
 #include "../../image/src/image.h"
+#include <opencv2/imgproc.hpp> //for ColormapTypes, arrowedLine()
 
 namespace mo {
 
@@ -44,6 +45,16 @@ void point(const Point& pt, Image& img, const Color& color = Color{255,255,255},
 /// draw text in img.
 //////////////////////////
 void text(const std::string& text, Image& img, const Point& org, const double& scale=1.0, const Color& color = Color{255,255,255});
+
+
+using ColormapTypes = cv::ColormapTypes;
+
+//////////////////////////
+/// \brief colorbar
+/// \param img
+/// \param colormaptype
+//////////////////////////
+void colorbar(Image& img, const ColormapTypes colormaptype);
 
 } //namespace mo
 

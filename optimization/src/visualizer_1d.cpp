@@ -107,9 +107,11 @@ void Visualizer_1d::draw_pts(){
 
 //-----------------------------------------------------------------
 void Visualizer_1d::draw_colorbar(){
-    text("df(x)", img_, Point(0,20), 0.5, Color{0,0,0});
+    text("df(x)", img_, Point(img_w_*90/100,img_h_/20), 0.5, Color{0,0,0});
     //from here 2016 3/16
     //draw color bar df(x)
+    Image roi = img_(Rect{img_w_*90/100, img_h_/10, img_w_/100, img_h_/10});
+    colorbar(roi, ColormapTypes::COLORMAP_HOT);
 }
 
 
