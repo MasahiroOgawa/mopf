@@ -1,6 +1,6 @@
 #ifndef MATRIX_H
 #define MATRIX_H
-#include <opencv2/core/core.hpp>
+#include <opencv2/core.hpp>
 
 namespace mo {
 

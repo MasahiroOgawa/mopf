@@ -51,7 +51,7 @@ void colorbar(Image& img, const ColormapTypes colormaptype){
         }
     }
 
-    cv::applyColorMap(img, img, cv::COLORMAP_HOT);
+    cv::applyColorMap(img, img, colormaptype);
 }
 
 
