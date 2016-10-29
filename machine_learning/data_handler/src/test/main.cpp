@@ -1,19 +1,19 @@
 #include "../datahandler.h"
-#include "../../../../image/src/image.h"
-#include "../../../../visualization/src/visualization.h"
+#include "../mnistdatahandler.h"
 
 using namespace std;
 using namespace mo;
 
-int main(){
-    auto dataset = mnist::read_dataset_mopf();
-
-    //display
-    for(vector<uint8_t> tr_img : dataset.training_images){
-        Image_gray img(28, 28, tr_img.data());
-        show("train image", img, 0);
-    }
-
+int main()try{
+    unique_ptr<DataHandler> pdh{create_handler(DataType::mnist)};
+    pdh->read();
+    pdh->show_traindata();
 
     return 0;
+}catch(runtime_error& e){
+  cerr << "runtime error: " << e.what() << endl;
+}catch(logic_error& e){
+  cerr << "logic error: " << e.what() << endl;
+}catch(...){
+cerr << "unknown error occured.\n";
 }

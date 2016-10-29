@@ -1,20 +1,22 @@
 #ifndef DATAHANDLER_H
 #define DATAHANDLER_H
-#include "../../../ext/mnist/mnist_reader.hpp"
+#include <string>
+#include <memory> //unique_ptr
 
 namespace mo {
-enum class Datatype{mnist};
+enum class DataType{mnist};
 
 class DataHandler
 {
 public:
-    DataHandler(const Datatype dt = Datatype::mnist);
-    void init(const Datatype dt);
-    void read();
+    DataHandler();
+    virtual void read(const std::string& datadir = "") = 0; // pure virtual function; must be implemented in derived classes.
+    virtual void show_traindata() = 0;
+    //    virtual ~DataHandler();
 private:
-    Datatype dt_;
-    mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> mnist_data_;
 };
+
+std::unique_ptr<DataHandler> create_handler(const DataType data_type);
 } // namespace mo
 
 #endif // DATAHANDLER_H

@@ -1,27 +1,26 @@
 #include "datahandler.h"
+#include "mnistdatahandler.h"
 
 using namespace std;
 
 namespace mo {
-DataHandler::DataHandler(const Datatype dt) : dt_(dt)
+DataHandler::DataHandler()
 {
 
 }
 
-//------------------
-void DataHandler::init(const Datatype dt){
-    dt_ = dt;
-}
 
-//------------------
-void DataHandler::read(){
-    switch (dt_) {
-    case Datatype::mnist:
-        mnist_data_ = mnist::read_dataset_mopf();
-        break;
-    default:
-        throw logic_error("no such Datatype.");
-    }
+//-----------------------------------------
+std::unique_ptr<DataHandler> create_handler(const DataType data_type){
+    unique_ptr<DataHandler> pdh;
+  switch (data_type) {
+  case DataType::mnist:
+    pdh = unique_ptr<DataHandler>{new MnistDataHandler()};
+    break;
+  default:
+    throw logic_error("no such data type.");
+  }
+  return pdh;
 }
 
 } // namespace mo
