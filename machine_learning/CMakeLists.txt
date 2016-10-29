@@ -1,3 +1,3 @@
 add_subdirectory(neuralnet)
 add_subdirectory(data_handler)
-add_subdirectory(knearestneighbor)
+add_subdirectory(knearest_neighbor)

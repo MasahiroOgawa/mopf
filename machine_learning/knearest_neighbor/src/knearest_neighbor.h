@@ -8,10 +8,10 @@ namespace mo {
 class KNearestNeighbor
 {
 public:
-    KNearestNeighbor();
+    KNearestNeighbor(const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
     void init(const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
     void eval();
-    void classify(const std::vector<double>& datum);
+    void classify(const std::vector<uint8_t>& datum); // currently specific to uint8_t.
 
 private:
     std::unique_ptr<DataHandler> pdh_;
