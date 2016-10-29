@@ -1,0 +1,2 @@
+add_subdirectory(neuralnet)
+add_subdirectory(data_handler)
