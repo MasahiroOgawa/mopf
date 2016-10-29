@@ -18,8 +18,7 @@ int main(){
 //            cout << int(p) << ' ';
 
         Image_gray img(28, 28, tr_img.data());
-        img.resize(28);
-        cout << img << endl;
+//        cout << img << endl;
         show("train image", img, 0);
     }
 
