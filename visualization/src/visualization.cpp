@@ -20,6 +20,13 @@ void show(const std::string& winname, const Image& img, const int waitms){
 
 
 //-----------------------------------------------------------------
+void show(const std::string& winname, const Image_gray& img, const int waitms){
+    cv::imshow(winname, img);
+    cv::waitKey(waitms);
+}
+
+
+//-----------------------------------------------------------------
 void line(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color){
     cv::line(img, pt_sta, pt_end, color.pixval());
 }

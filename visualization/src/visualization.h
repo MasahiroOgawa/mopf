@@ -13,6 +13,7 @@ namespace mo {
 /// \param waitms
 /////////////////////////
 void show(const std::string& winname, const Image& img, const int waitms=0);
+void show(const std::string& winname, const Image_gray& img, const int waitms=0);
 
 
 /////////////////////////
