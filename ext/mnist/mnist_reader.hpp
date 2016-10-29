@@ -260,6 +260,21 @@ MNIST_dataset<Container, Sub<Pixel>, Label> read_dataset(const std::string& trai
     return read_dataset_direct<Container, Sub<Pixel>>(trainimg_fname, testimg_fname, trainlabel_fname, testlabel_fname, training_limit, test_limit);
 }
 
+/*!
+ *
+ */
+template <template <typename...> class Container = std::vector, template <typename...> class Sub = std::vector, typename Pixel = uint8_t, typename Label = uint8_t>
+MNIST_dataset<Container, Sub<Pixel>, Label> read_dataset_mopf(std::size_t training_limit = 0, std::size_t test_limit = 0) {
+    std::string mnist_dir = "../../data/mnist";
+    std::string trainimg_fname = mnist_dir + "/train-images-idx3-ubyte";
+    std::string testimg_fname = mnist_dir + "/t10k-images-idx3-ubyte";
+    std::string trainlabel_fname = mnist_dir + "/train-labels-idx1-ubyte";
+    std::string testlabel_fname = mnist_dir + "/t10k-labels-idx1-ubyte";
+
+    return read_dataset_direct<Container, Sub<Pixel>>(trainimg_fname, testimg_fname, trainlabel_fname, testlabel_fname, training_limit, test_limit);
+}
+
+
 } //end of namespace mnist
 
 #endif

@@ -1,9 +1,17 @@
 #include "knearestneighbor.h"
 
+using namespace std;
+
+namespace mo {
 KNearestNeighbor::KNearestNeighbor()
 {
-    void init();
-    void classify();
-    void eval();
+
 }
+
+void KNearestNeighbor::init(const Datatype dt){
+    dh_.init(dt);
+    dh_.read();
+}
+
+} // namespace mo
 
