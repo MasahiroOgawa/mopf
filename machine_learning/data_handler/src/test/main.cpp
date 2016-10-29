@@ -1,4 +1,3 @@
-#include "../../../../ext/mnist/mnist_reader.hpp"
 #include "../datahandler.h"
 
 using namespace std;
@@ -11,8 +10,7 @@ int main(){
     string trainlabel = mnist_dir + "/train-labels-idx1-ubyte";
     string testlabel = mnist_dir + "/t10k-labels-idx1-ubyte";
 
-    auto dataset = mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>(
-                trainimg, testimg, trainlabel, testlabel);
+    auto dataset = mnist::read_dataset(trainimg, testimg, trainlabel, testlabel);
     for(vector<uint8_t> tr_img : dataset.training_images){
 //        for(auto p : tr_img)
 //            cout << int(p) << ' ';
