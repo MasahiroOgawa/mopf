@@ -8,9 +8,15 @@ KNearestNeighbor::KNearestNeighbor()
 
 }
 
+//------------------
 void KNearestNeighbor::init(const Datatype dt){
     dh_.init(dt);
     dh_.read();
+}
+
+//------------------
+void KNearestNeighbor::eval(){
+
 }
 
 } // namespace mo
