@@ -1,0 +1,39 @@
+############################## 
+# parameter file 
+# format
+#	parametername: value comments(less space is preferable; faster to read.)
+#	parametername: val1 val2 #comments(for vector value)
+# 	example) x: 1.0 #input value#double
+#		 v: 1 3 5 #vector<int>
+##############################
+
+#input
+datafname: /mnt/datadisk/others/iris/iris.data #string /mnt/datadisk/my/2014/DavidMiller/trainingData.txt #
+data_type: 2 #1:DavidMillerXOR,2:iris#int
+
+
+#learnig parameters
+rho: 1.0e-3 #learning rate#double
+th_maxit: 20 #unsigned
+hidden_topology: 3  #initial hidden topology.list<unsigned>
+problem_type: 3 #1:regression,2:binary classification,3:multiclass classification#int
+num_neuralnets: 4 #number of neuralnets for pararell computing#int
+
+rho_descendingrate: 1.0 #descending rate of the learning rate at each step.1 means no change.should be <=1.0#double
+momentum: 0.5 #coefficient for momentum term.double
+th_J: 1.0e-5 #target cost.double
+th_dJ: 1.0e-3 #threshold difference of J for decision of localminimum.double
+th_annihilate: 1.0e-1 #threshold for annihilate condition. if (sum of a neuron's output weight)/(sum of all output weight) become less than this value, the neuron will be deleted.double
+th_topology_unchange: 2 #threshold for topology unchange count.if topology is not unchanged, +1 in 1 iteration.int
+
+
+#output
+display_step: 1 #<0 means do not display#int
+show_opt: 2 #Visualizer::Showopt.0:none,1:inpos_compclscol,2:outpos_inclscol,3:outpos_inposcol
+iterative_update: 1 #0:batch learning,1:iterative update or stochastic gradient descent.#bool
+outdirname: /home/masahiro/git/neuralnet/result
+outfname: log.txt
+waitms: 10 #display each image within this time[ms]. minus means wait until key'q' pressed. note)currently any value except for 1 cause GLib-GObject-CRITICAL error.#int
+win_w: 255 #window width#int
+win_h: 255 #window height#int
+

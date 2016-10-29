@@ -1,0 +1,11 @@
+build-src-Desktop-Default
+*.user
+*~
+*.autosave
+*.png
+*.aux
+*.dvi
+*.log
+*#
+*.gz
+*.el
