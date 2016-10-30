@@ -12,7 +12,7 @@ public:
     void show_traindata();
 
 private:
-    mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset_;
+    mnist::MNIST_dataset<std::vector, std::vector<unsigned char>, unsigned char> dataset_;
 };
 } // namespace mo
 
