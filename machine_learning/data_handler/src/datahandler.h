@@ -12,11 +12,11 @@ public:
     DataHandler();
     virtual void read(const std::string& datadir = "") = 0; // pure virtual function; must be implemented in derived classes.
     virtual void show_traindata() = 0;
-    //    virtual ~DataHandler();
-private:
+    virtual ~DataHandler(){} // Because DataHandler has virtual func, need virtual destructor to call derived class's destructor.
 };
 
 std::unique_ptr<DataHandler> create_handler(const DataType data_type);
+
 } // namespace mo
 
 #endif // DATAHANDLER_H

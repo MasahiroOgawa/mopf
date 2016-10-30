@@ -25,7 +25,12 @@ void KNearestNeighbor::eval(){
 
 //------------------
 void KNearestNeighbor::classify(const std::vector<uint8_t>& datum){
-
+//    for(auto train_datum : pdh_->train_data()){
+        //double dist = distance(datum, train_datum);
+        //sort()
+        //count_majority_class()
+        //return class
+//    }
 }
 
 } // namespace mo

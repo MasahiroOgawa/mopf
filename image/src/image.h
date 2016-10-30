@@ -34,8 +34,9 @@ std::ostream& operator<<(std::ostream& os, const Color& col);
 ////////////////////////
 /// \brief Image
 ////////////////////////
-using Image = cv::Mat_<cv::Vec3b>; //color image
-using Image_gray = cv::Mat_<unsigned char>; //gray image
+template<typename T> using Image_ = cv::Mat_<T>;
+using Image = Image_<cv::Vec3b>; //color image
+using Image_gray = Image_<unsigned char>; //gray image
 
 } // namespace mo
 #endif // IMAGE_H
