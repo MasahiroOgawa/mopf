@@ -13,6 +13,7 @@ public:
     void eval();
     const char classify(const std::vector<unsigned char>& datum); // currently specific to uint8_t.
 
+
 private:
     std::unique_ptr<DataHandler> pdh_;
     bool show_result_;

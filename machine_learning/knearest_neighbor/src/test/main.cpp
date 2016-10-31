@@ -8,6 +8,7 @@ int main()try{
             "start knearest_neighbor test\n";
 
     KNearestNeighbor knn;
+//    knn.classify();
 
     return 0;
 }catch(runtime_error& e){
