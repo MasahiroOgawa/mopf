@@ -27,6 +27,9 @@ MnistDataHandler<Datum,Label>::read(const std::string& datadir){
     this->dataset_.test_data = std::move(mnist_dataset.test_images);
     this->dataset_.train_labels = std::move(mnist_dataset.training_labels);
     this->dataset_.test_labels = std::move(mnist_dataset.test_labels);
+
+    assert(this->dataset_.train_data.size() == this->dataset_.train_labels.size());
+    assert(this->dataset_.test_data.size() == this->dataset_.test_labels.size());
 }
 
 //---------------------------------------

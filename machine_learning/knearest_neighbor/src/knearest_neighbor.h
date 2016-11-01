@@ -24,7 +24,7 @@ private:
     std::unique_ptr<DataHandler<>> pdh_;
     bool show_result_;
 
-    const Label count_majority_label(const std::map<double, int>& dist_idx);
+    const Label count_majority_label(const std::map<double, Label>& dist_label);
 };
 
 
@@ -41,8 +41,9 @@ void KNearestNeighbor<Datum, Label>::init(const int k, const DataType dt, const 
 //------------------
 template<typename Datum, typename Label>
 const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
-    std::map<double, int> dist_idx;
+    std::map<double, Label> dist_label;
     const std::vector<Datum>& train_data = pdh_->train_data();
+    const std::vector<Label>& train_labels = pdh_->train_labels();
 
     for(int i=0; i<train_data.size(); ++i){
         double dist = distance(datum, train_data[i]);
@@ -50,15 +51,15 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
         //debug
         std::cout << "dist to train_data[" << i << "] = " << dist << std::endl;
 
-        dist_idx.insert( std::pair<double, int>(dist, i) );
+        dist_label.insert( std::pair<double, Label>(dist, train_labels[i]) );
     }
 
-    return count_majority_label(dist_idx);
+    return count_majority_label(dist_label);
 }
 
 //-------------------
 template<typename Datum, typename Label>
-const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<double, int>& dist_idx){
+const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<double, Label>& dist_label){
 
 }
 

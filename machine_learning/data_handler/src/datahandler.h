@@ -28,6 +28,8 @@ public:
     virtual ~DataHandler(){} // Because DataHandler has virtual func, need virtual destructor to call derived class's destructor.
     std::vector<Datum>& train_data(){return dataset_.train_data;}
     std::vector<Datum>& test_data(){return dataset_.test_data;}
+    std::vector<Label>& train_labels(){return dataset_.train_labels;}
+    std::vector<Label>& test_labels(){return dataset_.test_labels;}
 protected:
     Dataset<Datum, Label> dataset_; //currently support only the same type MNIST_dataset
 };
