@@ -8,27 +8,40 @@
 #include "../../../linear_algebra/src/vector.h"
 
 namespace mo {
+
+template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
 class KNearestNeighbor
 {
 public:
-    KNearestNeighbor(const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
-    void init(const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
+    KNearestNeighbor(const int k, const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true)
+    {init(k,dt,datadir,show_result);}
+    void init(const int k, const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
     void eval();
-    template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
     const Label classify(const Datum& datum);
-    template<typename Datum = std::vector<unsigned char>> std::vector<Datum>& test_data(){return pdh_->test_data();}
+    std::vector<Datum>& test_data(){return pdh_->test_data();}
 
 private:
+    int k_;
     std::unique_ptr<DataHandler<>> pdh_;
     bool show_result_;
+
+    const Label count_majority_label();
 };
 
 
 //------------------
 template<typename Datum, typename Label>
-const Label KNearestNeighbor::classify(const Datum& datum){
-    std::cout << "start " << __func__ << std::endl;
+void KNearestNeighbor<Datum, Label>::init(const int k, const DataType dt, const std::string& datadir, const bool show_result){
+    k_ = k;
+    show_result_ = show_result;
+    pdh_ = create_handler(dt);
+    pdh_->read(datadir);
+    if(show_result_) pdh_->show_traindata();
+}
 
+//------------------
+template<typename Datum, typename Label>
+const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
     std::map<double, int> dist_idx;
     const std::vector<Datum>& train_data = pdh_->train_data();
 
@@ -40,9 +53,14 @@ const Label KNearestNeighbor::classify(const Datum& datum){
 
         dist_idx.insert( std::pair<double, int>(dist, i) );
     }
-    //count_majority_class()
-    //return class
-    return 0;
+
+    return count_majority_label();
+}
+
+//-------------------
+template<typename Datum, typename Label>
+const Label KNearestNeighbor<Datum, Label>::count_majority_label(){
+
 }
 
 } // namespace mo

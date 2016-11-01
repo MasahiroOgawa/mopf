@@ -7,7 +7,7 @@ int main()try{
     cout << "----------------\n"
             "start knearest_neighbor test\n";
 
-    KNearestNeighbor knn;
+    KNearestNeighbor<> knn{4};
     knn.classify(knn.test_data()[0]);
 
     return 0;
