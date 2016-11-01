@@ -44,13 +44,10 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
     std::map<double, Label> dist_label;
     const std::vector<Datum>& train_data = pdh_->train_data();
     const std::vector<Label>& train_labels = pdh_->train_labels();
+    assert(train_data.size() == train_labels.size());
 
     for(int i=0; i<train_data.size(); ++i){
         double dist = distance(datum, train_data[i]);
-
-        //debug
-        std::cout << "dist to train_data[" << i << "] = " << dist << std::endl;
-
         dist_label.insert( std::pair<double, Label>(dist, train_labels[i]) );
     }
 
@@ -60,7 +57,22 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
 //-------------------
 template<typename Datum, typename Label>
 const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<double, Label>& dist_label){
+    assert(k_ < dist_label.size());
 
+    //cut k
+    //map label as first index
+    std::map<Label, int> label_occurences;
+    std::map<double, Label>::const_iterator& it = dist_label.begin();
+    for(int i=0; i<k_; ++i);{
+        ++label_occurences[it->second];
+        ++it;
+    }
+
+    //debug
+    for(auto dd : label_occurences) std::cout << dd.first << ' ' << dd.second << std::endl;
+
+    //count max label
+    //return
 }
 
 } // namespace mo
