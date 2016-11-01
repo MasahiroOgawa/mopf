@@ -3,9 +3,8 @@
 #include "../../data_handler/src/datahandler.h"
 #include "../../data_handler/src/mnistdatahandler.h"
 #include <memory> // for unique_ptr
-
 #include <map>
-#include "../../../linear_algebra/src/vector.h"
+#include "../../../linear_algebra/src/vector.h" // for distance()
 
 namespace mo {
 
@@ -25,7 +24,7 @@ private:
     std::unique_ptr<DataHandler<>> pdh_;
     bool show_result_;
 
-    const Label count_majority_label();
+    const Label count_majority_label(const std::map<double, int>& dist_idx);
 };
 
 
@@ -49,17 +48,17 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
         double dist = distance(datum, train_data[i]);
 
         //debug
-        std::cout << "dis to train_data[" << i << "] = " << dist << std::endl;
+        std::cout << "dist to train_data[" << i << "] = " << dist << std::endl;
 
         dist_idx.insert( std::pair<double, int>(dist, i) );
     }
 
-    return count_majority_label();
+    return count_majority_label(dist_idx);
 }
 
 //-------------------
 template<typename Datum, typename Label>
-const Label KNearestNeighbor<Datum, Label>::count_majority_label(){
+const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<double, int>& dist_idx){
 
 }
 
