@@ -14,17 +14,19 @@ public:
     MnistDataHandler(){}
     void read(const std::string& datadir = "");
     void show_traindata();
-
-private:
-    mnist::MNIST_dataset<std::vector, Datum, Label> dataset_;
 };
 
 
 //---------------------------------------
 template<typename Datum, typename Label> void
 MnistDataHandler<Datum,Label>::read(const std::string& datadir){
-    dataset_ = (datadir.empty()) ?
+    mnist::MNIST_dataset<std::vector, Datum, Label> mnist_dataset = (datadir.empty()) ?
                 mnist::read_dataset("git/my/mopf/data/mnist") : mnist::read_dataset(datadir);
+
+    this->dataset_.train_data = std::move(mnist_dataset.training_images); // we need this-> to make it dependent name(template arguments).
+    this->dataset_.test_data = std::move(mnist_dataset.test_images);
+    this->dataset_.train_labels = std::move(mnist_dataset.training_labels);
+    this->dataset_.test_labels = std::move(mnist_dataset.test_labels);
 }
 
 //---------------------------------------
@@ -32,7 +34,8 @@ template<typename Datum, typename Label> void
 MnistDataHandler<Datum, Label>::show_traindata(){
     std::cout << "q: stop display.\n";
 
-    for(std::vector<uint8_t> tr_img : dataset_.training_images){
+    const std::vector<Datum>& train_data = this->dataset_.train_data;
+    for(std::vector<unsigned char> tr_img : train_data){
         Image_gray img(28, 28, tr_img.data());
         char ch = show("train image", img, 0);
         if(ch=='q') break;
