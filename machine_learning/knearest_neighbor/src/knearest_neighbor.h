@@ -4,6 +4,9 @@
 #include "../../data_handler/src/mnistdatahandler.h"
 #include <memory> // for unique_ptr
 
+#include <map>
+#include "../../../linear_algebra/src/vector.h"
+
 namespace mo {
 class KNearestNeighbor
 {
@@ -11,13 +14,30 @@ public:
     KNearestNeighbor(const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
     void init(const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
     void eval();
-    const char classify(const std::vector<unsigned char>& datum); // currently specific to uint8_t.
-
+    template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
+    const Label classify(const Datum& datum); // currently specific to unsigned char.
+    template<typename Datum = std::vector<unsigned char>> std::vector<Datum>& test_data(){pdh_->test_data();}
 
 private:
     std::unique_ptr<DataHandler<>> pdh_;
     bool show_result_;
 };
+
+
+//------------------
+template<typename Datum, typename Label>
+const Label KNearestNeighbor::classify(const Datum& datum){
+    std::map<double, int> dist_idx;
+    const std::vector<Datum>& train_data = pdh_->train_data();
+
+    for(int i=0; i<train_data.size(); ++i){
+        double dist = distance(datum, train_data[i]);
+        dist_idx.insert( std::pair<double, int>(dist, i) );
+    }
+    //count_majority_class()
+    //return class
+    return 0;
+}
 
 } // namespace mo
 
