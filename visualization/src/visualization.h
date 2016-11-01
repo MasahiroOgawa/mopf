@@ -11,9 +11,10 @@ namespace mo {
 /// \param winname
 /// \param img
 /// \param waitms
+/// \return pressed key as int. same with cv::waitKey's return value
 /////////////////////////
-void show(const std::string& winname, const Image& img, const int waitms=0);
-void show(const std::string& winname, const Image_gray& img, const int waitms=0);
+int show(const std::string& winname, const Image& img, const int waitms=0);
+int show(const std::string& winname, const Image_gray& img, const int waitms=0);
 
 
 /////////////////////////

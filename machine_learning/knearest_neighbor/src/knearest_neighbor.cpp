@@ -25,19 +25,5 @@ void KNearestNeighbor::eval(){
 
 }
 
-////------------------
-//const char KNearestNeighbor::classify(const std::vector<unsigned char>& datum){
-//    map<double, int> dist_idx;
-//    const vector<vector<unsigned char>>& train_data = pdh_->train_data();
-
-//    for(int i=0; i<train_data.size(); ++i){
-//        double dist = distance(datum, train_data[i]);
-//        dist_idx.insert( pair<double, int>(dist, i) );
-//    }
-//    //count_majority_class()
-//    //return class
-//    return 0;
-//}
-
 } // namespace mo
 

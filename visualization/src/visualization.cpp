@@ -13,16 +13,16 @@ std::ostream& operator<<(std::ostream& os, const Color& col){
 
 
 //-----------------------------------------------------------------
-void show(const std::string& winname, const Image& img, const int waitms){
+int show(const std::string& winname, const Image& img, const int waitms){
     cv::imshow(winname, img);
-    cv::waitKey(waitms);
+    return cv::waitKey(waitms);
 }
 
 
 //-----------------------------------------------------------------
-void show(const std::string& winname, const Image_gray& img, const int waitms){
+int show(const std::string& winname, const Image_gray& img, const int waitms){
     cv::imshow(winname, img);
-    cv::waitKey(waitms);
+    return cv::waitKey(waitms);
 }
 
 

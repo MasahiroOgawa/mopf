@@ -30,9 +30,12 @@ MnistDataHandler<Datum,Label>::read(const std::string& datadir){
 //---------------------------------------
 template<typename Datum, typename Label> void
 MnistDataHandler<Datum, Label>::show_traindata(){
+    std::cout << "q: stop display.\n";
+
     for(std::vector<uint8_t> tr_img : dataset_.training_images){
         Image_gray img(28, 28, tr_img.data());
-        show("train image", img, 0);
+        char ch = show("train image", img, 0);
+        if(ch=='q') break;
     }
 }
 
