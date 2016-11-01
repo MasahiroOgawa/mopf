@@ -5,9 +5,7 @@ using namespace std;
 using namespace mo;
 
 int main()try{
-//    unique_ptr<DataHandler<>> pdh = create_handler<>(DataType::mnist);
-    unique_ptr<DataHandler<vector<unsigned char>, unsigned char>>
-            pdh = create_handler<vector<unsigned char>, unsigned char>(DataType::mnist);
+    unique_ptr<DataHandler<>> pdh = create_handler(DataType::mnist);
     pdh->read();
     pdh->show_traindata();
 

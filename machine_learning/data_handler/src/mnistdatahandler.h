@@ -6,10 +6,12 @@
 #include "../../../visualization/src/visualization.h"
 
 namespace mo{
-template<typename Datum, typename Label> class MnistDataHandler : public DataHandler<Datum,Label>
+
+template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
+class MnistDataHandler : public DataHandler<Datum,Label>
 {
 public:
-    MnistDataHandler();
+    MnistDataHandler(){}
     void read(const std::string& datadir = "");
     void show_traindata();
 

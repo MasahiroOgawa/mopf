@@ -3,8 +3,6 @@
 #include <string>
 #include <memory> //unique_ptr
 #include <vector>
-#include "../../../linear_algebra/src/vector.h"
-#include "mnistdatahandler.h"
 
 namespace mo {
 enum class DataType{mnist};
@@ -17,11 +15,14 @@ struct Dataset{
     std::vector<Label> test_labels;
 };
 
+///
+/// \brief DataHandler
+///
 template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
 class DataHandler
 {
 public:
-    DataHandler();
+    DataHandler(){}
     virtual void read(const std::string& datadir = "") = 0; // pure virtual function; must be implemented in derived classes.
     virtual void show_traindata() = 0;
     virtual ~DataHandler(){} // Because DataHandler has virtual func, need virtual destructor to call derived class's destructor.
@@ -32,17 +33,15 @@ private:
 };
 
 
-template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
-std::unique_ptr<DataHandler<Datum, Label>>
-create_handler(const DataType data_type){
-  switch (data_type) {
-  case DataType::mnist:
-    return std::unique_ptr<DataHandler<Datum, Label>>{new MnistDataHandler<Datum, Label>()};
-    break;
-  default:
-    throw std::logic_error("no such data type.");
-  }
-}
+///
+/// \brief create_handler
+/// \param data_type
+/// \return
+///
+std::unique_ptr<DataHandler<>> // we cannot define tempalete version.
+    // because in that case we have to define whole inplementation in .h, and which needs mnisthandler.h,
+    // so it cause cross include.
+create_handler(const DataType data_type);
 
 } // namespace mo
 

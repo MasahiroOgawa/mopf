@@ -15,7 +15,7 @@ public:
 
 
 private:
-    std::unique_ptr<DataHandler> pdh_;
+    std::unique_ptr<DataHandler<>> pdh_;
     bool show_result_;
 };
 

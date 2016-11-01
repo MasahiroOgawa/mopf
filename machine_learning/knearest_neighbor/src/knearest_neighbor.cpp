@@ -1,5 +1,7 @@
 #include "knearest_neighbor.h"
 #include <map>
+#include "../../../linear_algebra/src/vector.h"
+
 
 using namespace std;
 
