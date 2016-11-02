@@ -56,23 +56,23 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
 
 //-------------------
 template<typename Datum, typename Label>
-const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<double, Label>& dist_label){
+const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<double, Label>& dist_label)try{
     assert(k_ < dist_label.size());
 
     //cut k
     //map label as first index
     std::map<Label, int> label_occurences;
-    std::map<double, Label>::const_iterator& it = dist_label.begin();
-    for(int i=0; i<k_; ++i);{
+    typename std::map<double, Label>::const_iterator it = dist_label.begin();
+
+    for(int i=0; i<k_; ++i){
         ++label_occurences[it->second];
         ++it;
     }
 
-    //debug
-    for(auto dd : label_occurences) std::cout << dd.first << ' ' << dd.second << std::endl;
-
     //count max label
     //return
+}catch(...){
+throw;
 }
 
 } // namespace mo
