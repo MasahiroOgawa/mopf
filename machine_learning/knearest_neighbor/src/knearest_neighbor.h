@@ -62,7 +62,7 @@ const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<
     //cut k
     //map label as first index
     std::map<Label, int> label_occurences;
-    typename std::map<double, Label>::const_iterator it = dist_label.begin();
+    auto it = dist_label.begin();
 
     for(int i=0; i<k_; ++i){
         ++label_occurences[it->second];
@@ -70,6 +70,8 @@ const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<
     }
 
     //count max label
+//    auto
+
     //return
 }catch(...){
 throw;
