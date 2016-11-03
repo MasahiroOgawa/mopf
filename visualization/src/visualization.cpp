@@ -27,6 +27,11 @@ int show(const std::string& winname, const Image_gray& img, const int waitms){
 
 
 //-----------------------------------------------------------------
+void destroy_window(const std::string& winname){
+    return cv::destroyWindow(winname);
+}
+
+//-----------------------------------------------------------------
 void line(const Point& pt_sta, const Point& pt_end, Image& img, const Color& color){
     cv::line(img, pt_sta, pt_end, color.pixval());
 }

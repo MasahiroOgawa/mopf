@@ -41,7 +41,10 @@ MnistDataHandler<Datum, Label>::show_traindata(){
     for(std::vector<unsigned char> tr_img : train_data){
         Image_gray img(28, 28, tr_img.data());
         char ch = show("train image", img, 0);
-        if(ch=='q'){ break;}
+        if(ch=='q'){
+            destroy_window("train image");
+            break;
+        }
     }
 }
 

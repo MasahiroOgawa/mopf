@@ -86,7 +86,7 @@ void KNearestNeighbor<Datum, Label>::eval(){
     for(int i=0; i<num_testdata; ++i){
         Label lbl = classify(pdh_->test_data()[i]);
         if(lbl == pdh_->test_labels()[i]) ++num_correct;
-        std::cout << "test: " << i << " computed label= " << static_cast<int>(lbl)
+        std::cout << "test " << i << ": computed label= " << static_cast<int>(lbl)
                   << ", true label= " << static_cast<int>(pdh_->test_labels()[i]) << '\n';
     }
 

@@ -18,6 +18,13 @@ int show(const std::string& winname, const Image_gray& img, const int waitms=0);
 
 
 /////////////////////////
+/// \brief destroy_window
+/// \param winname
+/////////////////////////
+void destroy_window(const std::string& winname);
+
+
+/////////////////////////
 /// \brief line
 /// draw line in img.
 /////////////////////////
