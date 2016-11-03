@@ -9,6 +9,7 @@ int main()try{
 
     KNearestNeighbor<> knn{4};
     knn.classify(knn.test_data()[0]);
+    knn.eval();
 
     return 0;
 }catch(runtime_error& e){
