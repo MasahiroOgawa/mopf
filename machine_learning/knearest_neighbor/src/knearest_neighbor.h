@@ -78,7 +78,7 @@ throw;
 template<typename Datum, typename Label>
 void KNearestNeighbor<Datum, Label>::eval(){
     std::cout << "---------------\nstart "
-               << __func__ << '\n';
+              << __func__ << '\n';
     assert(pdh_->test_data().size() == pdh_->test_labels().size());
 
     int num_correct=0;
@@ -86,12 +86,19 @@ void KNearestNeighbor<Datum, Label>::eval(){
     for(int i=0; i<num_testdata; ++i){
         Label lbl = classify(pdh_->test_data()[i]);
         if(lbl == pdh_->test_labels()[i]) ++num_correct;
+
+        //print result
         std::cout << "test " << i << ": computed label= " << static_cast<int>(lbl)
                   << ", true label= " << static_cast<int>(pdh_->test_labels()[i]) << '\n';
+
+        if(show_result_){
+
+        }
     }
 
     std::cout << "correct classification= " << num_correct * 100.0 / num_testdata << '\n';
 }
+
 
 } // namespace mo
 

@@ -15,9 +15,9 @@ struct Dataset{
     std::vector<Label> test_labels;
 };
 
-///
+/////////////////////////////
 /// \brief DataHandler
-///
+/////////////////////////////
 template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
 class DataHandler
 {
@@ -35,11 +35,11 @@ protected:
 };
 
 
-///
+//////////////////////////////
 /// \brief create_handler
 /// \param data_type
 /// \return
-///
+//////////////////////////////
 std::unique_ptr<DataHandler<>> // we cannot define tempalete version.
     // because in that case we have to define whole inplementation in .h, and which needs mnisthandler.h,
     // so it cause cross include.

@@ -14,6 +14,7 @@ public:
     MnistDataHandler(){}
     void read(const std::string& datadir = "");
     void show_traindata();
+    void show(const Datum& datum);
 };
 
 
@@ -38,14 +39,23 @@ MnistDataHandler<Datum, Label>::show_traindata(){
     std::cout << "q: stop display.\n";
 
     const std::vector<Datum>& train_data = this->dataset_.train_data;
-    for(std::vector<unsigned char> tr_img : train_data){
-        Image_gray img(28, 28, tr_img.data());
-        char ch = show("train image", img, 0);
-        if(ch=='q'){
-            destroy_window("train image");
-            break;
-        }
+    for(auto tr_img : train_data){
+        this->show(tr_img);
     }
+
+    return;
+}
+
+
+//---------------------------------------
+template<typename Datum, typename Label> void
+MnistDataHandler<Datum, Label>::show(const Datum& datum){
+    Image_gray img(28, 28, datum.data());
+    char ch = mo::show("mnist image", img, 0);
+    if(ch=='q')
+        destroy_window("mnist image");
+
+    return;
 }
 
 } // namespace mo
