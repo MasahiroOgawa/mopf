@@ -55,6 +55,9 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
     }
 
     //todo: add reject option
+    if(show_result_){
+        std::cout << "min normalized dist= " << dist_label.begin()->first / pdh_->train_data()[0].size();
+    }
 
     return count_majority_label(dist_label);
 }
@@ -75,6 +78,8 @@ const Label KNearestNeighbor<Datum, Label>::count_majority_label(const std::map<
                                 [](const std::pair<Label,int>& p1, const std::pair<Label,int>& p2){return p1.second < p2.second;});
 
     return it2->first;
+
+
 }catch(...){
 throw;
 }
@@ -88,13 +93,18 @@ void KNearestNeighbor<Datum, Label>::eval(){
     int num_correct=0;
     int num_testdata = pdh_->test_data().size();
     for(int i=0; i<num_testdata; ++i){
+        if(show_result_){
+            std::cout << "test " << i << ": ";
+        }
+
         clock_t beg = clock();
         Label lbl = classify(pdh_->test_data()[i]);
         clock_t end = clock();
+
         if(lbl == pdh_->test_labels()[i]) ++num_correct;
 
         if(show_result_){
-            std::cout << "test " << i << ": computed label= " << static_cast<int>(lbl)
+            std::cout << ", computed label= " << static_cast<int>(lbl)
                       << ", true label= " << static_cast<int>(pdh_->test_labels()[i])
                       << ", computation time=" << float(end - beg)/CLOCKS_PER_SEC << "[s]\n" << std::flush;
 
