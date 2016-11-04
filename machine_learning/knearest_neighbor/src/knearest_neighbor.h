@@ -12,9 +12,9 @@ template<typename Datum = std::vector<unsigned char>, typename Label = unsigned 
 class KNearestNeighbor
 {
 public:
-    KNearestNeighbor(const int k, const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true)
-    {init(k,dt,datadir,show_result);}
-    void init(const int k, const DataType dt = DataType::mnist, const std::string& datadir = "", const bool show_result = true);
+    KNearestNeighbor(const int k, const std::string& datadir, const DataType dt = DataType::mnist, const bool show_result = true)
+    {init(k,datadir,dt,show_result);}
+    void init(const int k, const std::string& datadir, const DataType dt = DataType::mnist, const bool show_result = true);
     void eval();
     const Label classify(const Datum& datum);
     std::vector<Datum>& test_data(){return pdh_->test_data();} // public because it may be used from main().
@@ -30,7 +30,7 @@ private:
 
 //------------------
 template<typename Datum, typename Label>
-void KNearestNeighbor<Datum, Label>::init(const int k, const DataType dt, const std::string& datadir, const bool show_result){
+void KNearestNeighbor<Datum, Label>::init(const int k, const std::string& datadir, const DataType dt, const bool show_result){
     k_ = k;
     show_result_ = show_result;
     pdh_ = create_handler(dt);

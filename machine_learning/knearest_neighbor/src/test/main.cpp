@@ -7,7 +7,7 @@ int main()try{
     cout << "----------------\n"
             "start knearest_neighbor test\n";
 
-    KNearestNeighbor<> knn{4};
+    KNearestNeighbor<> knn{4,"/home/masahiro/git/my/mopf/data/mnist"};
 //    show("test0",knn.test_data()[0])
     cout << "test 0 classified as: " << knn.classify(knn.test_data()[0]) << '\n';
     knn.eval();
