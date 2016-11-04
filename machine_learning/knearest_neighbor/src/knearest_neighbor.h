@@ -36,6 +36,9 @@ void KNearestNeighbor<Datum, Label>::init(const int k, const std::string& datadi
     pdh_ = create_handler(dt);
     pdh_->read(datadir);
     if(show_result_) pdh_->show_traindata();
+
+    // print info
+    std::cout << "[INFO] init k=" << k << ", datadir=" << datadir << ", data type=" << static_cast<int>(dt) << ", show result=" << show_result << "\n";
 }
 
 //------------------
@@ -77,8 +80,7 @@ throw;
 //--------------------
 template<typename Datum, typename Label>
 void KNearestNeighbor<Datum, Label>::eval(){
-    std::cout << "---------------\nstart "
-              << __func__ << '\n';
+    std::cout << "[INFO] enter " << __func__ << '\n';
     assert(pdh_->test_data().size() == pdh_->test_labels().size());
 
     int num_correct=0;
@@ -87,12 +89,14 @@ void KNearestNeighbor<Datum, Label>::eval(){
         Label lbl = classify(pdh_->test_data()[i]);
         if(lbl == pdh_->test_labels()[i]) ++num_correct;
 
-        //print result
-        std::cout << "test " << i << ": computed label= " << static_cast<int>(lbl)
-                  << ", true label= " << static_cast<int>(pdh_->test_labels()[i]) << '\n';
-
         if(show_result_){
-
+            std::cout << "test " << i << ": computed label= " << static_cast<int>(lbl)
+                      << ", true label= " << static_cast<int>(pdh_->test_labels()[i]) << '\n' << std::flush;
+            char ch = pdh_->show(pdh_->test_data()[i], "test image");
+            if(ch == 'q'){
+                destroy_window("test image");
+                show_result_ = false;
+            }
         }
     }
 

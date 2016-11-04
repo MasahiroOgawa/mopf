@@ -19,7 +19,7 @@ public:
     /// \param datum
     /// \return pushed key
     //////////////////
-    char show(const Datum& datum);
+    char show(const Datum& datum, const std::string& winname="mnist image");
 
     void show_traindata();
 
@@ -64,9 +64,9 @@ MnistDataHandler<Datum, Label>::show_traindata(){
 
     const std::vector<Datum>& train_data = this->dataset_.train_data;
     for(auto tr_img : train_data){
-        char ch = this->show(tr_img);
+        char ch = this->show(tr_img,"train image");
         if(ch=='q'){
-            destroy_window("mnist image");
+            destroy_window("train image");
             break;
         }
     }
@@ -77,9 +77,9 @@ MnistDataHandler<Datum, Label>::show_traindata(){
 
 //---------------------------------------
 template<typename Datum, typename Label> char
-MnistDataHandler<Datum, Label>::show(const Datum& datum){
+MnistDataHandler<Datum, Label>::show(const Datum& datum, const std::string& winname){
     Image_gray img(28, 28, const_cast<unsigned char*>(datum.data()));
-    return mo::show("mnist image", img, 0);
+    return mo::show(winname, img, 0);
 }
 
 } // namespace mo
