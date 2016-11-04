@@ -24,6 +24,7 @@ class DataHandler
 public:
     DataHandler(){}
     virtual void read(const std::string& datadir = "") = 0; // pure virtual function; must be implemented in derived classes.
+    virtual char show(const Datum& datum) = 0;
     virtual void show_traindata() = 0;
     virtual ~DataHandler(){} // Because DataHandler has virtual func, need virtual destructor to call derived class's destructor.
     std::vector<Datum>& train_data(){return dataset_.train_data;}
