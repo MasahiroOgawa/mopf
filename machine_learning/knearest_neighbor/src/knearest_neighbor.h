@@ -5,6 +5,7 @@
 #include <memory> // for unique_ptr
 #include <map>
 #include "../../../linear_algebra/src/vector.h" // for distance()
+#include <ctime> // for clock_t
 
 namespace mo {
 
@@ -17,7 +18,6 @@ public:
     void init(const int k, const std::string& datadir, const DataType dt = DataType::mnist, const bool show_result = true);
     void eval();
     const Label classify(const Datum& datum);
-    std::vector<Datum>& test_data(){return pdh_->test_data();} // public because it may be used from main().
 
 private:
     int k_;
@@ -54,6 +54,8 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
         dist_label.insert( std::pair<double, Label>(dist, train_labels[i]) );
     }
 
+    //todo: add reject option
+
     return count_majority_label(dist_label);
 }
 
@@ -86,16 +88,28 @@ void KNearestNeighbor<Datum, Label>::eval(){
     int num_correct=0;
     int num_testdata = pdh_->test_data().size();
     for(int i=0; i<num_testdata; ++i){
+        clock_t beg = clock();
         Label lbl = classify(pdh_->test_data()[i]);
+        clock_t end = clock();
         if(lbl == pdh_->test_labels()[i]) ++num_correct;
 
         if(show_result_){
             std::cout << "test " << i << ": computed label= " << static_cast<int>(lbl)
-                      << ", true label= " << static_cast<int>(pdh_->test_labels()[i]) << '\n' << std::flush;
+                      << ", true label= " << static_cast<int>(pdh_->test_labels()[i])
+                      << ", computation time=" << float(end - beg)/CLOCKS_PER_SEC << "[s]\n" << std::flush;
+
             char ch = pdh_->show(pdh_->test_data()[i], "test image");
-            if(ch == 'q'){
+            switch (ch) {
+            case 'p':
+            case 'b':
+                i-=2;
+                break;
+            case 'q':
                 destroy_window("test image");
                 show_result_ = false;
+                break;
+            default:
+                break;
             }
         }
     }
