@@ -13,9 +13,11 @@ template<typename Datum = std::vector<unsigned char>, typename Label = unsigned 
 class KNearestNeighbor
 {
 public:
-    KNearestNeighbor(const int k, const std::string& datadir, const DataType dt = DataType::mnist, const bool show_result = true)
-    {init(k,datadir,dt,show_result);}
-    void init(const int k, const std::string& datadir, const DataType dt = DataType::mnist, const bool show_result = true);
+    KNearestNeighbor(const int k, const std::string& datadir, const DataType dt = DataType::mnist
+            , const bool show_result = true, const DistanceType disttp = DistanceType::l2)
+    {init(k,datadir,dt,show_result, disttp);}
+    void init(const int k, const std::string& datadir, const DataType dt = DataType::mnist
+            , const bool show_result = true, const DistanceType disttp = DistanceType::l2);
     void eval();
     const Label classify(const Datum& datum);
 
@@ -23,6 +25,7 @@ private:
     int k_;
     std::unique_ptr<DataHandler<>> pdh_;
     bool show_result_;
+    DistanceType disttp_;
 
     const Label count_majority_label(const std::map<double, Label>& dist_label);
 };
@@ -30,15 +33,16 @@ private:
 
 //------------------
 template<typename Datum, typename Label>
-void KNearestNeighbor<Datum, Label>::init(const int k, const std::string& datadir, const DataType dt, const bool show_result){
+void KNearestNeighbor<Datum, Label>::init(const int k, const std::string& datadir, const DataType dt, const bool show_result, const DistanceType disttp){
     k_ = k;
     show_result_ = show_result;
     pdh_ = create_handler(dt);
     pdh_->read(datadir);
     if(show_result_) pdh_->show_traindata();
+    disttp_ = disttp;
 
-    // print info
-    std::cout << "[INFO] init k=" << k << ", datadir=" << datadir << ", data type=" << static_cast<int>(dt) << ", show result=" << show_result << "\n";
+    std::cout << "[INFO] init k=" << k << ", datadir=" << datadir << ", data type=" << static_cast<int>(dt)
+              << ", show result=" << show_result << ", distance type=" << static_cast<int>(disttp) << "\n";
 }
 
 //------------------
@@ -50,7 +54,7 @@ const Label KNearestNeighbor<Datum, Label>::classify(const Datum& datum){
     assert(train_data.size() == train_labels.size());
 
     for(int i=0; i<train_data.size(); ++i){
-        double dist = distance(datum, train_data[i]);
+        double dist = distance(datum, train_data[i], disttp_);
         dist_label.insert( std::pair<double, Label>(dist, train_labels[i]) );
     }
 

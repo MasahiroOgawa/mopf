@@ -28,15 +28,34 @@ enum class DistanceType{
     cos,
 };
 
-
+/////////////////////////
+/// \brief l2norm
+/// \param v1
+/// \param v2
+/// \return
+/////////////////////////
 template<typename T>
 double l2norm(const std::vector<T>& v1, const std::vector<T>& v2);
 
+
+/////////////////////////
+/// \brief cosnorm
+/// \param v1
+/// \param v2
+/// \return cosine distance = angle distance
+/////////////////////////
 template<typename T>
 double cosnorm(const std::vector<T>& v1, const std::vector<T>& v2);
 
+
+/////////////////////////
+/// \brief norm
+/// \param v1
+/// \return
+/////////////////////////
 template<typename T>
 double norm(const std::vector<T>& v);
+
 
 /////////////////////////
 /// \brief distance
@@ -63,12 +82,8 @@ double distance(const std::vector<T>& v1, const std::vector<T>& v2, const Distan
     }
 }
 
-/////////////////////////
-/// \brief l2norm
-/// \param v1
-/// \param v2
-/// \return
-/////////////////////////
+
+//-------------------------------------
 template<typename T>
 double l2norm(const std::vector<T>& v1, const std::vector<T>& v2){
     double dist{0}; //no implicit constructor for double
@@ -79,22 +94,15 @@ double l2norm(const std::vector<T>& v1, const std::vector<T>& v2){
     return sqrt(dist);
 }
 
-/////////////////////////
-/// \brief cosnorm
-/// \param v1
-/// \param v2
-/// \return cosine distance = angle distance
-/////////////////////////
+
+//-------------------------------------
 template<typename T>
 double cosnorm(const std::vector<T>& v1, const std::vector<T>& v2){
     return 1 - std::inner_product(v1.begin(), v1.end(), v2.begin(), 0.0) / (norm(v1) * norm(v2));
 }
 
-/////////////////////////
-/// \brief norm
-/// \param v1
-/// \return
-/////////////////////////
+
+//-------------------------------------
 template<typename T>
 double norm(const std::vector<T>& v){
     return sqrt(std::inner_product(v.begin(), v.end(), v.begin(), 0.0));

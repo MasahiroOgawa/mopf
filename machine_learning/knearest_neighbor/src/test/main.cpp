@@ -7,7 +7,7 @@ int main()try{
     cout << "----------------\n"
             "start knearest_neighbor test\n";
 
-    KNearestNeighbor<> knn{4,"/home/masahiro/git/my/mopf/data/mnist"};
+    KNearestNeighbor<> knn{4,"/home/masahiro/git/my/mopf/data/mnist", DataType::mnist, true, DistanceType::cos};
     knn.eval();
 
     return 0;
