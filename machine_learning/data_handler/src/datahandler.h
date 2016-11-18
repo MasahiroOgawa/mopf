@@ -5,7 +5,11 @@
 #include <vector>
 
 namespace mo {
-enum class DataType{mnist};
+enum class DataType{
+    david=1,
+    iris,
+    mnist
+};
 
 template<typename Datum = std::vector<unsigned char>, typename Label = unsigned char>
 struct Dataset{
