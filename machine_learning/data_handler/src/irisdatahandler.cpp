@@ -4,9 +4,11 @@
 #include <iostream>
 using namespace std;
 
+namespace mo {
+
 IrisDataHandler::IrisDataHandler()
 {
-    datadim_ = 4;
+
     cls_map_["Iris-setosa"] = (cv::Mat_<double>(3,1) << 1, 0, 0);
     cls_map_["Iris-versicolor"] = (cv::Mat_<double>(3,1) << 0, 1, 0);
     cls_map_["Iris-virginica"] = (cv::Mat_<double>(3,1) << 0, 0, 1);
@@ -28,6 +30,7 @@ try{
     string line;
     string cell;
     cv::Mat Xt;
+    unsigned datadim_ = 4;
     while(getline(fi, line)){ //read lines
         stringstream lstream(line);
         if(line.empty()) break; //in case reading empty line.
@@ -49,3 +52,5 @@ try{
     cerr << "invalid argument in DataHandler::read()\n";
     throw;
 }
+
+} // namespace mo

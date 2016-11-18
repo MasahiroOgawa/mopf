@@ -3,6 +3,8 @@
 #include <stdexcept>
 using namespace std;
 
+namespace mo {
+
 DavidDataHandler::DavidDataHandler()
 {
 }
@@ -14,7 +16,7 @@ try{
 
     vector<unsigned> topology;
     getTopology(topology);
-    datadim_ = topology[0];
+    unsigned datadim_ = topology[0];
 
     vector<double> inputVals, targetVals;
     //1 time read to fill X_
@@ -99,3 +101,5 @@ unsigned DavidDataHandler::getTargetOutputs(vector<double> &targetOutputVals)
 
     return targetOutputVals.size();
 }
+
+} // namespace mo

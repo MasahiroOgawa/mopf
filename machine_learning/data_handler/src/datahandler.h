@@ -3,6 +3,7 @@
 #include <string>
 #include <memory> //unique_ptr
 #include <vector>
+#include "../../../linear_algebra/src/matrix.h"
 
 namespace mo {
 enum class DataType{
@@ -30,6 +31,8 @@ public:
     virtual void read(const std::string& datadir) = 0; // pure virtual function; must be implemented in derived classes.
     virtual char show(const Datum& datum, const std::string& winname) = 0;
     virtual void show_traindata() = 0;
+    virtual const Matrix& X()const = 0;
+    virtual const Matrix& B()const = 0;
     virtual ~DataHandler(){} // Because DataHandler has virtual func, need virtual destructor to call derived class's destructor.
     std::vector<Datum>& train_data(){return dataset_.train_data;}
     std::vector<Datum>& test_data(){return dataset_.test_data;}

@@ -4,11 +4,17 @@
 #include <fstream>
 #include <vector>
 
-class DavidDataHandler : public DataHandler
+namespace mo {
+
+class DavidDataHandler : public DataHandler<std::vector<double>,std::vector<double>>
 {
 public:
     DavidDataHandler();
     void read(const std::string& filename);
+    const Matrix& X()const{return X_;}
+    const Matrix& B()const{return B_;}
+
+private:
     bool isEof(void) { return m_trainingDataFile.eof(); }
     void getTopology(std::vector<unsigned> &topology);
 
@@ -16,8 +22,11 @@ public:
     unsigned getNextInputs(std::vector<double> &inputVals);
     unsigned getTargetOutputs(std::vector<double> &targetOutputVals);
 
-private:
     std::ifstream m_trainingDataFile;
+    Matrix X_;
+    Matrix B_;
 };
+
+} // namespace mo
 
 #endif // DAVIDDATAHANDLER_H
