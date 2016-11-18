@@ -40,11 +40,11 @@ protected:
 /// \brief create_handler
 /// \param data_type
 /// \return
+/// we cannot define tempalete version.
+/// because in that case we have to define whole inplementation in .h, and which needs mnisthandler.h,
+///  so it cause cross include.
 //////////////////////////////
-std::unique_ptr<DataHandler<>> // we cannot define tempalete version.
-    // because in that case we have to define whole inplementation in .h, and which needs mnisthandler.h,
-    // so it cause cross include.
-create_handler(const DataType data_type);
+std::unique_ptr<DataHandler<>> create_handler(const DataType data_type);
 
 } // namespace mo
 

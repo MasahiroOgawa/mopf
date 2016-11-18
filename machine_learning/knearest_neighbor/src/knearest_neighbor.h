@@ -14,9 +14,6 @@ class KNearestNeighbor
 {
 public:
     KNearestNeighbor(const int k, const std::string& datadir, const DataType dt = DataType::mnist
-            , const bool show_result = true, const DistanceType disttp = DistanceType::l2)
-    {init(k,datadir,dt,show_result, disttp);}
-    void init(const int k, const std::string& datadir, const DataType dt = DataType::mnist
             , const bool show_result = true, const DistanceType disttp = DistanceType::l2);
     void eval();
     const Label classify(const Datum& datum);
@@ -30,16 +27,14 @@ private:
     const Label count_majority_label(const std::map<double, Label>& dist_label);
 };
 
-
 //------------------
 template<typename Datum, typename Label>
-void KNearestNeighbor<Datum, Label>::init(const int k, const std::string& datadir, const DataType dt, const bool show_result, const DistanceType disttp){
-    k_ = k;
-    show_result_ = show_result;
-    pdh_ = create_handler(dt);
+KNearestNeighbor<Datum, Label>::KNearestNeighbor(const int k, const std::string& datadir, const DataType dt
+                                                 , const bool show_result, const DistanceType disttp):
+    k_ {k}, show_result_ {show_result}, pdh_{create_handler(dt)}, disttp_{disttp}
+{
     pdh_->read(datadir);
     if(show_result_) pdh_->show_traindata();
-    disttp_ = disttp;
 
     std::cout << "[INFO] init k=" << k << ", datadir=" << datadir << ", data type=" << static_cast<int>(dt)
               << ", show result=" << show_result << ", distance type=" << static_cast<int>(disttp) << "\n";

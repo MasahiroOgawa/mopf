@@ -5,7 +5,7 @@ using namespace std;
 using namespace mo;
 
 int main()try{
-    unique_ptr<DataHandler<>> pdh = create_handler(DataType::mnist);
+    unique_ptr<DataHandler<>> pdh{create_handler(DataType::mnist)};
     pdh->read("~/git/my/mopf/data/mnist");
     pdh->show_traindata();
 
