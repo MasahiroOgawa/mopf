@@ -12,3 +12,9 @@ install_manifest.txt
 
 # build outputs
 build
+*.aux
+*.dvi
+*.log
+
+# binary files
+*.png
