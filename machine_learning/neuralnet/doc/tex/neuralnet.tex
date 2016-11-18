@@ -19,8 +19,9 @@
   f(a_{1,1}) & f(a_{1,2}) & \cdots & f(a_{1,n}) \\
   f(a_{2,1}) & f(a_{2,2}) & \cdots & f(a_{2,n}) \\
   \vdots  & \vdots  & \ddots & \vdots  \\
+
   f(a_{m,1}) & f(a_{m,2}) & \cdots & f(a_{m,n})
- \end{pmatrix}$ 
+ \end{pmatrix}$ : for $m \times n$ matrix $\bm{A}$
 \item $(\bm{A}.*\bm{B})_{i,j} = a_{i,j}b_{i,j}$
 \item $\bm{1}_{m\times n} = 
   \begin{pmatrix}
@@ -33,6 +34,8 @@
     1 \\
     \bm{y}
   \end{pmatrix}$ : homogeneous vector
+
+\subsection{variables}
 \item $n$ : data number
 \item $N$ : total number of data
 \item $l$ : layer number
@@ -130,8 +133,8 @@ Therefore we concentrate on computing $\frac{\partial J_n}{\partial
   \bm{\tilde{W}}_{l}(k)}$ below.
 
 \subsection{Feed Forward}
-The below are true for all data and all iteration.
-So we omit the data number $n$ and iteration number $k$ as 
+The below are true for all data and all iteration,
+so we omit the data number $n$ and iteration number $k$ as 
 e.g.\ $\bm{x}_{l,n} = \bm{x}_l, \bm{\tilde{W}}_l(k) = \bm{\tilde{W}}_l$.
 \begin{eqnarray}
   \bm{x}_l = {}^t\bm{\tilde{W}}_{l-1} \bm{\tilde{y}}_{l-1} \\
@@ -139,6 +142,8 @@ e.g.\ $\bm{x}_{l,n} = \bm{x}_l, \bm{\tilde{W}}_l(k) = \bm{\tilde{W}}_l$.
 \end{eqnarray}
 
 \subsubsection{activation function for hidden layers}
+We can choose below 2 types of function as activation function.
+These 2 activation functions will not produce any difference.
 \begin{eqnarray}
   f(x) = 
   \begin{cases}
@@ -210,9 +215,9 @@ And we omit $n$ as $J_n = J$ in this section.
 \end{eqnarray}
 
 \subsubsection{back propagation for an output layer}
-To compute back propagation for an output layer, we need cost function form.
-Depend on that, we have to choose appropriate cost function for each
-problem as below.
+To compute a back propagation for an output layer, we need a concrete cost function form.
+Because of this situation, we have to choose appropriate cost function form for each
+problem as below at this time.
 \begin{eqnarray}
   J = 
   \begin{cases}

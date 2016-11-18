@@ -1,12 +1,12 @@
 #!/bin/sh
 
-#################
+################
 #run Neuralnet program
 ################
 #params
 BASEDIR=$(dirname $0)/..
-PARAM=${BASEDIR}/prm/param.txt
-BIN=${BASEDIR}/build-src-Desktop-Default/neuralnet
+PARAM=${BASEDIR}/param/param.txt
+BIN=${BASEDIR}/build/neuralnet
 OUTDIR=${BASEDIR}/result
 OUTIMGNAME=${OUTDIR}/error.png
 LOGBASENAME=log.txt

@@ -5,6 +5,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include "neuralnet.h"
+#include "util.h"
 //#define DEBUG_
 using namespace std;
 
@@ -26,6 +27,7 @@ void Visualizer::init(const Neuralnet& nn){
   id_ = nn.id();
   display_dim_ = 3; //cv::viz::WCloud only allow 3 or 4 channel matrix.
   topology_ = nn.topology();
+  th_J_ = nn.prm().th_J;
 
   //preprocess
   comp_labels(B_);
@@ -83,7 +85,7 @@ void Visualizer::show_layer(const cv::Mat& Y, const int layer){
 
   //compress
   cv::Mat Ycompress;
-  compress(Y, Ycompress);
+  fit_to_dispdim(Y, Ycompress);
 
   //create pointcloud of Ycompress
   cv::Mat cloud_3d = load_cloud(Ycompress);
@@ -126,8 +128,25 @@ void Visualizer::record_WJ(const std::vector<cv::Mat>& Wshom, const double& J){
  * @brief show_error
  */
 void Visualizer::show_error(){
-  show_error3d();
-  show_error2d();
+  switch (static_cast<ErrShowOpt>(prm_.error_show_opt)) {
+  case ErrShowOpt::none:
+    break;
+  case ErrShowOpt::tmvar:
+    show_error_timevariation();
+    break;
+  case ErrShowOpt::dim2_tmvar:
+    show_error_timevariation();
+  case ErrShowOpt::dim2:
+    show_error2d();
+    break;
+  case ErrShowOpt::dim3_tmvar:
+    show_error_timevariation();
+  case ErrShowOpt::dim3:
+    show_error3d();
+    break;
+  default:
+    throw runtime_error("no such error show option @Visualizer::show_error()");
+  }
 }
 
 
@@ -207,20 +226,25 @@ cv::Mat Visualizer::load_cloud(const cv::Mat& Xcompress){
 
 
 
+void Visualizer::fit_to_dispdim(const cv::Mat& X, cv::Mat& Xcompress){
+  if(X.rows < display_dim_) cv::vconcat(X, cv::Mat::zeros(display_dim_-X.rows, X.cols, X.type()), Xcompress);
+  else if(X.rows > display_dim_) compress(X, Xcompress);
+  else Xcompress = X; // in case X.rows==display_dim_.
+}
+
 
 /**
  * @brief Visualizer::compress
  * @param X
  * @param Xcompress
- * @detail in case X.rows < display_dim_, add zeros and let Xcompress row vectors have more than 3dim.
  * @return
  */
 cv::PCA Visualizer::compress(const cv::Mat& X, cv::Mat& Xcompress){
   if(X.empty()) throw runtime_error("input matrix is empty @Visualizer::compress()");
+  else if(X.rows < display_dim_) throw runtime_error("X.rows="+to_string(X.rows)+" is less than display dim="+to_string(display_dim_)+" @Visualizer::compress()");
 
   cv::PCA pca(X, cv::Mat(), CV_PCA_DATA_AS_COL, display_dim_);
-  if(X.rows < display_dim_) cv::vconcat(X, cv::Mat::zeros(display_dim_-X.rows, X.cols, X.type()), Xcompress);
-  else pca.project(X, Xcompress);
+  pca.project(X, Xcompress);
 
   return pca;
 }
@@ -249,16 +273,18 @@ void Visualizer::comp_labels(const cv::Mat& B){
 void Visualizer::show_outsp(const cv::Mat& YL){
   wins_[num_layers_-1].showWidget("coordinate", cv::viz::WCoordinateSystem());
 
-  //compress YL
+  //fit YL, B to display dim.
   cv::Mat YLcompress;
-  cv::PCA pca = compress(YL,YLcompress);
-
-  //project B
-  if(B_.rows < display_dim_ ) cv::vconcat(B_, cv::Mat::zeros(display_dim_-B_.rows, B_.cols, B_.type()), Bcompress_);
-  else pca.project(B_, Bcompress_);
+  if(YL.rows > display_dim_){
+    cv::PCA pca = compress(YL,YLcompress);
+    pca.project(B_, Bcompress_);
 #ifdef DEBUG_
-  cout<<"Bcomp="<<Bcompress_(cv::Rect(0,0,10,3))<<endl;
+    cout<<"Bcomp="<<Bcompress_(cv::Rect(0,0,10,3))<<endl;
 #endif
+  }else{
+    fit_to_dispdim(YL,YLcompress);
+    fit_to_dispdim(B_, Bcompress_);
+  }
 
   //create point cloud
   cv::viz::WCloudCollection clouds_widget;
@@ -309,6 +335,7 @@ void Visualizer::set_colors(){
 void Visualizer::set_color_byclass(){
   //create a color of each class
   int max_class = *max_element(c_.begin(),c_.end());
+  if(max_class == 0) throw runtime_error("cannot draw because max_class = 0 @Visualizer::set_color_byclass()");
   vector<cv::Scalar_<unsigned char> > inpos_compclscols;
   for(int i=0; i<=max_class; ++i){
     //    cv::randu(color,cv::Scalar(0),cv::Scalar(255)); //note: viz::Widget does not support alpha value, it will be neglected. this sometimes create close colors.
@@ -330,7 +357,7 @@ void Visualizer::set_color_byclass(){
 void Visualizer::set_color_bypos(){
   //compress X0
   cv::Mat X0compress;
-  compress(X0_, X0compress);
+  fit_to_dispdim(X0_, X0compress);
 
   //compute each colors min,max
   vector<double> min(display_dim_);
@@ -354,6 +381,8 @@ void Visualizer::set_color_bypos(){
  * @param num_wins
  */
 void Visualizer::create_wins(){
+  int num_wins{0};
+
   //layer windows
   for(unsigned i=0; i<num_layers_; ++i){
     string winname = "id=" + to_string(id_) + ",layer=" + to_string(i);
@@ -361,27 +390,61 @@ void Visualizer::create_wins(){
     win.setWindowSize(cv::Size(prm_.win_w, prm_.win_h));
     win.setWindowPosition(cv::Point(i*prm_.win_w, id_*prm_.win_h));
     wins_.push_back(win);
+    ++num_wins;
   }
 
-  //3d error window
-  cv::viz::Viz3d err_win("id="+to_string(id_)+"weight1-weight2-error");
-  err_win.setWindowSize(cv::Size(prm_.win_w, prm_.win_h));
-  err_win.setWindowPosition(cv::Point(num_layers_*prm_.win_w,id_*prm_.win_h));
-  wins_.push_back(err_win);
-
-  //2d error window
-  err2d_winname_ = "id=" + to_string(id_) + "iteration-error";
-  cv::namedWindow(err2d_winname_);
-  cv::moveWindow(err2d_winname_, (num_layers_+1)*prm_.win_w, id_*prm_.win_h);
+  switch (static_cast<ErrShowOpt>(prm_.error_show_opt)) {
+  case ErrShowOpt::tmvar:
+    create_1derrwin(num_wins);
+    break;
+  case ErrShowOpt::dim2_tmvar:
+    create_1derrwin(num_wins);
+  case ErrShowOpt::dim2:
+    create_2derrwin(num_wins);
+    break;
+  case ErrShowOpt::dim3_tmvar:
+    create_1derrwin(num_wins);
+  case ErrShowOpt::dim3:
+    create_3derrwin(num_wins);
+    break;
+  default:
+    break;
+  }
 
   //network window
   net_winname_ = "id=" + to_string(id_) + "network";
   cv::namedWindow(net_winname_);
-  cv::moveWindow(net_winname_, (num_layers_+2)*prm_.win_w, id_*prm_.win_h);
+  cv::moveWindow(net_winname_, num_wins*prm_.win_w, id_*prm_.win_h);
+}
+
+//--------------------------------------------------
+void Visualizer::create_1derrwin(int& num_wins){
+  errvar_winname_ = "id=" + to_string(id_) + "iteration-error";
+  cv::namedWindow(errvar_winname_);
+  cv::moveWindow(errvar_winname_, num_wins*prm_.win_w, id_*prm_.win_h);
+  ++num_wins;
+}
+
+//--------------------------------------------------
+void Visualizer::create_2derrwin(int& num_wins){
+  err2d_winname_ = "id=" + to_string(id_) + "weight1-weight2-error";
+  cv::namedWindow(err2d_winname_);
+  cv::moveWindow(err2d_winname_, num_wins*prm_.win_w, id_*prm_.win_h);
+  ++num_wins;
+}
+
+//--------------------------------------------------
+void Visualizer::create_3derrwin(int& num_wins){
+  cv::viz::Viz3d err_win("id="+to_string(id_)+"weight1-weight2-error");
+  err_win.setWindowSize(cv::Size(prm_.win_w, prm_.win_h));
+  err_win.setWindowPosition(cv::Point(num_wins*prm_.win_w,id_*prm_.win_h));
+  wins_.push_back(err_win);
+  ++num_wins;
 }
 
 
-void Visualizer::show_error2d(){
+//--------------------------------------------------
+void Visualizer::show_error_timevariation(){
   cv::Mat err2d_img(prm_.win_h, prm_.win_w, CV_8UC3, cv::Scalar::all(0));
 
   //compute graph scale
@@ -406,17 +469,18 @@ void Visualizer::show_error2d(){
   cv::putText(err2d_img, "curr="+to_string(Js_.back()), cv::Point(0,25), cv:: FONT_HERSHEY_PLAIN, 1.0, cv::Scalar::all(255));
   cv::putText(err2d_img, "min="+to_string(minJ)+", max="+to_string(maxJ), cv::Point(0,40), cv:: FONT_HERSHEY_PLAIN, 1.0, cv::Scalar::all(255));
 
-  cv::imshow(err2d_winname_,err2d_img);
+  cv::imshow(errvar_winname_,err2d_img);
 }
 
 
+//--------------------------------------
 void Visualizer::show_error3d(){
   //show coordinate
   wins_[num_layers_].showWidget("coordinate", cv::viz::WCoordinateSystem()); //wins_[num_layers] is error window.
 
   //compress W
-  --display_dim_; //w is 2D. we will display (w,J) in 3D.
-  compress(ws_, wJcompress_);
+  --display_dim_; //w must be compressed to 2D. we will display (w,J) in 3D.
+  fit_to_dispdim(ws_, wJcompress_);
   ++display_dim_;
 
   //concatenate J and W
@@ -438,4 +502,98 @@ void Visualizer::show_error3d(){
     wins_[num_layers_].spin();
   else
     wins_[num_layers_].spinOnce(prm_.waitms, true);
+}
+
+
+//------------------------------------
+void Visualizer::show_error2d(){
+  //create a window
+  cv::Mat err2d_img(prm_.win_h, prm_.win_w, CV_8UC3, cv::Scalar::all(0));
+  cv::cvtColor(err2d_img, err2d_img, CV_BGR2HSV); //draw in hsv
+
+  //compress W
+  --display_dim_; //w must be compressed to 2D. wJcompress is now 2d row matrix.
+  fit_to_dispdim(ws_, wJcompress_);
+  ++display_dim_;
+
+  //concatenate J and W
+  cv::Mat Js(Js_);
+  Js = Js.t(); //Js_ must be 1 x T dim. Js_.reshape(1,1) doesn't work.
+  if(wJcompress_.cols != Js.cols) throw runtime_error("iteration num doen't match in ws and Js!");
+  wJcompress_.push_back(Js);
+
+  cv::Mat_<double> MinmaxWs;
+  Util::minmax_eachrow(wJcompress_, MinmaxWs);
+
+  draw_errarrows(wJcompress_, MinmaxWs, err2d_img);
+
+  draw_errpts(wJcompress_, MinmaxWs, err2d_img);
+
+  cv::imshow(err2d_winname_, err2d_img);
+}
+
+
+//------------------------------------
+cv::Point Visualizer::mapto_err2dimg(const double& x, const double& y, const double minx, const double maxx, const double miny, const double maxy){
+  if(minx == maxx) throw runtime_error("minx==maxx=" + to_string(minx) + "@Visualizer::mapto_err2dimg()");
+  if(miny == maxy) throw runtime_error("miny==maxy=" + to_string(miny) + " @Visualizer::mapto_err2dimg()");
+
+  const double xmargin = prm_.win_w / 20.0; //20% is margin
+  const double ymargin = prm_.win_h / 20.0;
+  double mapped_x = xmargin + (x - minx) * (prm_.win_w - 2*xmargin) / (maxx - minx);
+  double mapped_y = ymargin + (y - miny) * (prm_.win_h - 2*ymargin) / (maxy - miny);
+
+  return cv::Point{static_cast<int>(mapped_x), static_cast<int>(mapped_y)};
+}
+
+
+//------------------------------------
+void Visualizer::draw_errarrows(const cv::Mat& Ws, const cv::Mat& MinmaxWs, cv::Mat& img){
+  int num_iterate = Js_.size();
+  if(num_iterate < 3) return; //do not draw until we get 3 points. because we use PCA so if there only exist 2 points, y must be 0 for those 2 points.
+  if(Ws.rows != 3) throw runtime_error("Ws.row should be 3 @Visualizer::draw_errarrows");
+  if(MinmaxWs.rows != 3) throw runtime_error("MinmaxWs.row should be 3 @Visualizer::draw_errarrows");
+
+  const double minx = MinmaxWs.at<double>(0,0);
+  const double maxx = MinmaxWs.at<double>(0,1);
+  const double miny = MinmaxWs.at<double>(1,0);
+  const double maxy = MinmaxWs.at<double>(1,1);
+
+  for(int  n=1; n<num_iterate; ++n)try{
+    cv::Point start_pt = mapto_err2dimg(wJcompress_.at<double>(0,n-1), wJcompress_.at<double>(1,n-1), minx, maxx, miny, maxy);
+    cv::Point end_pt = mapto_err2dimg(wJcompress_.at<double>(0,n), wJcompress_.at<double>(1,n), minx, maxx, miny, maxy);
+    cv::arrowedLine(img, start_pt, end_pt, cv::Scalar::all(128));
+  }catch(runtime_error& e){
+    cerr << "cannot draw arow because " << e.what() << endl;
+    return;
+  }
+}
+
+
+//------------------------------------
+void Visualizer::draw_errpts(const cv::Mat& Ws, const cv::Mat& MinmaxWs, cv::Mat& img){
+  int num_iterate = Js_.size();
+  if(num_iterate < 3) return; //do not draw until we get 2 point.
+  if(Ws.rows != 3) throw runtime_error("Ws.row should be 3 @Visualizer::draw_errpts");
+  if(MinmaxWs.rows != 3) throw runtime_error("MinmaxWs.row should be 3 @Visualizer::draw_errpts");
+
+  const int radius{2};
+  const double minx = MinmaxWs.at<double>(0,0);
+  const double maxx = MinmaxWs.at<double>(0,1);
+  const double miny = MinmaxWs.at<double>(1,0);
+  const double maxy = MinmaxWs.at<double>(1,1);
+//  const double minJ = MinmaxWs.at<double>(2,0);
+//  const double maxJ = MinmaxWs.at<double>(2,1);
+
+  for(int  n=0; n<num_iterate; ++n)try{
+    cv::Point pt = mapto_err2dimg(wJcompress_.at<double>(0,n), wJcompress_.at<double>(1,n), minx, maxx, miny, maxy);
+    double normalize_factor{5.0e-7/th_J_}; //arbitrary. this is for color.
+    double red = 255 * tanh(wJcompress_.at<double>(2,n) * normalize_factor);
+    double blue = 255-red;
+    double green = 0.0;
+    cv::circle(img, pt, radius, cv::Scalar{blue,green,red}, -1); //-1 means filled circle.
+  }catch(runtime_error& e){
+  cerr << e.what() << endl;
+  return;
+}
 }

@@ -31,6 +31,7 @@ struct NN_param{
 
 struct Vis_param{
   int show_opt;
+  int error_show_opt;
   int display_step;
   int waitms;
   int win_w;

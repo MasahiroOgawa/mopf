@@ -25,6 +25,7 @@ void read_param(std::istream& fi, Param& prm){
     else if(str=="num_neuralnets:") fi>>prm.nn.num_neuralnets;
 
     else if(str=="show_opt:") fi>>prm.vis.show_opt;
+    else if(str=="error_show_opt:") fi>>prm.vis.error_show_opt;
     else if(str=="display_step:") fi>>prm.vis.display_step;
     else if(str=="waitms:") fi>>prm.vis.waitms;
     else if(str=="win_w:") fi>>prm.vis.win_w;
@@ -64,6 +65,7 @@ std::ostream& operator <<(std::ostream& os, Param& prm){
   os << "hidden_topology:"; for(auto& i : prm.nn.hidden_topology) os << i << "\n";
 
   os << "show_opt:" << prm.vis.show_opt << "\n";
+  os << "error_show_opt:" << prm.vis.error_show_opt << "\n";
   os << "display_step:" << prm.vis.display_step << "\n";
   os << "waitms:" << prm.vis.waitms << "\n";
   os << "win_w:" << prm.vis.win_w << "\n";
