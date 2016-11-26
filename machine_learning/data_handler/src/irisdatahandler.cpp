@@ -9,9 +9,9 @@ namespace mo {
 IrisDataHandler::IrisDataHandler()
 {
 
-    cls_map_["Iris-setosa"] = (cv::Mat_<double>(3,1) << 1, 0, 0);
-    cls_map_["Iris-versicolor"] = (cv::Mat_<double>(3,1) << 0, 1, 0);
-    cls_map_["Iris-virginica"] = (cv::Mat_<double>(3,1) << 0, 0, 1);
+    cls_map_["Iris-setosa"] = (Matrix(3,1) << 1, 0, 0);
+    cls_map_["Iris-versicolor"] = (Matrix(3,1) << 0, 1, 0);
+    cls_map_["Iris-virginica"] = (Matrix(3,1) << 0, 0, 1);
 }
 
 
@@ -29,20 +29,20 @@ try{
 
     string line;
     string cell;
-    cv::Mat Xt;
+    Matrix Xt;
     unsigned datadim_ = 4;
     while(getline(fi, line)){ //read lines
         stringstream lstream(line);
         if(line.empty()) break; //in case reading empty line.
-        cv::Mat x;
+        Matrix x;
         for(unsigned i=0;i<datadim_;++i){ //read feature cells
             getline(lstream, cell, ',');
             x.push_back(stod(cell));
         }
-        Xt.push_back(cv::Mat(x.t()));
+        Xt.push_back(Matrix(x.t()));
 
         getline(lstream, cell, ','); //read instruction signal
-        cv::Mat b_vec = cls_map_.find(cell)->second;
+        Matrix b_vec = cls_map_.find(cell)->second;
         if(B_.empty()) B_ = b_vec;
         else cv::hconcat(B_, b_vec, B_);
     }

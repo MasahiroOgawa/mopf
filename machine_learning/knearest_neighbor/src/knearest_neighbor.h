@@ -20,7 +20,7 @@ public:
 
 private:
     int k_;
-    std::unique_ptr<DataHandler<>> pdh_;
+    std::unique_ptr<DataHandler<std::vector<unsigned char>, unsigned char>> pdh_;
     bool show_result_;
     DistanceType disttp_;
 
@@ -31,7 +31,7 @@ private:
 template<typename Datum, typename Label>
 KNearestNeighbor<Datum, Label>::KNearestNeighbor(const int k, const std::string& datadir, const DataType dt
                                                  , const bool show_result, const DistanceType disttp):
-    k_ {k}, show_result_ {show_result}, pdh_{create_handler(dt)}, disttp_{disttp}
+    k_ {k}, show_result_ {show_result}, pdh_{create_imgdata_handler(dt)}, disttp_{disttp}
 {
     pdh_->read(datadir);
     if(show_result_) pdh_->show_traindata();

@@ -2,6 +2,7 @@
 #include "../../data_handler/src/datahandler.h"
 #include "../../data_handler/src/daviddatahandler.h"
 #include "../../data_handler/src/irisdatahandler.h"
+#include "../../data_handler/src/mnistdatahandler.h"
 #include "neuralnethandler.h"
 #include <memory> //for unique_ptr
 using namespace std;
@@ -17,12 +18,12 @@ try{
   read_param(prm_file,prm);
 
   //read data
-  unique_ptr<DataHandler<>> pdh{create_handler(static_cast<DataType>(prm.data.data_type))};
+  unique_ptr<DataHandler<vector<double>, double>> pdh{create_vecdata_handler(static_cast<DataType>(prm.data.data_type))};
   pdh->read(prm.data.datafname);
 
   //learn
   NeuralnetHandler nns(prm.nn, prm.vis);
-  nns.learn(pdh->X(), pdh->B());
+  nns.learn(pdh->train_datamat(), pdh->train_labelmat());
 
   return 0;
 }catch(runtime_error& e){
