@@ -64,9 +64,10 @@ void MnistDataHandler<Datum,Label>::read(const std::string& datadir){
 }
 
 //---------------------------------------
+// meaningless function in case the Datum type is not image.
 template<typename Datum , typename Label>
 char MnistDataHandler<Datum, Label>::show(const Datum& datum, const std::string& winname){
-    std::cout << "datum" << std::endl;
+    std::cout << __func__ << " is called\n";
     return '0';
 }
 
@@ -101,13 +102,28 @@ void MnistDataHandler<Datum, Label>::show_traindata(){
 //---------------------------------------
 template<typename Datum , typename Label>
 const Matrix& MnistDataHandler<Datum, Label>::train_datamat()const{
-    return Matrix();
+    Matrix X(this->train_data().at(0).size(), this->train_data().size());
+
+    // copy and convert each elements into double.
+    for(int i=0; i<X.rows; ++i)
+        for(int j=0; j<X.cols; ++j)
+            X.at<double>(i,j) = this->train_data().at(i).at(j);
+
+    return std::move(X);
 }
 
 //---------------------------------------
 template<typename Datum , typename Label>
 const Matrix& MnistDataHandler<Datum, Label>::train_labelmat()const{
-    return Matrix();
+    const int num_class = 10;
+    Matrix B(num_class, this->train_labels().size());
+
+    // output labels are each class's probabilities.
+    for(int i=0; i<B.rows; ++i)
+        for(int j=0; j<B.cols; ++j)
+            B.at<double>(i,j) = (this->train_labels().at(i) == j) ? 1.0 : 0.0;
+
+    return std::move(B);
 }
 
 

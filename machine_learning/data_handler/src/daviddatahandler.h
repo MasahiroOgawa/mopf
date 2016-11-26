@@ -6,13 +6,14 @@
 
 namespace mo {
 
-class DavidDataHandler : public DataHandler<std::vector<double>,std::vector<double>>
+class DavidDataHandler : public DataHandler<std::vector<double>, double>
 {
 public:
     DavidDataHandler();
-    void read(const std::string& filename);
-    const Matrix& X()const{return X_;}
-    const Matrix& B()const{return B_;}
+    void read(const std::string& datadir);
+
+    const Matrix& train_datamat()const{return X_;}
+    const Matrix& train_labelmat()const{return B_;}
 
 private:
     bool isEof(void) { return m_trainingDataFile.eof(); }

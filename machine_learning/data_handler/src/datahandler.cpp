@@ -1,5 +1,6 @@
 #include "datahandler.h"
 #include "mnistdatahandler.h"
+#include "daviddatahandler.h"
 
 using namespace std;
 

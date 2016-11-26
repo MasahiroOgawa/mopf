@@ -9,8 +9,9 @@ DavidDataHandler::DavidDataHandler()
 {
 }
 
-void DavidDataHandler::read(const std::string& filename)
+void DavidDataHandler::read(const std::string& datadir)
 try{
+    string filename = datadir + "/trainingData.txt";
     m_trainingDataFile.open(filename.c_str());
     if(!m_trainingDataFile) throw runtime_error("cannot open the input file @DavidDataHandler::read");
 
