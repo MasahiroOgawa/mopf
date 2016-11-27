@@ -29,7 +29,7 @@ th_annihilate: 1.0e-1 #threshold for annihilate condition. if (sum of a neuron's
 
 #output
 display_step: 1 #<0 means do not display#int
-show_opt: 2 #Visualizer::Showopt.0:none,1:position:input, color:computed class on the input window,2:position:output, color:input class,3:position:output, color:input position
+show_opt: 3 #Visualizer::Showopt.0:none,1:position:input, color:computed class on the input window,2:position:output, color:input class,3:position:output, color:input position
 error_show_opt: 4 #0:none,1:1D time variation,2:2D,3:3D,4:2D with time variation,5:3D with time variation
 outdirname: /home/masahiro/git/my/mopf/machine_learning/neuralnet/result
 outfname: log.txt
