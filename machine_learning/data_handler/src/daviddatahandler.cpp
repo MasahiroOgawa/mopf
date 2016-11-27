@@ -13,14 +13,14 @@ void DavidDataHandler::read(const std::string& datadir)
 try{
     string filename = datadir + "/trainingData.txt";
     m_trainingDataFile.open(filename.c_str());
-    if(!m_trainingDataFile) throw runtime_error("cannot open the input file @DavidDataHandler::read");
+    if(!m_trainingDataFile) throw runtime_error("cannot open the input file: " + filename);
 
     vector<unsigned> topology;
     getTopology(topology);
     unsigned datadim_ = topology[0];
 
-    vector<double> inputVals, targetVals;
-    //1 time read to fill X_
+    //1 time read to fill X_,B_
+    vector<double> inputVals, targetVals; // first input vector
     getNextInputs(inputVals);
     if(inputVals.empty()) throw runtime_error("cannot get input values @DavidDataHandler::read()");
     X_ = cv::Mat(inputVals);
@@ -31,7 +31,6 @@ try{
     //read after 2nd data.
     while(!isEof()){
         if(getNextInputs(inputVals) != datadim_) break;
-//        cout<<"inputval="<<cv::Mat(inputVals)<<" ";
         cv::hconcat(X_, cv::Mat(inputVals), X_);
         getTargetOutputs(targetVals);
         if(targetVals.empty()) throw runtime_error("cannot get target values @DavidDataHandler::read()");
@@ -42,6 +41,16 @@ try{
     throw;
 }
 
+
+//-----------------------------------------
+void DavidDataHandler::show_traindata(){
+    cout << "train data matrix = " << train_datamat() << endl;
+    cout << "train label matrix = " << train_labelmat() << endl;
+}
+
+
+
+//-----------------------------------------
 void DavidDataHandler::getTopology(vector<unsigned> &topology)
 {
     string line;

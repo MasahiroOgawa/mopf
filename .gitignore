@@ -15,6 +15,7 @@ build
 *.aux
 *.dvi
 *.log
+result/
 
 # binary files
 *.png

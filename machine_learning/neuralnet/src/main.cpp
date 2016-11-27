@@ -20,6 +20,7 @@ try{
   //read data
   unique_ptr<DataHandler<vector<double>, double>> pdh{create_vecdata_handler(static_cast<DataType>(prm.data.data_type))};
   pdh->read(prm.data.datafname);
+  pdh->show_traindata();
 
   //learn
   NeuralnetHandler nns(prm.nn, prm.vis);
