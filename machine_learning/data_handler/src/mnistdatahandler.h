@@ -27,8 +27,9 @@ public:
     char show(const Datum& datum, const std::string& winname="mnist image");
 
     void show_traindata();
-    const Matrix& train_datamat()const;
-    const Matrix& train_labelmat()const;
+
+private:
+    void compute_datamatrices();
 };
 
 
@@ -43,6 +44,8 @@ void MnistDataHandler<Datum,Label>::read(const std::string& datadir){
     this->dataset_.test_data = std::move(mnist_dataset.test_images);
     this->dataset_.train_labels = std::move(mnist_dataset.training_labels);
     this->dataset_.test_labels = std::move(mnist_dataset.test_labels);
+
+    compute_datamatrices();
 
     //print out info
     size_t num_traindata = this->dataset_.train_data.size();
@@ -64,9 +67,9 @@ void MnistDataHandler<Datum,Label>::read(const std::string& datadir){
 }
 
 //---------------------------------------
-// meaningless function in case the Datum type is not image.
 template<typename Datum , typename Label>
 char MnistDataHandler<Datum, Label>::show(const Datum& datum, const std::string& winname){
+
     std::cout << __func__ << " is called\n";
     return '0';
 }
@@ -101,31 +104,30 @@ void MnistDataHandler<Datum, Label>::show_traindata(){
 
 //---------------------------------------
 template<typename Datum , typename Label>
-const Matrix& MnistDataHandler<Datum, Label>::train_datamat()const{
-    Matrix X(this->train_data().at(0).size(), this->train_data().size());
-
-    // copy and convert each elements into double.
-    for(int i=0; i<X.rows; ++i)
-        for(int j=0; j<X.cols; ++j)
-            X.at<double>(i,j) = this->train_data().at(i).at(j);
-
-    return std::move(X);
-}
+void MnistDataHandler<Datum, Label>::compute_datamatrices(){}
 
 //---------------------------------------
-template<typename Datum , typename Label>
-const Matrix& MnistDataHandler<Datum, Label>::train_labelmat()const{
+// template specialization
+template<>
+inline void MnistDataHandler<std::vector<double>, double>::compute_datamatrices(){
+    //compute train_datamat_
+    this->train_datamat_ = Matrix(this->train_datadim(), this->train_datanum());
+    // copy and convert each elements into double.
+    for(int j=0; j< this->train_datamat_.cols; ++j)
+        for(int i=0; i< this->train_datamat_.rows; ++i)
+            this->train_datamat_.at<double>(i,j)
+                = static_cast<double>(this->train_data().at(j).at(i));
+
+    //compute train_labelmat_
     const int num_class = 10;
-    Matrix B(num_class, this->train_labels().size());
-
+    this->train_labelmat_ = Matrix(num_class, this->train_datanum());
     // output labels are each class's probabilities.
-    for(int i=0; i<B.rows; ++i)
-        for(int j=0; j<B.cols; ++j)
-            B.at<double>(i,j) = (this->train_labels().at(i) == j) ? 1.0 : 0.0;
+    for(int j=0; j<this->train_labelmat_.cols; ++j)
+        for(int i=0; i<this->train_labelmat_.rows; ++i)
+            this->train_labelmat_.at<double>(i,j)
+                = (this->train_labels().at(j) == i) ? 1.0 : 0.0;
 
-    return std::move(B);
 }
-
 
 } // namespace mo
 

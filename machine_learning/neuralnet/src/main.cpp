@@ -28,9 +28,9 @@ try{
 
   return 0;
 }catch(runtime_error& e){
-  cerr << "runtime error: " << e.what() << endl;
+  cerr << "[ERROR] " << e.what() << endl;
 }catch(logic_error& e){
-  cerr << "logic error: " << e.what() << endl;
+  cerr << "[ERROR] " << e.what() << endl;
 }catch(...){
 cerr << "unknown error occured.\n";
 }

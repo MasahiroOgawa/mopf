@@ -397,7 +397,9 @@ void Neuralnet::automatic_update_learningrate(){
  * @param b
  */
 void Neuralnet::read_data(const cv::Mat& X0, const cv::Mat& B) {
-    if (B.cols != X0.cols) throw runtime_error("number of input data must coinside with number of ouput data.");
+    if (B.cols != X0.cols)
+        throw runtime_error("the number of training data: " + to_string(X0.cols)
+                            + " must coinsides with the number of training labels: " + to_string(B.cols));
 
     // create Y0,B_
     num_data_ = X0.cols;
