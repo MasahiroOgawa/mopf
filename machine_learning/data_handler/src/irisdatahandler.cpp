@@ -19,8 +19,9 @@ IrisDataHandler::IrisDataHandler()
  * @brief IrisDataHandler::read
  * @param filename
  */
-void IrisDataHandler::read(const std::string& filename)
+void IrisDataHandler::read(const std::string& datadir)
 try{
+    string filename = datadir + "/iris.data";
     ifstream fi(filename.c_str());
     if(!fi){
         string errmsg="cannot open: "+filename;
@@ -52,5 +53,13 @@ try{
     cerr << "invalid argument in DataHandler::read()\n";
     throw;
 }
+
+
+//-----------------------------------------
+void IrisDataHandler::show_traindata(){
+    cout << "train data matrix = " << train_datamat() << endl;
+    cout << "train label matrix = " << train_labelmat() << endl;
+}
+
 
 } // namespace mo

@@ -5,13 +5,15 @@
 
 namespace mo {
 
-class IrisDataHandler : public DataHandler<std::vector<double>, std::vector<double>>
+class IrisDataHandler : public DataHandler<std::vector<double>, double>
 {
 public:
     IrisDataHandler();
-    void read(const std::string& filename);
-    const Matrix& X()const{return X_;}
-    const Matrix& B()const{return B_;}
+    void read(const std::string& datadir);
+    char show(const std::vector<double>& datum, const std::string& winname="iris"){return '0';} // do not implement because we assume
+    void show_traindata();
+    const Matrix& train_datamat()const{return X_;}
+    const Matrix& train_labelmat()const{return B_;}
 
 private:
     std::map<std::string,cv::Mat> cls_map_;

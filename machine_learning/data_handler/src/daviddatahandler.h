@@ -11,7 +11,7 @@ class DavidDataHandler : public DataHandler<std::vector<double>, double>
 public:
     DavidDataHandler();
     void read(const std::string& datadir);
-    char show(const std::vector<double>& datum, const std::string& winname="david datahandler image"){return '0';} // do not implement because we assume
+    char show(const std::vector<double>& datum, const std::string& winname="david"){return '0';} // do not implement because we assume
     void show_traindata();
     const Matrix& train_datamat()const{return X_;}
     const Matrix& train_labelmat()const{return B_;}

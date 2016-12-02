@@ -1,6 +1,7 @@
 #include "datahandler.h"
 #include "mnistdatahandler.h"
 #include "daviddatahandler.h"
+#include "irisdatahandler.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ std::unique_ptr<DataHandler<std::vector<double>, double>> create_vecdata_handler
     switch (data_type) {
     case DataType::david:
         return unique_ptr<DataHandler<vector<double>, double>>{ new DavidDataHandler() };
+    case DataType::iris:
+        return unique_ptr<DataHandler<vector<double>, double>>{ new IrisDataHandler() };
     case DataType::mnist:
         return unique_ptr<DataHandler<vector<double>, double>>{ new MnistDataHandler<vector<double>, double>() };
     default:

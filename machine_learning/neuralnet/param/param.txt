@@ -14,11 +14,11 @@ problem_type: 2 #1:regression,2:binary classification,3:multiclass classificatio
 
 
 #learnig parameters
-rho: 5.0e-4 #learning rate#double
+rho: 0.01 #5.0e-4 #learning rate#double
 hidden_topology: 3 #initial hidden topology. space is considered as no hidden layer. list<unsigned>
-num_neuralnets: 4 #number of neuralnets for pararell computing#int
-iterative_update: 0 #0:batch learning,1:iterative update or stochastic gradient descent.#bool
-rho_descendingrate: -1 #descending rate of the learning rate at each step. 1 means no change.should be <=1.0. if <=0, automatic update rho#double
+num_neuralnets: 2 #number of neuralnets for pararell computing#int
+iterative_update: 1 #0:batch learning,1:iterative update or stochastic gradient descent.#bool
+rho_descendingrate: 1 #descending rate of the learning rate at each step. 1 means no change.should be <=1.0. if <=0, automatic update rho#double
 momentum: 0.5 #coefficient for momentum term.double
 th_J: 1.0e-5 #target cost.double
 th_dJ: 1.0e-3 #threshold difference of J for decision of localminimum. If dJ over this threshold, it will be consider as local minimum. double
@@ -33,7 +33,7 @@ show_opt: 3 #Visualizer::Showopt.0:none,1:position:input, color:computed class o
 error_show_opt: 4 #0:none,1:1D time variation,2:2D,3:3D,4:2D with time variation,5:3D with time variation
 outdirname: /home/masahiro/git/my/mopf/machine_learning/neuralnet/result
 outfname: log.txt
-waitms: 10 #display each image within this time[ms]. minus means wait until key'q' pressed. note)currently any value except for 1 cause GLib-GObject-CRITICAL error.#int
+waitms: 1 #display each image within this time[ms]. minus means wait until key'q' pressed. note)currently any value except for 1 cause GLib-GObject-CRITICAL error.#int
 win_w: 255 #window width#int
 win_h: 255 #window height#int
 
