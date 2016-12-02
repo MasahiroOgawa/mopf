@@ -8,9 +8,9 @@
 ##############################
 
 #input
-datafname: /home/masahiro/git/my/mopf/data/david_miller #../data/iris/iris.data  #../data/kx_trainingdata.txt #../data/x^2_trainingdata.txt #../data/iris/iris.data #string #string /mnt/datadisk/my/2014/DavidMiller/trainingData.txt #
-data_type: 1 #1:DavidMillerXOR,2:iris#int
-problem_type: 2 #1:regression,2:binary classification,3:multiclass classification#int
+datafname: /home/masahiro/git/my/mopf/data/iris #david_miller #string
+data_type: 2 #1:DavidMillerXOR,2:iris#int
+problem_type: 3 #1:regression,2:binary classification,3:multiclass classification#int
 
 
 #learnig parameters
