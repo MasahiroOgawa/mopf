@@ -69,9 +69,17 @@ void MnistDataHandler<Datum,Label>::read(const std::string& datadir){
 //---------------------------------------
 template<typename Datum , typename Label>
 char MnistDataHandler<Datum, Label>::show(const Datum& datum, const std::string& winname){
+    if(datum.size() != 784)
+        throw std::length_error("input data dim: " + std::to_string(datum.size()) + " must be 28*28=784 dim");
 
-    std::cout << __func__ << " is called\n";
-    return '0';
+    Image_gray img(28,28);
+    for(int r=0; r<img.rows; ++r)
+        for(int c=0; c<img.cols; ++c){
+            unsigned char v = datum.at(r*img.cols + c);
+            img.at<unsigned char>(r,c) = v;
+        }
+
+    return mo::show(winname, img, 0);
 }
 
 //---------------------------------------
