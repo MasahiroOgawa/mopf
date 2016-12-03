@@ -19,22 +19,23 @@ NeuralnetHandler::~NeuralnetHandler(){
 
 void NeuralnetHandler::learn(const cv::Mat& X0, const cv::Mat& B){
 //    thread t0{neuralnets_[0].learn,X0,B};
+    neuralnets_[0].learn(X0,B);
 
 
-    for(auto& nn : neuralnets_){
-        nn.init(X0,B);
-    }
+//    for(auto& nn : neuralnets_){
+//        nn.init(X0,B);
+//    }
 
-    bool intermediate = true;
-    while(intermediate){
-        for(auto it=neuralnets_.begin(); it!=neuralnets_.end(); ++it){
-            it->update();
+//    bool intermediate = true;
+//    while(intermediate){
+//        for(auto it=neuralnets_.begin(); it!=neuralnets_.end(); ++it){
+//            it->update();
 
-            if(it->state()==State::solved || it->state()==State::overiterate){
-                intermediate = false;
-            }else if(it->state()==State::localminimum){
-                it->reset();
-            }
-        }
-    }
+//            if(it->state()==State::solved || it->state()==State::overiterate){
+//                intermediate = false;
+//            }else if(it->state()==State::localminimum){
+//                it->reset();
+//            }
+//        }
+//    }
 }
