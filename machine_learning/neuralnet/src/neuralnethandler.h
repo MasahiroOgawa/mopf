@@ -10,8 +10,9 @@ public:
   NeuralnetHandler(const NN_param& nnprm, const Vis_param& visprm);
   ~NeuralnetHandler();
   void learn(const cv::Mat& X0, const cv::Mat& B);
+
 private:
-  Neuralnet neuralnet_;
+  std::vector<Neuralnet> neuralnets_;
   NN_param nnprm_;
   Vis_param visprm_;
 };

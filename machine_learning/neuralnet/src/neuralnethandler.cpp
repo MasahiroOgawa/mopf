@@ -4,10 +4,10 @@ using namespace std;
 
 
 NeuralnetHandler::NeuralnetHandler(const NN_param& nnprm, const Vis_param& visprm)
-    : neuralnet_(nnprm,visprm) , nnprm_(nnprm), visprm_(visprm)
+    : nnprm_(nnprm), visprm_(visprm)
 {
-
-
+    for(int i=0; i<nnprm_.num_neuralnets; ++i)
+        neuralnets_.push_back(Neuralnet(nnprm_, visprm_, i)); // Neuralnet's 3rd arg i is its id.
 }
 
 
@@ -15,13 +15,14 @@ NeuralnetHandler::~NeuralnetHandler(){
 }
 
 
-void NeuralnetHandler::learn(const cv::Mat& X0, const cv::Mat& B){
-    thread t(&Neuralnet::learn, &neuralnet_, X0,B);
-    t.join();
+void NeuralnetHandler::learn(const cv::Mat& X0, const cv::Mat& B)try{
+    vector<thread> threads;
+    for(int i=0;i<nnprm_.num_neuralnets; ++i)
+        threads.push_back(thread(&Neuralnet::learn, &neuralnets_[i], X0, B));
 
-//    vector<thread> v;
-//    for(int i=0;i<nnprm_.num_neuralnets; ++i)
-//        v.push_back(thread(&Neuralnet::learn, &neuralnet_, X0,B));
-
-//    for_each(v.begin(), v.end(), [](thread& t){t.join();} );
+    for(auto& t : threads)
+        t.join();
+}catch(...){
+cerr << "[ERROR] @NeuralnetHandler::learn\n";
+throw;
 }
