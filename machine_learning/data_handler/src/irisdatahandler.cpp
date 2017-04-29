@@ -44,11 +44,11 @@ try{
 
         getline(lstream, cell, ','); //read instruction signal
         Matrix b_vec = cls_map_.find(cell)->second;
-        if(B_.empty()) B_ = b_vec;
-        else cv::hconcat(B_, b_vec, B_);
+        if(train_labelmat_.empty()) train_labelmat_ = b_vec;
+        else cv::hconcat(train_labelmat_, b_vec, train_labelmat_);
     }
 
-    X_ = Xt.t();
+    train_datamat_ = Xt.t();
 }catch(invalid_argument &e){
     cerr << "invalid argument in DataHandler::read()\n";
     throw;
