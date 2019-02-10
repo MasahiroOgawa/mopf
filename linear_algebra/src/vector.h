@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #include <opencv2/core.hpp>
+#include <numeric>
 
 namespace mo {
 template<int n> using Vector = cv::Vec<double,n>; //opencv only support specific dimension vector.
