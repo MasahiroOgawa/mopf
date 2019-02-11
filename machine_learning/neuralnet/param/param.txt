@@ -3,7 +3,7 @@
 # format
 #	parametername: value #comments(less space is preferable; faster to read.)
 #	parametername: val1 val2 #comments(for vector value)
-# 	example) x: 1.0 #input value#double
+# 	example) x: 1.0 #input value #double
 #		 v: 1 3 5 #vector<int>
 ##############################
 
