@@ -6,7 +6,7 @@
 #params
 BASEDIR=$(dirname $0)/..
 PARAM=${BASEDIR}/param/param.txt
-BIN=~/git/my/mopf/build/debug/machine_learning/neuralnet/neuralnet
+BIN=~/git/my/mopf/build/machine_learning/neuralnet/neuralnet
 OUTDIR=${BASEDIR}/result
 OUTIMGNAME=${OUTDIR}/error.png
 LOGBASENAME=log.txt

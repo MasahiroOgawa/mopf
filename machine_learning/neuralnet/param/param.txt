@@ -8,7 +8,7 @@
 ##############################
 
 #input
-datafname: /home/masahiro/git/mopf/data/iris #mnist #iris #david_miller #string
+datafname: /home/masahiro/git/my/mopf/data/iris #mnist #iris #david_miller #string
 data_type: 2 #1:DavidMillerXOR,2:iris,3:mnist#int
 problem_type: 3 #1:regression,2:binary classification,3:multiclass classification#int
 
