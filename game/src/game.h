@@ -1,7 +1,8 @@
-#ifndef VISUALIZATION_H
-#define VISUALIZATION_H
+#ifndef GAME_H
+#define GAME_H
 
 #include "../../image/src/image.h"
+#include <opencv2/core.hpp>
 
 namespace mo {
 namespace game {
@@ -12,7 +13,7 @@ public:
   void swim();
 
 private:
-  cv::Mat image;
+  Image image;
 };
 
 class Param {
@@ -24,4 +25,4 @@ public:
 } // namespace game
 } // namespace mo
 
-#endif // VISUALIZATION_H
+#endif // GAME_H

@@ -1,14 +1,16 @@
 #include "game.h"
+#include "../../visualization/src/visualization.h"
 #include <fstream>
-#include <opencv2/highgui.hpp>
 using namespace std;
 
 namespace mo {
 namespace game {
 //-----------------------------------------------------------------
 void Character::load_image(const std::string &image_name) {
-  image = cv::imread(image_name);
+  image = imread(image_name);
 }
+
+void Character::swim() { show("water tank", image); }
 
 Param::Param(const std::string &prm_fname) {
   // read param
@@ -29,5 +31,4 @@ Param::Param(const std::string &prm_fname) {
 }
 
 } // namespace game
-
 } // namespace mo
