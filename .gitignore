@@ -9,6 +9,7 @@ install_manifest.txt
 # backuped files
 *~
 \#*
+*.orig
 
 # build outputs
 build
