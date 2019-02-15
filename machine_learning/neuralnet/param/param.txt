@@ -3,12 +3,12 @@
 # format
 #	parametername: value #comments(less space is preferable; faster to read.)
 #	parametername: val1 val2 #comments(for vector value)
-# 	example) x: 1.0 #input value#double
+# 	example) x: 1.0 #input value #double
 #		 v: 1 3 5 #vector<int>
 ##############################
 
 #input
-datafname: /home/masahiro/git/mopf/data/iris #mnist #iris #david_miller #string
+datafname: /home/masahiro/git/my/mopf/data/iris #mnist #iris #david_miller #string
 data_type: 2 #1:DavidMillerXOR,2:iris,3:mnist#int
 problem_type: 3 #1:regression,2:binary classification,3:multiclass classification#int
 
