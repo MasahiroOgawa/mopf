@@ -1,5 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
+#include <numeric>
 #include <opencv2/core.hpp>
 
 namespace mo {
