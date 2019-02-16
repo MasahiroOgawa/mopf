@@ -16,10 +16,22 @@ private:
   Image image;
 };
 
+class Aquarium {
+public:
+  Aquarium(const std::string &background_name);
+  void load_character(const std::string &image_name);
+  void run();
+
+private:
+  Image background_image_;
+  Character character_;
+};
+
 class Param {
 public:
   Param(const std::string &prm_fname);
-  std::string image_fname;
+  std::string character_fname;
+  std::string background_fname;
 };
 
 } // namespace game

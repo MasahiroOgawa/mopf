@@ -11,6 +11,22 @@ void Character::load_image(const std::string &image_name) {
 }
 
 void Character::swim() { show("water tank", image); }
+//-----------------------------------------------------------------
+
+Aquarium::Aquarium(const std::string &background_name) {
+  background_image_ = imread(background_name);
+}
+
+void Aquarium::load_character(const string &image_name) {
+  character_.load_image(image_name);
+}
+
+void Aquarium::run() {
+  show("aquarium", background_image_);
+  character_.swim();
+}
+
+//-----------------------------------------------------------------
 
 Param::Param(const std::string &prm_fname) {
   // read param
@@ -21,8 +37,10 @@ Param::Param(const std::string &prm_fname) {
   constexpr streamsize max_strlen(1024);
   string str;
   while (fi >> str) {
-    if (str == "image_filename:")
-      fi >> image_fname;
+    if (str == "character_filename:")
+      fi >> character_fname;
+    else if (str == "background_filename:")
+      fi >> background_fname;
 
     fi.ignore(
         max_strlen,
