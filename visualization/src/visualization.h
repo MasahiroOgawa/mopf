@@ -2,6 +2,7 @@
 #define VISUALIZATION_H
 
 #include "../../image/src/image.h"
+#include "../../linear_algebra/src/matrix.h" //for warpaffine.
 #include <iostream>
 #include <opencv2/imgcodecs.hpp> //for cv::IMREAD_COLOR
 #include <opencv2/imgproc.hpp>   //for ColormapTypes, arrowedLine()
@@ -72,6 +73,8 @@ using ColormapTypes = cv::ColormapTypes;
 /// \param colormaptype
 //////////////////////////
 void colorbar(Image &img, const ColormapTypes colormaptype);
+
+void warpAffine(Image src, Image dst, Matrix M);
 
 } // namespace mo
 

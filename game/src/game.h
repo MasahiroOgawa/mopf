@@ -7,15 +7,6 @@
 namespace mo {
 namespace game {
 
-class Character {
-public:
-  void load_image(const std::string &image_name);
-  void swim();
-
-private:
-  Image image;
-};
-
 class Aquarium {
 public:
   Aquarium(const std::string &background_name);
@@ -23,8 +14,8 @@ public:
   void run();
 
 private:
-  Image background_image_;
-  Character character_;
+  Image background_img_;
+  Image character_img_;
 };
 
 class Param {

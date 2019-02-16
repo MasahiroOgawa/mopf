@@ -6,24 +6,20 @@ using namespace std;
 namespace mo {
 namespace game {
 //-----------------------------------------------------------------
-void Character::load_image(const std::string &image_name) {
-  image = imread(image_name);
-}
-
-void Character::swim() { show("water tank", image); }
-//-----------------------------------------------------------------
 
 Aquarium::Aquarium(const std::string &background_name) {
-  background_image_ = imread(background_name);
+  background_img_ = imread(background_name);
 }
 
 void Aquarium::load_character(const string &image_name) {
-  character_.load_image(image_name);
+  character_img_ = imread(image_name);
 }
 
 void Aquarium::run() {
-  show("aquarium", background_image_);
-  character_.swim();
+  Matrix affine_mat = (Matrix(2, 3) << 1.0, 0.0, 10.0, 0.0, 1.0, 10.0);
+
+  warpAffine(character_img_, background_img_, affine_mat);
+  show("aquarium", background_img_);
 }
 
 //-----------------------------------------------------------------

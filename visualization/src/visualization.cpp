@@ -74,4 +74,10 @@ void colorbar(Image &img, const ColormapTypes colormaptype) {
   cv::applyColorMap(img, img, colormaptype);
 }
 
+//-----------------------------------------------------------------
+void warpAffine(Image src, Image dst, Matrix M) {
+  cv::warpAffine(src, dst, M, dst.size(), cv::INTER_LINEAR,
+                 cv::BORDER_TRANSPARENT);
+}
+
 } // namespace mo
