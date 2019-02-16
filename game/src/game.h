@@ -16,6 +16,7 @@ public:
 private:
   Image background_img_;
   Image character_img_;
+  Image composite_img_;
 };
 
 class Param {

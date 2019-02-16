@@ -16,10 +16,20 @@ void Aquarium::load_character(const string &image_name) {
 }
 
 void Aquarium::run() {
-  Matrix affine_mat = (Matrix(2, 3) << 1.0, 0.0, 10.0, 0.0, 1.0, 10.0);
+  Matrix affine_mat = (Matrix(2, 3) << 1.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-  warpAffine(character_img_, background_img_, affine_mat);
-  show("aquarium", background_img_);
+  while (1) {
+    background_img_.copyTo(composite_img_);
+
+    // move
+    double &tx = affine_mat.at<double>(0, 2); // alias
+    tx += rand() % 100 - 50;
+
+    warpAffine(character_img_, composite_img_, affine_mat);
+
+    if (show("aquarium", composite_img_, 100) == 'q')
+      break;
+  }
 }
 
 //-----------------------------------------------------------------
