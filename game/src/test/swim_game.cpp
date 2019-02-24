@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) try {
   Param prm(prm_fname);
 
   Aquarium aquarium(prm.background_fname);
-  aquarium.load_character(prm.character_fname);
+  aquarium.load_characters(prm.character_fname);
   aquarium.run();
 
 } catch (runtime_error &e) {
