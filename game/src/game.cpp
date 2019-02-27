@@ -1,5 +1,6 @@
 #include "game.h"
 #include "../../visualization/src/visualization.h"
+#include "param.h"
 #include <fstream>
 #include <random> //for Character::update_position()
 
@@ -61,27 +62,6 @@ void Character::update_position(const int bgimg_w, const int bgimg_h) {
 void Character::update_shape(const double time) {
   affine_mat_.at<double>(0, 0) = 1 + size_change_ratio_ * sin(time * 0.001);
   affine_mat_.at<double>(1, 1) = 1 + size_change_ratio_ * sin(time * 0.001);
-}
-//-----------------------------------------------------------------
-
-Param::Param(const std::string &prm_fname) {
-  // read param
-  ifstream fi(prm_fname);
-  if (!fi)
-    throw runtime_error("input parameter file could not open.");
-
-  constexpr streamsize max_strlen(1024);
-  string str;
-  while (fi >> str) {
-    if (str == "character_filename:")
-      fi >> character_fname;
-    else if (str == "background_filename:")
-      fi >> background_fname;
-
-    fi.ignore(
-        max_strlen,
-        '\n'); // read until reaching the max_strlen or the end of the line.
-  }
 }
 
 } // namespace game
