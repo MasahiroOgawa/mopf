@@ -14,8 +14,10 @@ Aquarium::Aquarium(const std::string &background_name) {
   background_img_ = imread(background_name);
 }
 
-void Aquarium::load_characters(const std::string &character_imgname) {
-  character_.load(character_imgname);
+void Aquarium::load_characters(
+    const std::vector<std::string> &character_imgnames) {
+  for (auto character_imgname : character_imgnames)
+    characters_.push_back(Character(character_imgname));
 }
 
 void Aquarium::run() {
@@ -26,37 +28,45 @@ void Aquarium::run() {
     background_img_.copyTo(composite_img_);
 
     // movement on x,y
-    character_.update_position(composite_img_.cols, composite_img_.rows);
-    character_.update_shape(time);
+    for (auto character : characters_) {
+      character.update_position(composite_img_.cols, composite_img_.rows, dt);
+      character.update_shape(time);
 
-    warpAffine(character_.img(), composite_img_, character_.affine_mat());
+      warpAffine(character.img(), composite_img_, character.affine_mat());
+    }
 
     if (show("aquarium", composite_img_, dt) == 'q')
       break;
     time += dt;
   }
-}
+} // namespace game
 
 //-----------------------------------------------------------------
-void Character::load(const string &image_name) {
+Character::Character(const string &image_name) {
   character_img_ = imread(image_name);
 }
 
-void Character::update_position(const int bgimg_w, const int bgimg_h) {
-  double &posx = affine_mat_.at<double>(0, 2); // alias
-  double &posy = affine_mat_.at<double>(1, 2); // alias
+void Character::update_position(const int bgimg_w, const int bgimg_h,
+                                const int dt) {
+  // get an alias
+  double &posx = affine_mat_.at<double>(0, 2);
+  double &posy = affine_mat_.at<double>(1, 2);
+
+  // let it stay inside background image.
   if (posx > bgimg_w - character_img_.cols && vx_ > 0 || posx < 0 && vx_ < 0)
     vx_ *= -1;
   if (posy > bgimg_h - character_img_.rows && vy_ > 0 || posy < 0 && vy_ < 0)
     vy_ *= -1;
 
+  // add normal distribution to the velocity.
   static std::default_random_engine generator;
   normal_distribution<double> distribution(0.0, 0.01);
   vx_ += distribution(generator);
   vy_ += distribution(generator);
 
-  posx += vx_ * dt_;
-  posy += vy_ * dt_;
+  // integrate velocity to position.
+  posx += vx_ * dt;
+  posy += vy_ * dt;
 }
 
 void Character::update_shape(const double time) {

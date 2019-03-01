@@ -8,7 +8,6 @@
 ##############################
 
 #input
-#character_filename: /home/masahiro/Downloads/image/fish.jpeg
-character_filename: /home/masahiro/Pictures/rei/reiface.jpg /home/masahiro/Pictures/masahiro/masahiroface.jpg
+character_filename: /home/masahiro/Downloads/image/fish.jpeg /home/masahiro/Pictures/rei/reiface.jpg /home/masahiro/Pictures/masahiro/masahiroface.jpg #vector<string>
 
-background_filename: /home/masahiro/Downloads/image/inthesea.jpg
+background_filename: /home/masahiro/Downloads/image/inthesea.jpg #string

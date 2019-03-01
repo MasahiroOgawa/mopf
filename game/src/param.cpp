@@ -1,5 +1,6 @@
 #include "param.h"
 #include <fstream>
+#include <sstream> // for istringstream
 
 using namespace std;
 
@@ -16,7 +17,7 @@ Param::Param(const std::string &prm_fname) {
   string str;
   while (fi >> str) {
     if (str == "character_filename:")
-      fi >> character_fname;
+      read_strs(fi, character_fnames, '#');
     else if (str == "background_filename:")
       fi >> background_fname;
 
@@ -26,5 +27,13 @@ Param::Param(const std::string &prm_fname) {
   }
 }
 
+void read_strs(istream &ist, std::vector<string> &strs, const char delim) {
+  string line;
+  getline(ist, line, delim); // read until delim
+  istringstream iss(line);
+  string str;
+  while (iss >> str)
+    strs.push_back(str);
+}
 } // namespace game
 } // namespace mo

@@ -1,6 +1,7 @@
 #ifndef PARAM_H
 #define PARAM_H
 #include <string>
+#include <vector>
 
 namespace mo {
 namespace game {
@@ -8,11 +9,14 @@ namespace game {
 class Param {
 public:
   Param(const std::string &prm_fname);
-  std::string character_fname;
+  std::vector<std::string> character_fnames;
   std::string background_fname;
 };
 
-} //namespace game
-} //namespace mo
+void read_strs(std::istream &ist, std::vector<std::string> &strs,
+               const char delim);
+
+} // namespace game
+} // namespace mo
 
 #endif // PARAM_H
