@@ -53,9 +53,11 @@ void Character::update_position(const int bgimg_w, const int bgimg_h,
   double &posy = affine_mat_.at<double>(1, 2);
 
   // let it stay inside background image.
-  if (posx > bgimg_w - character_img_.cols && vx_ > 0 || posx < 0 && vx_ < 0)
+  if ((posx > bgimg_w - character_img_.cols && vx_ > 0) ||
+      (posx < 0 && vx_ < 0))
     vx_ *= -1;
-  if (posy > bgimg_h - character_img_.rows && vy_ > 0 || posy < 0 && vy_ < 0)
+  if ((posy > bgimg_h - character_img_.rows && vy_ > 0) ||
+      (posy < 0 && vy_ < 0))
     vy_ *= -1;
 
   // add normal distribution to the velocity.
