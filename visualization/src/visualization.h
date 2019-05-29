@@ -21,7 +21,8 @@ Image imread(const std::string &filename, int flags = cv::IMREAD_COLOR);
 /// \param winname
 /// \param img
 /// \param waitms
-/// \return pressed key as int. same with cv::waitKey's return value
+/// \return pressed key as int or -1 in case no key pressed. same with
+/// cv::waitKey's return value
 /////////////////////////
 int show(const std::string &winname, const Image &img, const int waitms = 0);
 int show(const std::string &winname, const Image_gray &img,
