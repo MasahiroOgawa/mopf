@@ -8,7 +8,7 @@
 ##############################
 
 #input
-datafname: /home/masahiro/git/my/mopf/data/iris #mnist #iris #david_miller #string
+datafname: /home/masahiro/git/mine/mopf/data/iris #mnist #iris #david_miller #string
 data_type: 2 #1:DavidMillerXOR,2:iris,3:mnist#int
 problem_type: 3 #1:regression,2:binary classification,3:multiclass classification#int
 
@@ -31,7 +31,7 @@ th_annihilate: 1.0e-1 #threshold for annihilate condition. if (sum of a neuron's
 display_step: 1 #<0 means do not display#int
 show_opt: 2 #Visualizer::Showopt.0:none,1:position:input, color:computed class on the input window,2:position:output, color:input class,3:position:output, color:input position
 error_show_opt: 4 #0:none,1:1D time variation,2:2D,3:3D,4:2D with time variation,5:3D with time variation
-outdirname: /home/masahiro/git/mopf/machine_learning/neuralnet/result
+outdirname: /home/masahiro/git/mine/mopf/machine_learning/neuralnet/result
 outfname: log.txt
 waitms: 1 #display each image within this time[ms]. minus means wait until key'q' pressed. note)currently any value except for 1 cause GLib-GObject-CRITICAL error.#int
 win_w: 255 #window width#int
