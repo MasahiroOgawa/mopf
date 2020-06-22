@@ -333,7 +333,7 @@ void Neuralnet::try_annihilate() {
     cv::Mat abssum_neuronweights;  // sum of absolute value of each neuron's output weights(exclude bias neuron). =
     // (neuron1's sum of absolute value of output weights; neuron2's ; ...) :
     // (num_neurons-1) x 1 dim
-    cv::reduce(abs_Wsl, abssum_neuronweights, 1, CV_REDUCE_SUM);
+    cv::reduce(abs_Wsl, abssum_neuronweights, 1, cv::ReduceTypes::REDUCE_SUM);
 
     double min_val;
     int min_idx[2];

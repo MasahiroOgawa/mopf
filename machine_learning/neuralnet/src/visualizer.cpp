@@ -515,7 +515,7 @@ void Visualizer::show_error3d(){
 void Visualizer::show_error2d(){
     //create a window
     cv::Mat err2d_img(prm_.win_h, prm_.win_w, CV_8UC3, cv::Scalar::all(0));
-    cv::cvtColor(err2d_img, err2d_img, CV_BGR2HSV); //draw in hsv
+    cv::cvtColor(err2d_img, err2d_img, cv::COLOR_BGR2HSV); //draw in hsv
 
     //compress W
     --display_dim_; //w must be compressed to 2D. wJcompress is now 2d row matrix.

@@ -4,7 +4,7 @@ set(CMAKE_CXX_FLAGS "-pthread -std=c++11")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
 
 
-find_package(OpenCV 3 REQUIRED)
+find_package(OpenCV REQUIRED)
 file(GLOB SRCS src/*.cpp)
 add_executable(${PROJECT_NAME} ${SRCS})
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} data_handler)
