@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_STANDARD 14)
+
 project(mopf)
 
 add_subdirectory(3d_reconstruction)
@@ -12,3 +14,4 @@ add_subdirectory(linear_algebra)
 add_subdirectory(machine_learning)
 add_subdirectory(optimization)
 add_subdirectory(visualization)
+add_subdirectory(string_util)
