@@ -17,11 +17,11 @@ void VideoStabilizer::run() {
   // preparation
   cv::VideoCapture cap(in_videoname_);
   int n_frames = int(cap.get(cv::CAP_PROP_FRAME_COUNT));
-  int w = int(cap.get(cv::CAP_PROP_FRAME_WIDTH));
-  int h = int(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
+  int width = int(cap.get(cv::CAP_PROP_FRAME_WIDTH));
+  int height = int(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
   double fps = cap.get(cv::CAP_PROP_FPS);
-  cv::VideoWriter out("out.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'),
-                      fps, cv::Size(2 * w, h));
+  cv::VideoWriter out("out.mp4", cv::VideoWriter::fourcc('M', 'P', '4', 'V'),
+                      fps, cv::Size(2 * width, height));
   cv::Mat curr, curr_gray;
   cv::Mat prev, prev_gray;
   std::vector<Transform> transforms;
