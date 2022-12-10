@@ -10,18 +10,24 @@
 
 namespace mo {
 
-VideoStabilizer::VideoStabilizer(const std::string &in_videoname)
-    : in_videoname_(in_videoname) {}
+VideoStabilizer::VideoStabilizer(const std::string &in_videoname,
+                                 const std::string &out_videoname)
+    : in_videoname_(in_videoname), out_videoname_(out_videoname) {}
 
 void VideoStabilizer::run() {
   // preparation
   cv::VideoCapture cap(in_videoname_);
+
+  // read video configurations
   int n_frames = int(cap.get(cv::CAP_PROP_FRAME_COUNT));
   int width = int(cap.get(cv::CAP_PROP_FRAME_WIDTH));
   int height = int(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
   double fps = cap.get(cv::CAP_PROP_FPS);
-  cv::VideoWriter out("out.mp4", cv::VideoWriter::fourcc('M', 'P', '4', 'V'),
-                      fps, cv::Size(2 * width, height));
+
+  // prepare for output
+  cv::VideoWriter out(out_videoname_,
+                      cv::VideoWriter::fourcc('M', 'P', '4', 'V'), fps,
+                      cv::Size(2 * width, height));
   cv::Mat curr, curr_gray;
   cv::Mat prev, prev_gray;
   std::vector<Transform> transforms;

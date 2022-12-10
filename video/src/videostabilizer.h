@@ -7,7 +7,8 @@ namespace mo {
 
 class VideoStabilizer {
 public:
-  VideoStabilizer(const std::string &in_videoname);
+  VideoStabilizer(const std::string &in_videoname,
+                  const std::string &out_videoname = "out.mp4");
   void run();
   struct Transform {
     double dx;
@@ -37,6 +38,7 @@ private:
 
   // variable
   std::string in_videoname_;
+  std::string out_videoname_;
 };
 
 } // namespace mo
