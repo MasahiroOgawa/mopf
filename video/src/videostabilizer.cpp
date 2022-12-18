@@ -125,7 +125,7 @@ void VideoStabilizer::run() {
   cap.release();
   out.release();
   cv::destroyAllWindows();
-}
+} // namespace mo
 
 std::vector<VideoStabilizer::Trajectory>
 VideoStabilizer::cumsum(std::vector<Transform> &transforms) {

@@ -32,11 +32,12 @@ public:
   };
 
 private:
+  // functions
   std::vector<Trajectory> cumsum(std::vector<Transform> &transforms);
   /// upscale k% fixing the center.
   void enlargeImage(cv::Mat &frame_stabilized, float k = 1.05);
 
-  // variable
+  // variables
   std::string in_videoname_;
   std::string out_videoname_;
 };
