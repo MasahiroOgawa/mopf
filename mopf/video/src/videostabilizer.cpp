@@ -8,12 +8,6 @@ namespace mo {
 
 VideoStabilizer::VideoStabilizer() {}
 
-void VideoStabilizer::init(int img_w, int img_h, int fps) {
-  img_w_ = img_w;
-  img_h_ = img_h;
-  fps_ = fps;
-}
-
 void VideoStabilizer::run(const mo::Image &image) {
   curr_img_ = image;
 

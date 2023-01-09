@@ -5,9 +5,6 @@
 #include <mopf/image/src/image.h>
 #include <mopf/video/src/video.hpp>
 #include <mopf/video/src/videostabilizer.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/videoio.hpp>
 
 int main(int argc, char **argv) {
   // treat arguments
@@ -21,6 +18,10 @@ int main(int argc, char **argv) {
 
   // prepare for input
   mo::VideoCapture cap(in_videoname);
+  if (!cap.isOpened()) {
+    std::cerr << "[ERROR] Unable to open " << in_videoname << std::endl;
+    return -1;
+  }
   int img_w = int(cap.get(cv::CAP_PROP_FRAME_WIDTH));
   int img_h = int(cap.get(cv::CAP_PROP_FRAME_HEIGHT));
   int fps = cap.get(cv::CAP_PROP_FPS);
@@ -33,7 +34,6 @@ int main(int argc, char **argv) {
 
   // prepare for processing
   mo::VideoStabilizer vstab;
-  vstab.init(img_w, img_h, fps);
 
   // image loop
   while (1) {
@@ -41,18 +41,19 @@ int main(int argc, char **argv) {
     if (image.empty())
       break;
     vstab.run(image);
+    vstab.show();
   }
 
   // post process
   cap.release();
   out.release();
-  cv::destroyAllWindows();
   return 0;
 }
 
-void enlargeImage(mo::Image &frame_stabilized, float k) {
-  mo::Matrix T = cv::getRotationMatrix2D(
-      cv::Point2f(frame_stabilized.cols / 2, frame_stabilized.rows / 2), 0, k);
-  cv::warpAffine(frame_stabilized, frame_stabilized, T,
-                 frame_stabilized.size());
-}
+// void enlargeImage(mo::Image &frame_stabilized, float k) {
+//  mo::Matrix T = cv::getRotationMatrix2D(
+//      cv::Point2f(frame_stabilized.cols / 2, frame_stabilized.rows / 2), 0,
+//      k);
+//  cv::warpAffine(frame_stabilized, frame_stabilized, T,
+//                 frame_stabilized.size());
+//}

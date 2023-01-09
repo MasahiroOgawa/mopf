@@ -11,7 +11,6 @@ namespace mo {
 class VideoStabilizer {
 public:
   VideoStabilizer();
-  void init(int img_w, int img_h, int fps);
   void run(const mo::Image &image);
   void show();
 
@@ -31,9 +30,6 @@ private:
   // variables
   std::string in_videoname_{};
   std::string out_videoname_{};
-  int img_w_{0};
-  int img_h_{0};
-  double fps_{0.0};
   bool is_initial_frame_{true};
   mo::Image curr_img_{};
   mo::Image_gray curr_gray_{};
