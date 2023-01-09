@@ -11,7 +11,17 @@ VideoStabilizer::VideoStabilizer() {}
 void VideoStabilizer::run(const mo::Image &image) {
   curr_img_ = image;
 
-  read_grayimg();
+  // read gray image
+  if (is_initial_frame_) {
+    mo::ToGray(curr_img_, prev_gray_);
+
+    // assume input image size is fixed.
+    curr_img_.copyTo(dst_img_);
+
+    is_initial_frame_ = false;
+    return;
+  }
+  mo::ToGray(curr_img_, curr_gray_);
 
   calcFlow();
 
@@ -25,19 +35,6 @@ void VideoStabilizer::run(const mo::Image &image) {
 }
 
 void VideoStabilizer::show() { mo::show("Before and After", dst_img_, 10); }
-
-void VideoStabilizer::read_grayimg() {
-  if (is_initial_frame_) {
-    mo::ToGray(curr_img_, prev_gray_);
-    is_initial_frame_ = false;
-
-    // assume input image size is fixed.
-    curr_img_.copyTo(dst_img_);
-
-    return;
-  }
-  mo::ToGray(curr_img_, curr_gray_);
-}
 
 void VideoStabilizer::calcFlow() {
   mo::goodFeaturesToTrack(prev_gray_, prev_pts_);

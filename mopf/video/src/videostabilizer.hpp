@@ -22,7 +22,6 @@ public:
 
 private:
   // functions
-  void read_grayimg();
   void calcFlow();
   void compPrev2CurrFrameTransforms();
   void comp_stabcam_transform();

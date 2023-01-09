@@ -13,6 +13,7 @@ install_manifest.txt
 
 # build outputs
 build
+debug
 *.aux
 *.dvi
 *.log
