@@ -1,6 +1,4 @@
 project(game)
-cmake_minimum_required(VERSION 2.8)
-find_package(OpenCV REQUIRED)
 
 aux_source_directory(src SRCS)
 add_library(${PROJECT_NAME} ${SRCS})

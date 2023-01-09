@@ -49,11 +49,3 @@ int main(int argc, char **argv) {
   out.release();
   return 0;
 }
-
-// void enlargeImage(mo::Image &frame_stabilized, float k) {
-//  mo::Matrix T = cv::getRotationMatrix2D(
-//      cv::Point2f(frame_stabilized.cols / 2, frame_stabilized.rows / 2), 0,
-//      k);
-//  cv::warpAffine(frame_stabilized, frame_stabilized, T,
-//                 frame_stabilized.size());
-//}
