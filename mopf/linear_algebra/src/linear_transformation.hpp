@@ -20,8 +20,8 @@ public:
 private:
   double dx_{0.0};
   double dy_{0.0};
-  double da_{0.0}; ///< angle
-  mo::Matrix T_{}; ///< =(R|t) 2x3 matrix.
+  double da_{0.0};                        ///< angle
+  mo::Matrix T_{mo::Matrix::zeros(2, 3)}; ///< =(R|t) 2x3 matrix.
 };
 
 void estimate2DTransform(const std::vector<Point2f> &pts_from,
