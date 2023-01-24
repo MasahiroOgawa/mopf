@@ -42,6 +42,7 @@ int main(int argc, char **argv) {
       break;
     vstab.run(image);
     vstab.show();
+    out.write(vstab.comb_img());
   }
 
   // post process

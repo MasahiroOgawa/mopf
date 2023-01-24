@@ -13,6 +13,7 @@ public:
   VideoStabilizer();
   void run(const mo::Image &image);
   void show();
+  const mo::Image &comb_img() const { return comb_img_; }
 
   struct Trajectory {
     double x;
