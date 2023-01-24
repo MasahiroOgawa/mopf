@@ -28,8 +28,8 @@ int main(int argc, char **argv) {
   mo::Image image;
 
   // prepare for output
-  cv::VideoWriter out(out_videoname,
-                      cv::VideoWriter::fourcc('M', 'P', '4', 'V'), fps,
+  mo::VideoWriter out(out_videoname,
+                      mo::VideoWriter::fourcc('M', 'P', '4', 'V'), fps,
                       cv::Size(2 * img_w, img_h));
 
   // prepare for processing

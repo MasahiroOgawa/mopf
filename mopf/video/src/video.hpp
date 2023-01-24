@@ -11,6 +11,8 @@ namespace mo {
 ///
 using VideoCapture = cv::VideoCapture;
 
+using VideoWriter = cv::VideoWriter;
+
 void pyramidLK(const mo::Image_gray &prev_img, const mo::Image_gray &curr_img,
                const std::vector<mo::Point2f> &prev_pts,
                std::vector<mo::Point2f> &curr_pts,
