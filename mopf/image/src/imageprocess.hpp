@@ -13,6 +13,8 @@ void goodFeaturesToTrack(const mo::Image_gray &image,
                          const double quality_level = 0.01,
                          const double minDistance = 30);
 
+void hconcat(const Image &l_img, const Image &r_img, Image &concat_img);
+
 void warpAffine(const mo::Image &in_img, const mo::Transform2D &transform,
                 mo::Image &dst_img);
 

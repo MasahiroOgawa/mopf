@@ -47,6 +47,7 @@ private:
                                        ///< cummurative transformations.
   Transform2D stabcam_transform_;
   mo::Image dst_img_{};
+  mo::Image comb_img_{};
 };
 
 } // namespace mo

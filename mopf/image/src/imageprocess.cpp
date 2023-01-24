@@ -11,6 +11,10 @@ void goodFeaturesToTrack(const Image_gray &image,
                           minDistance);
 }
 
+void hconcat(const Image &l_img, const Image &r_img, Image &concat_img) {
+  cv::hconcat(l_img, r_img, concat_img);
+}
+
 void warpAffine(const Image &in_img, const Transform2D &transform,
                 Image &dst_img) {
   cv::warpAffine(in_img, dst_img, transform.T(), dst_img.size(),

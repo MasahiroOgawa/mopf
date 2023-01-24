@@ -34,7 +34,10 @@ void VideoStabilizer::run(const mo::Image &image) {
   mo::warpAffine(curr_img_, stabcam_transform_, dst_img_);
 }
 
-void VideoStabilizer::show() { mo::show("Before and After", dst_img_, 10); }
+void VideoStabilizer::show() {
+  mo::hconcat(curr_img_, dst_img_, comb_img_);
+  mo::show("Before and After", comb_img_, 10);
+}
 
 void VideoStabilizer::calcFlow() {
   mo::goodFeaturesToTrack(prev_gray_, prev_pts_);
