@@ -1,9 +1,9 @@
 #ifndef VIDEOSTABILIZER_HPP
 #define VIDEOSTABILIZER_HPP
 #include "../../image/src/image.h"
+#include "../../image/src/imageprocess.hpp"
 #include "../../linear_algebra/src/linear_transformation.hpp" // for Transform2D
-#include "../../linear_algebra/src/matrix.h"
-#include "../../linear_algebra/src/vector.h" // for Point
+#include "../../linear_algebra/src/vector.h"                  // for Point
 #include <vector>
 
 namespace mo {
@@ -13,7 +13,12 @@ public:
   VideoStabilizer();
   void run(const mo::Image &image);
   void show();
-  const mo::Image &comb_img() const { return comb_img_; }
+  const mo::Image &comb_img() {
+    if (comb_img_.empty())
+      mo::hconcat(curr_img_, dst_img_, comb_img_);
+    return comb_img_;
+  }
+  const mo::Image &dst_img() const { return dst_img_; }
 
   struct Trajectory {
     double x;
