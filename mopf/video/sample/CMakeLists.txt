@@ -6,3 +6,6 @@ target_link_libraries(sample_videostabilizer video)
 
 add_executable(sample_realsense sample_realsense.cpp)
 target_link_libraries(sample_realsense video visualization)
+
+add_executable(sample_realsense_stabilizer sample_realsense_stabilizer.cpp)
+target_link_libraries(sample_realsense_stabilizer video visualization)
