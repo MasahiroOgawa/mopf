@@ -13,6 +13,11 @@ public:
     mo::Image result_img()const{return result_img_;}
 
 private:
+    void extract_features();
+    void match_features();
+    void register_goodfeatures();
+    void comb_imgs();
+
     mo::Image result_img_;
 };
 
