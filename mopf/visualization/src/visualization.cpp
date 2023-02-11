@@ -5,12 +5,18 @@ using namespace std;
 
 namespace mo {
 //-----------------------------------------------------------------
-Image imread(const std::string &filename, int flags) {
-  cv::Mat img = cv::imread(filename, flags);
-  if (flags == cv::IMREAD_COLOR)
-    return static_cast<Image>(img);
-  else
-    return static_cast<Image_gray>(img);
+Image imread(const std::string &filename) try {
+  cv::Mat img = cv::imread(filename, cv::IMREAD_COLOR);
+  return static_cast<Image>(img);
+} catch (std::exception &e) {
+  throw runtime_error("cannot read image: " + filename);
+}
+
+Image_gray imread_gray(const std::string &filename) try {
+  cv::Mat img = cv::imread(filename, cv::IMREAD_GRAYSCALE);
+  return static_cast<Image_gray>(img);
+} catch (std::exception &e) {
+  throw runtime_error("cannot read image: " + filename);
 }
 
 //-----------------------------------------------------------------

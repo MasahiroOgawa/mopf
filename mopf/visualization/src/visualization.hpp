@@ -15,7 +15,8 @@ namespace mo {
 /// \param flags
 /// \return
 ///
-Image imread(const std::string &filename, int flags = cv::IMREAD_COLOR);
+Image imread(const std::string &filename);
+Image_gray imread_gray(const std::string &filename);
 
 /////////////////////////
 /// \brief show

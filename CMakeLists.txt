@@ -16,3 +16,5 @@ add_subdirectory(mopf/optimization)
 add_subdirectory(mopf/string_util)
 add_subdirectory(mopf/video)
 add_subdirectory(mopf/visualization)
+
+add_subdirectory(sample)
