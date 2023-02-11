@@ -1,20 +1,18 @@
-#include "../image.h"
+#include "../image.hpp"
 #include <iostream>
 
 using namespace std;
 using namespace mo;
 
+int main() try {
+  cout << "----------------------------------------\n"
+       << "run test image\n";
 
-int main()try{
-    cout << "----------------------------------------\n"
-         << "run test image\n";
+  cout << "[PASS] \n";
 
-    cout << "[PASS] \n";
-
-
-    return 0;
-}catch(runtime_error& e){
-    cerr << "runtime error: " << e.what() << endl;
-}catch(...){
-cerr << "unknown error!\n";
+  return 0;
+} catch (runtime_error &e) {
+  cerr << "runtime error: " << e.what() << endl;
+} catch (...) {
+  cerr << "unknown error!\n";
 }

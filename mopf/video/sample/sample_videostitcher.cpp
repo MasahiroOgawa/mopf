@@ -2,7 +2,7 @@
 #include <cmath>
 #include <fstream>
 #include <iostream>
-#include <mopf/image/src/image.h>
+#include <mopf/image/src/image.hpp>
 #include <mopf/video/src/video.hpp>
 #include <mopf/video/src/videostitcher.hpp>
 

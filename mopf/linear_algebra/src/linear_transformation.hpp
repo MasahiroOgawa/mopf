@@ -1,7 +1,7 @@
 #ifndef LINEAR_TRANSFORMATION_HPP
 #define LINEAR_TRANSFORMATION_HPP
-#include "matrix.h"
-#include "vector.h"
+#include "matrix.hpp"
+#include "vector.hpp"
 #include <vector>
 
 namespace mo {

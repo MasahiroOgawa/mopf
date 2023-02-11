@@ -1,6 +1,6 @@
-#ifndef LEAST_SQUARE_H
-#define LEAST_SQUARE_H
-#include "matrix.h"
+#ifndef LEAST_SQUARE_HPP
+#define LEAST_SQUARE_HPP
+#include "matrix.hpp"
 
 namespace mo {
 
@@ -18,4 +18,4 @@ void polynomial_curvefit(const Matrix& x, const Matrix& y, Matrix& c,
 
 } //namespace mo
 
-#endif // LEAST_SQUARE_H
+#endif // LEAST_SQUARE_HPP

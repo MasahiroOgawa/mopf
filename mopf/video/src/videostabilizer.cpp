@@ -2,7 +2,7 @@
 #include "../../image/src/imageprocess.hpp"
 #include "../../linear_algebra/src/linear_transformation.hpp"
 #include "../../video/src/video.hpp"
-#include "../../visualization/src/visualization.h"
+#include "../../visualization/src/visualization.hpp"
 
 namespace mo {
 

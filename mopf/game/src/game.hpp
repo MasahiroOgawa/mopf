@@ -1,8 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "../../image/src/image.h"
-#include "../../linear_algebra/src/matrix.h"
+#include "../../image/src/image.hpp"
+#include "../../linear_algebra/src/matrix.hpp"
 #include <opencv2/core.hpp>
 #include <random>
 

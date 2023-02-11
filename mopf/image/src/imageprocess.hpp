@@ -1,9 +1,9 @@
 #ifndef IMAGEPROCESS_HPP
 #define IMAGEPROCESS_HPP
 #include "../../linear_algebra/src/linear_transformation.hpp"
-#include "../../linear_algebra/src/matrix.h"
-#include "../../linear_algebra/src/vector.h"
-#include "image.h"
+#include "../../linear_algebra/src/matrix.hpp"
+#include "../../linear_algebra/src/vector.hpp"
+#include "image.hpp"
 
 namespace mo {
 

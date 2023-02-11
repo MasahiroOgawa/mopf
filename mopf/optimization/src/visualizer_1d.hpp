@@ -1,7 +1,7 @@
-#ifndef VISUALIZER_1D_H
-#define VISUALIZER_1D_H
-#include "../../linear_algebra/src/matrix.h"
-#include "../../visualization/src/visualization.h"
+#ifndef VISUALIZER_1D_HPP
+#define VISUALIZER_1D_HPP
+#include "../../linear_algebra/src/matrix.hpp"
+#include "../../visualization/src/visualization.hpp"
 
 namespace mo {
 
@@ -77,4 +77,4 @@ private:
 
 } // namespace mo
 
-#endif // VISUALIZER_1D_H
+#endif // VISUALIZER_1D_HPP

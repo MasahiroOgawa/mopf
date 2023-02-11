@@ -1,9 +1,9 @@
-#ifndef VISUALIZATION_H
-#define VISUALIZATION_H
+#ifndef VISUALIZATION_HPP
+#define VISUALIZATION_HPP
 
-#include "../../image/src/image.h"
-#include "../../linear_algebra/src/matrix.h" // for warpaffine.
-#include "../../linear_algebra/src/vector.h" // for Point
+#include "../../image/src/image.hpp"
+#include "../../linear_algebra/src/matrix.hpp" // for warpaffine.
+#include "../../linear_algebra/src/vector.hpp" // for Point
 #include <iostream>
 #include <opencv2/imgcodecs.hpp> //for cv::IMREAD_COLOR
 #include <opencv2/imgproc.hpp>   //for ColormapTypes, arrowedLine()
@@ -80,4 +80,4 @@ void warpAffine(Image src, Image dst, Matrix M);
 
 } // namespace mo
 
-#endif // VISUALIZATION_H
+#endif // VISUALIZATION_HPP

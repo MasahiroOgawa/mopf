@@ -1,5 +1,5 @@
-#ifndef USBCAM_H
-#define USBCAM_H
+#ifndef USBCAM_HPP
+#define USBCAM_HPP
 
 namespace mo {
 

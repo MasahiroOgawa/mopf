@@ -1,11 +1,7 @@
-#include "parallelstereo.h"
+#include "parallelstereo.hpp"
 
+namespace mo {
 
-namespace mo{
-
-ParallelStereo::ParallelStereo()
-{
-
-}
+ParallelStereo::ParallelStereo() {}
 
 } // namespace mo

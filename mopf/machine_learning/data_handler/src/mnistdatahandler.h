@@ -1,8 +1,8 @@
 #ifndef MNISTDATAHANDLER_H
 #define MNISTDATAHANDLER_H
 #include "../../../../ext/mnist/src/mnist_reader.hpp"
-#include "../../../image/src/image.h"
-#include "../../../visualization/src/visualization.h"
+#include "../../../image/src/image.hpp"
+#include "../../../visualization/src/visualization.hpp"
 #include "datahandler.h"
 
 namespace mo {

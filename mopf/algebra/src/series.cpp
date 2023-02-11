@@ -1,4 +1,4 @@
-#include "series.h"
+#include "series.hpp"
 #include <climits>
 #include <stdexcept>
 #include <vector>

@@ -1,6 +1,6 @@
-#include "game.h"
-#include "../../visualization/src/visualization.h"
-#include "param.h"
+#include "game.hpp"
+#include "../../visualization/src/visualization.hpp"
+#include "param.hpp"
 #include <fstream>
 #include <random>
 

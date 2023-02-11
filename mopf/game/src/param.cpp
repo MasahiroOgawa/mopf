@@ -1,4 +1,4 @@
-#include "param.h"
+#include "param.hpp"
 #include <fstream>
 #include <sstream> // for istringstream
 

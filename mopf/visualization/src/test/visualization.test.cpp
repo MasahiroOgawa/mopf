@@ -1,4 +1,4 @@
-#include "../visualization.h"
+#include "../visualization.hpp"
 #include <iostream>
 
 using namespace std;

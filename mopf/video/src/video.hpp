@@ -1,8 +1,8 @@
 #ifndef VIDEO_HPP
 #define VIDEO_HPP
-#include "../../image/src/image.h"
-#include "../../linear_algebra/src/vector.h" // for Point
-#include <opencv2/videoio.hpp>               // for cv::VideoCapture
+#include "../../image/src/image.hpp"
+#include "../../linear_algebra/src/vector.hpp" // for Point
+#include <opencv2/videoio.hpp>                 // for cv::VideoCapture
 
 namespace mo {
 

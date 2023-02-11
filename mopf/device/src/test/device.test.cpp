@@ -1,4 +1,4 @@
-#include "../usbcam.h"
+#include "../usbcam.hpp"
 #include <iostream>
 
 using namespace std;

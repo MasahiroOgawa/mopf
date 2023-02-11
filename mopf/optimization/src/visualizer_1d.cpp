@@ -1,4 +1,4 @@
-#include "visualizer_1d.h"
+#include "visualizer_1d.hpp"
 #include <iostream>
 #define DEBUG_
 using namespace std;

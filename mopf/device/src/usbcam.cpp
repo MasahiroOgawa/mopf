@@ -1,6 +1,6 @@
-#include "usbcam.h"
+#include "usbcam.hpp"
 #include "../../video/src/video.hpp"
-#include "../../visualization/src/visualization.h"
+#include "../../visualization/src/visualization.hpp"
 
 namespace mo {
 bool Usbcam::show_loop() {

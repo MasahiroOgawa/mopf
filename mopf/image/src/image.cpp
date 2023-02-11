@@ -1,4 +1,4 @@
-#include "image.h"
+#include "image.hpp"
 #include <opencv2/imgproc.hpp>
 using namespace std;
 

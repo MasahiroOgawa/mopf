@@ -1,5 +1,5 @@
-#include "../game.h"
-#include "../param.h"
+#include "../game.hpp"
+#include "../param.hpp"
 #include <iostream>
 
 using namespace std;

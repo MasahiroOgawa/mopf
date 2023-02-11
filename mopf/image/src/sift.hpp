@@ -1,7 +1,7 @@
 #ifndef SIFT_HPP
 #define SIFT_HPP
 
-#include "../../../mopf/image/src/image.h"
+#include "image.hpp"
 #include <opencv2/xfeatures2d.hpp>
 #include <vector>
 

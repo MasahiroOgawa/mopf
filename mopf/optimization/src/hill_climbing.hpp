@@ -1,8 +1,8 @@
-#ifndef HILL_CLIMBING_H
-#define HILL_CLIMBING_H
-#include "../../linear_algebra/src/matrix.h"
+#ifndef HILL_CLIMBING_HPP
+#define HILL_CLIMBING_HPP
+#include "../../linear_algebra/src/matrix.hpp"
 #include <functional> //for std::function
-#include "visualizer_1d.h"
+#include "visualizer_1d.hpp"
 
 namespace mo {
 
@@ -71,4 +71,4 @@ private:
 
 #include "hill_climbing.tpp"
 
-#endif // HILL_CLIMBING_H
+#endif // HILL_CLIMBING_HPP

@@ -1,4 +1,4 @@
-#include "visualization.h"
+#include "visualization.hpp"
 #include <opencv2/highgui.hpp>
 
 using namespace std;

@@ -1,5 +1,5 @@
 #include "mopf/video/src/video.hpp"
-#include "mopf/visualization/src/visualization.h"
+#include "mopf/visualization/src/visualization.hpp"
 
 int main() {
   mo::Image in_img;

@@ -1,7 +1,4 @@
-#include "vector.h"
+#include "vector.hpp"
 using namespace std;
 
-namespace mo {
-
-} // namespace mo
-
+namespace mo {} // namespace mo
