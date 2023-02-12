@@ -16,6 +16,14 @@ void Sift::detect(const Image_gray &img) {
 }
 
 void Sift::match(const Image_gray &img1, const Image_gray &img2) {
+  // init
+  keypoints_.clear();
+  keypoints2_.clear();
+  descriptors_.release();
+  descriptors2_.release();
+  raw_matches_.clear();
+  filtered_matches_.clear();
+
   in_img_ = img1;
   in_img2_ = img2;
 

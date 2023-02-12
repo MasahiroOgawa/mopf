@@ -5,9 +5,8 @@ namespace mo {
 VideoStitcher::VideoStitcher() {}
 
 void VideoStitcher::run(const Image &img) {
-  if (is_initial_img_) {
+  if (prev_img_.empty()) {
     prev_img_ = img;
-    is_initial_img_ = false;
     return;
   }
   cur_img_ = img;
@@ -16,9 +15,13 @@ void VideoStitcher::run(const Image &img) {
   match_features();
   register_goodfeatures();
   comb_imgs();
+  prev_img_ = cur_img_;
 }
 
-void VideoStitcher::show() { sift_.show(); }
+void VideoStitcher::show() {
+  if (!cur_img_.empty())
+    sift_.show();
+}
 
 void VideoStitcher::extract_features() {}
 
