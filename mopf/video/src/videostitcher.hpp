@@ -1,5 +1,6 @@
 #ifndef VIDEOSTITCHER_HPP
 #define VIDEOSTITCHER_HPP
+#include "../../../mopf/image_process/src/sift.hpp"
 #include "../../image/src/image.hpp"
 
 namespace mo {
@@ -17,7 +18,12 @@ private:
   void register_goodfeatures();
   void comb_imgs();
 
-  mo::Image result_img_;
+  // variables
+  mo::Image_gray prev_img_{};
+  mo::Image_gray cur_img_{};
+  bool is_initial_img_{true};
+  mo::Sift sift_{};
+  mo::Image result_img_{};
 };
 
 } // namespace mo

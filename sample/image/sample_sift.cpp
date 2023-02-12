@@ -1,4 +1,4 @@
-#include <mopf/image/src/sift.hpp>
+#include <mopf/image_process/src/sift.hpp>
 #include <mopf/visualization/src/visualization.hpp>
 using namespace std;
 

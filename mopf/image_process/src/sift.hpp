@@ -1,7 +1,7 @@
 #ifndef SIFT_HPP
 #define SIFT_HPP
 
-#include "image.hpp"
+#include "../../../mopf/image/src/image.hpp"
 #include <opencv2/xfeatures2d.hpp>
 #include <vector>
 
@@ -12,7 +12,7 @@ public:
   Sift();
   void detect(const mo::Image_gray &img);
   void match(const mo::Image_gray &img1, const mo::Image_gray &img2);
-  int show();
+  int show(int waitms = 0);
 
 private:
   void reset() { keypoints_.clear(); }

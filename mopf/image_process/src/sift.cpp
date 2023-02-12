@@ -1,5 +1,5 @@
 #include "sift.hpp"
-#include "../../visualization/src/visualization.hpp"
+#include "../../../mopf/visualization/src/visualization.hpp"
 
 namespace mo {
 
@@ -37,7 +37,7 @@ void Sift::filter_matches() {
   }
 }
 
-int Sift::show() {
+int Sift::show(int waitms) {
   if (filtered_matches_.empty()) {
     cv::drawKeypoints(in_img_, keypoints_, result_img_);
   } else {
@@ -47,10 +47,7 @@ int Sift::show() {
                     cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
   }
 
-  // debug
-  std::cout << descriptors_.size << std::endl;
-
-  return mo::show("SIFT result", result_img_, 0);
+  return mo::show("SIFT", result_img_, waitms);
 }
 
 } // namespace mo
