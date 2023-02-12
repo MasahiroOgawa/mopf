@@ -6,10 +6,10 @@ VideoStitcher::VideoStitcher() {}
 
 void VideoStitcher::run(const Image &img) {
   if (prev_img_.empty()) {
-    prev_img_ = img;
+    mo::ToGray(img, prev_img_);
     return;
   }
-  cur_img_ = img;
+  mo::ToGray(img, cur_img_);
 
   extract_features();
   match_features();
