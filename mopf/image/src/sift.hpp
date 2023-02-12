@@ -18,9 +18,10 @@ private:
   void reset() { keypoints_.clear(); }
 
   mo::Image_gray in_img_{};
-  std::vector<cv::KeyPoint> keypoints_{};
   cv::Ptr<cv::SIFT> sift_{};
-  cv::Mat descriptor_{}; ///< histogram of each 3 channel Mat[row,col,octave]
+  std::vector<cv::KeyPoint> keypoints_{};
+  cv::Mat descriptors_{}; ///< histogram of each 3 channel Mat[row,col,octave]
+  mo::Image result_img_{};
 };
 
 } // namespace mo
