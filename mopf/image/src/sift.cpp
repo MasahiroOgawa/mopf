@@ -3,7 +3,10 @@
 
 namespace mo {
 
-Sift::Sift() { sift_ = cv::SIFT::create(); }
+Sift::Sift() {
+  sift_ = cv::SIFT::create();
+  matcher_ = cv::DescriptorMatcher::create(cv::DescriptorMatcher::FLANNBASED);
+}
 
 void Sift::detect(const Image_gray &img) {
   in_img_ = img;
@@ -12,10 +15,41 @@ void Sift::detect(const Image_gray &img) {
   return;
 }
 
-void Sift::match(const Image_gray &img1, const Image_gray &img2) { return; }
+void Sift::match(const Image_gray &img1, const Image_gray &img2) {
+  in_img_ = img1;
+  in_img2_ = img2;
+
+  sift_->detectAndCompute(in_img_, cv::noArray(), keypoints_, descriptors_);
+  sift_->detectAndCompute(in_img2_, cv::noArray(), keypoints2_, descriptors2_);
+
+  matcher_->knnMatch(descriptors_, descriptors2_, raw_matches_,
+                     num_keep_bestmatch_);
+  filter_matches();
+
+  return;
+}
+
+void Sift::filter_matches() {
+  for (const auto &raw_match : raw_matches_) {
+    if (raw_match[0].distance < thre_Lowe_ratio_ * raw_match[1].distance) {
+      filtered_matches_.push_back(raw_match[0]);
+    }
+  }
+}
 
 int Sift::show() {
-  cv::drawKeypoints(in_img_, keypoints_, result_img_);
+  if (filtered_matches_.empty()) {
+    cv::drawKeypoints(in_img_, keypoints_, result_img_);
+  } else {
+    cv::drawMatches(in_img_, keypoints_, in_img2_, keypoints2_,
+                    filtered_matches_, result_img_, cv::Scalar::all(-1),
+                    cv::Scalar::all(-1), std::vector<char>(),
+                    cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
+  }
+
+  // debug
+  std::cout << descriptors_.size << std::endl;
+
   return mo::show("SIFT result", result_img_, 0);
 }
 

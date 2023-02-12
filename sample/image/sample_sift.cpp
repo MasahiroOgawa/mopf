@@ -4,8 +4,9 @@ using namespace std;
 
 int main(int argc, char **argv) try {
   // read image
-  if (argc != 2) {
-    cerr << "Usage: " << argv[0] << " image_filename\n";
+  if (argc < 2) {
+    cerr << "Usage: " << argv[0]
+         << " image_filename [matching_img2_filename]\n";
     return -1;
   }
   string imgname = argv[1];
@@ -14,10 +15,25 @@ int main(int argc, char **argv) try {
     cerr << "[ERROR] fail to read " << imgname << endl;
     return -1;
   }
+  // read matching image if exist
+  string img2name{};
+  mo::Image_gray in_img2{};
+  if (argc > 2) {
+    img2name = argv[2];
+    in_img2 = mo::imread_gray(img2name);
+    if (in_img2.empty()) {
+      cerr << "[ERROR] fail to read " << img2name << endl;
+      return -1;
+    }
+  }
 
   // run SIFT
   mo::Sift sift;
-  sift.detect(in_img);
+  if (in_img2.empty()) {
+    sift.detect(in_img);
+  } else {
+    sift.match(in_img, in_img2);
+  }
   sift.show();
 
   return 0;
