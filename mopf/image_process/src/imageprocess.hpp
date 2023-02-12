@@ -3,7 +3,7 @@
 #include "../../linear_algebra/src/linear_transformation.hpp"
 #include "../../linear_algebra/src/matrix.hpp"
 #include "../../linear_algebra/src/vector.hpp"
-#include "image.hpp"
+#include "../../image/src/image.hpp"
 
 namespace mo {
 

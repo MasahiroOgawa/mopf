@@ -1,7 +1,7 @@
 #ifndef VIDEOSTABILIZER_HPP
 #define VIDEOSTABILIZER_HPP
 #include "../../image/src/image.hpp"
-#include "../../image/src/imageprocess.hpp"
+#include "../../image_process/src/imageprocess.hpp"
 #include "../../linear_algebra/src/linear_transformation.hpp" // for Transform2D
 #include "../../linear_algebra/src/vector.hpp"                // for Point
 #include <vector>

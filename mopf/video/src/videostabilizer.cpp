@@ -1,5 +1,5 @@
 #include "videostabilizer.hpp"
-#include "../../image/src/imageprocess.hpp"
+#include "../../image_process/src/imageprocess.hpp"
 #include "../../linear_algebra/src/linear_transformation.hpp"
 #include "../../video/src/video.hpp"
 #include "../../visualization/src/visualization.hpp"
