@@ -1,5 +1,5 @@
 project(sample)
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories(${mopf_SOURCE_DIR})
 
 
 add_executable(sample_realsense video/sample_realsense.cpp)
